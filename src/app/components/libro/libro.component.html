@@ -1,0 +1,136 @@
+
+<style>
+    #contenedor{
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-top:20px ;
+        border: 50px;
+        border:2px #194bf0 solid;       
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    
+.navbar.navbar-light{
+    background-color: #2d8fd4;
+
+}
+
+.navbar.navbar-light .navbar-brand {
+    margin-left: 10px;/*NOTAS DE VENTA*/
+    font-weight: bold;
+}
+.btn.btn-info{
+    margin-right: 10px;/*Boton nuevo*/
+    font-weight: bold;
+    color: black;
+}
+.input-group{
+    margin: 10px;
+    
+}
+.input-group button{
+    left: 0;
+    border-top-left-radius: 10px;
+    font-weight: bold;
+    background-color:darkblue ;
+    color:white;
+    margin-top: 0;
+    height: 37px;
+}
+.table-responsive{
+    margin: 10px;
+}
+thead tr{
+    background-color: #2d8fd4;
+    border: #194bf0 2px solid;
+}
+table th{
+    text-align: center; /*titulos*/
+}
+table tr{     
+  text-align: center; /*filas*/
+}
+table #botones{
+  text-align: center;
+}
+
+.botonEditar a{     
+     border: 2px burlywood solid;
+     margin-left: 60px;
+     margin-top: 0px;
+           
+   }
+   .botonEliminar a{   
+     border: 2px red solid;
+     margin-right: 40px;
+      margin-top: -66px;
+}
+a:hover{
+  background-color: rgb(208, 207, 197);
+ }
+</style>
+  <div id="contenedor">
+          <nav class="navbar navbar-light ">
+            <a  class="navbar-brand" >
+                LIBROS
+            </a>             
+        </nav>
+          <form class="input-group" style="width: 400px">
+            
+            <input type="search" class="form-control" placeholder="ISBN" aria-label="Search" />
+            <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
+              <i class="bi bi-search"> Buscar</i>
+            </button>
+          </form>
+            <!--TABLA-->
+            <div class="table-responsive">
+              <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">ISBN</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Autor</th>                
+                  <th scope="col">Stock</th>
+                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">Genero</th>
+                  <th scope="col">Editorial</th>
+                  <th style="text-align: center;" scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>               
+                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page };let i=index ">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{lib.isbn}}</td>
+                  <td>{{lib.titulo}}</td>
+                  <td *ngFor="let au of lib.autores">{{au.nombre}}</td>                
+                  <td>{{lib.stock}}</td>
+                  <td>{{lib.precioUnitario}}</td>
+                  <td *ngFor="let ge of lib.generos">{{ge.nombre}}</td>    
+                  <td *ngFor="let ed of lib.editoriales">{{ed.nombre}}</td>                     
+                  <td id="botones">
+                    <div class="botonEditar">
+                    <a class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
+                      <i class="bi bi-pencil-square"></i>
+                    </a>
+                  </div>
+                  <div class="botonEliminar">
+                    <a class="btn btn-default" type="button" (click)="delete(lib)" >
+                      <i class="bi bi-trash-fill"></i>
+                    </a>
+                  </div>                
+                  </td>
+                 </tr>
+              </tbody>              
+            </table>
+            </div><!--TABLA RESPONSIVE-->
+            <!--FIN TABLA-->
+            <pagination-controls 
+            (pageChange)="page = $event"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            ></pagination-controls>
+            <!--FINAL CONTENIDO-->
+       
+</div>
+ 

@@ -1,0 +1,209 @@
+<style>
+#contenedor{
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-top:20px ;
+        /* border: 50px;
+        border:2px #194bf0 solid;       
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px; */
+    }
+
+  body {
+    overflow-x: hidden;
+  }
+   
+  #wrapper.toggled {
+    padding-left: 250px;
+  }  
+  
+  #page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+  }
+  
+  #wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+  }
+    
+  @media(min-width:768px) {
+    #wrapper {
+      padding-left: 0;
+    }
+    #wrapper.toggled {
+      padding-left: 250px;
+    }
+    #sidebar-wrapper {
+      width: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+      width: 250px;
+    }
+    #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+    }
+  }
+    .content {
+      margin: 20px auto 32px;
+      padding: 0 10px;
+      max-width: 900px;
+      flex-direction: column;
+      align-items: center;
+      /*border:3px solid rgb(7, 32, 78);
+      border-radius:30px;*/
+    }
+    /*.content button{
+      background-color: red;
+      position:relative;
+      <div class="boton menos"></div>///menos
+    }*/
+    /*botone + -*/
+    .boton {
+  display:inline-block;
+  width:30px;
+  height:30px;
+  border-radius:100%; 
+  position:relative;
+}
+
+.boton.mas::before, .boton.menos::before {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:40%;
+  height:0;
+  border-top:3px solid #50a0d4;
+}
+
+.boton.mas::after {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:0;
+  height:40%;
+  border-left:3px solid #50a0d4;
+}
+.boton.mas{
+  top: -10px;
+  left: 0%;
+  border:2px solid #50a0d4;
+  }
+.boton.menos.btn .btn-link{
+  top: -50px;
+  left: 102%;
+  }
+  .boton.menos{
+    left:102%;
+    top: -35px;
+    border:2px solid #000000;
+    background:#efade0;
+  }
+  .dropdown-menu{
+    padding: 10%;
+    width: 110%;
+  }
+  </style>
+<body>
+  <div id="wrapper" class="toggled">  
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <!--CONTENIDO-->
+          <div id="contenedor">
+          <h1>REGISTRO</h1>
+          <div class="content"> 
+
+          <form class="col-8"[formGroup]="Miformulario"(submit)="onSubmit(Miformulario.value)"><!-- -->
+            <div class="mb-3">
+              <label for="isbn" class="form-label">ISBN</label>
+              <input type="text" class="form-control" id="isbn" formControlName="isbn">
+              </div>    
+              <div class="mb-3">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" class="form-control"  id="titulo" formControlName="titulo">
+                </div>  
+                <!--<div class="mb-3">
+                  <label for="autor" class="form-label">Autor(es)</label>
+                  <input type="text" class="form-control"  id="autor" >
+                  </div> -->
+                 
+                  <!--AUTOR-->
+                  
+                  <div class="mb-3">
+                    <label for="autor" class="form-label">Autor(es)</label>
+                    <div formArrayName="autores">
+                        <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
+                        </div>
+                      </div>
+                      <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
+                   </div> 
+                  <!--FIN AUTOR-->
+                  <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control"  id="stock" formControlName="stock">
+                    </div> 
+                  <div class="mb-3">
+                  <label for="precioUnitario" class="form-label">Precio Unitario</label>
+                  <input type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
+                  </div>
+                  <!--GENERO-->                 
+                  <div class="mb-3">
+                    <label for="autor" class="form-label">Genero(s)</label>
+                    <div formArrayName="generos">
+                        <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
+                        </div>
+                      </div>
+                      <a class=" boton mas btn btn-link" (click)="addGenero()"></a>
+                   </div> 
+                  <!--FIN GENERO-->
+                    <!--EDITORIAL-->
+                    <div class="mb-3">
+                      <label for="editorial" class="form-label">Editorial(es)</label>
+                      <div formArrayName="editoriales">
+                          <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                            <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
+                          </div>
+                        </div>
+                        <a class=" boton mas btn btn-link" (click)="addEditorial()"></a>
+                     </div> 
+                    <!--FIN EDITORIAL-->
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="descripcion">Descripcion</label>
+                  <textarea class="form-control"  id="descripcion" rows="4" formControlName="descripcion"></textarea>
+                  </div> 
+                       
+            <!--<label for="exampleInputRol" class="form-label">Rol</label>
+            <select class="form-select" aria-label="Default select example">           
+              //<option selected>ROL</option>//
+              <option value="1">Administrador</option>
+              <option value="2">Vendedor</option>
+            </select>-->
+            <br>
+            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
+      
+            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
+           <ng-template  #elseBlock>
+            <button type="submit" class="btn btn-success" >Actualizar</button>
+          </ng-template>
+          </form>
+        </div> 
+      </div>          
+          <!--FINAL CONTENIDO-->
+        </div>
+    </div>
+  </div>
+  
+</body>

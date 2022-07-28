@@ -13,11 +13,11 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 const routes: Routes = [
   {path:'login',component:UserLoginComponent},
   {path:'lista',component:LibroComponent},//,canActivate:[AuthGuard]
-  {path:'formulario',component:LibroformComponent,canActivate:[AuthGuard]},
-  {path:'registroUsuarios',component:UsuarioFormsComponent,canActivate:[AuthGuard]},
+  {path:'formulario',component:LibroformComponent},
+  {path:'registroUsuarios',component:UsuarioFormsComponent},
   {path:'usuarios',component:UsuariosComponent},//,canActivate:[AuthGuard]
-  {path:'registroUsuarios/:id',component:UsuarioFormsComponent,canActivate:[AuthGuard]},
-  {path:'formulario/:id',component:LibroformComponent,canActivate:[AuthGuard]},
+  {path:'registroUsuarios/:id',component:UsuarioFormsComponent},
+  {path:'formulario/:id',component:LibroformComponent},
   {path:'notas_de_venta',component:NotaVentaComponent},//,canActivate:[AuthGuard]
   {path:'nueva_nota_de_venta',component:ModalNotaVComponent},
   {path:'reservas',component:ReservasComponent},

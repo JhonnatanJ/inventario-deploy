@@ -16,7 +16,7 @@ export class UserLoginService {
   //private log :string="http://localhost:8088/geolib/cuentas/login";
   //private readonly mockUser:DatosLogin=new DatosLogin('admin','admin');
   
-  iniciar=false;//amge is Authenticated
+  iniciar=false;
 
   private _cuenta!:Cuenta;
   private _token!:string;

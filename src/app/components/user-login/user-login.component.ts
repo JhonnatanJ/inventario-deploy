@@ -24,11 +24,16 @@ export class UserLoginComponent implements OnInit {
      
       vista=true;///amage
   ngOnInit(){
-    if(JSON.parse(sessionStorage.getItem("token")!)!=null){
+    
+    // let token:string="";
+    // sessionStorage.setItem("token",token);
+    //console.log(JSON.parse(sessionStorage.getItem("token")));
+    // if(sessionStorage.getItem("token")!=""){
       if(this.userloginService.isAuthenticated()){
-        Swal.fire('Login',`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,'info' )
+        Swal.fire('Login',`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,'info' );
+        this.userloginService.iniciar=true;
          this.router.navigate(['/lista']);
-      }
+      //}
     }
     
   }
@@ -58,7 +63,7 @@ export class UserLoginComponent implements OnInit {
       Swal.fire('Error Login', 'Email o Contraseña Incorrectas!','error');
       this.userloginService.iniciar=false;
      }
-     this.userloginService.iniciar=false;
+      this.userloginService.iniciar=false;
     }
 
     );

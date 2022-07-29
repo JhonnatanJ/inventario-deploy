@@ -6,7 +6,7 @@ export class Reserva {
     constructor(){
         this.cuenta=new Cuenta();
         this.usuario=new Usuario();
-        this.detalleReservas=[new DetalleReserva()];
+       // this.detalleReservas=[new DetalleReserva()];
     }
     idReserva!:number;
     fechaCreacion!:Date;//Date ojo
@@ -16,5 +16,14 @@ export class Reserva {
     abono!:number;
     cuenta!:Cuenta;
     usuario!:Usuario;
-    detalleReservas!:DetalleReserva[];
+    detalleReservas:DetalleReserva[]=[];
+
+    calcularGranTotal():number{
+        this.valorTotal=0;
+        this.detalleReservas.forEach((item:DetalleReserva)=>{
+            this.valorTotal=this.valorTotal+item.calcularTotal();
+        });
+        return this.valorTotal;
+        
+    }
 }

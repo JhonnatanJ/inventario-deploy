@@ -2,11 +2,15 @@ import { Libro } from "./libro";
 
 export class DetalleReserva {
     constructor(){
-        this.isbn= new Libro();
+        this.libro= new Libro();
     }
 
     idDetalleReserva!:string;
-    cantidad!:number;
+    cantidad:number=1;
     subtotal!:number;
-    isbn!:Libro;
+    libro!:Libro;
+
+    public calcularTotal():number{
+        return this.cantidad*this.libro.precioUnitario;
+    }
 }

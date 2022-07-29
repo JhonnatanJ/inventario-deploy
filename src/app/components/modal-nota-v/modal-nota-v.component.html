@@ -181,7 +181,7 @@
           <th >{{p.libro.isbn}}</th> <!--[(ngModel)]="nota.detalles[i+1].libro.isbn" name="isbn" ngDefaultControl-->
        
      
-          <td> <input type="number" value="{{p.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td> <!-- [(ngModel)]="nota.detalles[i+1].cantidad" name="cantidad" ngDefaultControl-->
+          <td> <input min="1" type="number" value="{{p.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td> <!-- [(ngModel)]="nota.detalles[i+1].cantidad" name="cantidad" ngDefaultControl-->
        
         
           <!--formControlName="cantidad" id="cantidad" ngDefaultControl-->

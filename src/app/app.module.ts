@@ -16,12 +16,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { NotaVentaComponent } from './components/nota-venta/nota-venta.component';
 import { ModalNotaVComponent } from './components/modal-nota-v/modal-nota-v.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule,NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ListReservaComponent } from './components/list-reserva/list-reserva.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     NotaVentaComponent,
     ModalNotaVComponent,
     ReservasComponent,
-  
+    ListReservaComponent,
+    
 
   ],
   imports: [
@@ -46,11 +50,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule,
+    NgbModalModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-
+    NgxSpinnerModule ,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

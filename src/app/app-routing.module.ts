@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { LibroComponent } from './components/libro/libro.component';
 import { LibroformComponent } from './components/libroform/libroform.component';
+import { ListReservaComponent } from './components/list-reserva/list-reserva.component';
 import { ModalNotaVComponent } from './components/modal-nota-v/modal-nota-v.component';
 import { NotaVentaComponent } from './components/nota-venta/nota-venta.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'formulario/:id',component:LibroformComponent},
   {path:'notas_de_venta',component:NotaVentaComponent},//,canActivate:[AuthGuard]
   {path:'nueva_nota_de_venta',component:ModalNotaVComponent},
-  {path:'reservas',component:ReservasComponent},
+  {path:'reservas',component:ListReservaComponent},
+  {path:'nueva_reserva',component:ReservasComponent},
 ];
 
 @NgModule({

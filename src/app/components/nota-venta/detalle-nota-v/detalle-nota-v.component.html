@@ -1,0 +1,91 @@
+<style>
+    ul{       
+        margin-right: 20px;
+    }
+
+.card-header{
+    font-weight: bolder;    
+}
+
+.list-group-item.list-group-item-primary{
+    text-align: center;
+    font-weight: bolder;    
+}
+
+.table{
+  text-align: center;
+}
+.text-end{
+  text-align:right ;
+  padding: .5rem 7rem;
+  font-weight: bold;
+}
+</style>
+
+<!--MODAL-->
+
+<div *ngIf="modalService.modal"  class="abrir-modal  fadeIn" > <!--si se quiere incluis animacion aumentae: animacion antes del FadeIn-->
+  <div tabindex="-1" style="display:block ;" class="modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+        </div>    
+        <div>
+          <div class="card-header"> NOTA DE VENTA</div>
+        </div>
+        <br>
+        <ul class="vendedor">
+            <li class="list-group-item list-group-item-primary">VENDEDOR</li>
+            <li class="list-group-item">{{NotaV.cuenta.usuario.nombres}} {{NotaV.cuenta.usuario.apellidos}}</li>
+          </ul>
+        
+          <ul>
+            <li class="list-group-item list-group-item-primary">DATOS DE LA NOTA DE VENTA</li>
+            <li class="list-group-item">CÓDIGO:{{NotaV.idNotaventa}}</li>
+            <li class="list-group-item">FECHA: {{NotaV.fechaRegistro}}</li>
+          </ul>
+
+          <div class="modal-body">  
+            <div class="table-responsive">
+             <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">LIBRO</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">SUBTOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor=" let nt of NotaV.detalles">           
+                    <td>{{nt.libro.isbn}}</td>
+                    <td>{{nt.libro.titulo}}</td>  
+                    <td>{{nt.cantidad}}</td> 
+                    <td> $ {{nt.libro.precioUnitario}}</td>
+                    <td>$ {{nt.subtotal}}</td>
+                </tr>   
+                <tr>
+                    <td colspan="4" class="text-end">TOTAL $</td>
+                    <td>
+                        $ {{NotaV.valorTotal}}
+                    </td>
+                </tr>
+                  </tbody>
+              </table>   
+            </div> 
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-success" >Ok!</button>
+</div> -->

@@ -48,7 +48,7 @@ export class LibroformComponent implements OnInit {
       cuenta:aux.idCuenta, 
     });
     console.log(aux);    
-   //this.cargar();    
+   this.cargar();    
   }
 
   createL():void{

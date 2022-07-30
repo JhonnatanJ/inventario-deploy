@@ -56,10 +56,15 @@ table #botones{
 
 .botonEditar a{     
      border: 2px burlywood solid;
-     margin-left: 10px;
+     margin-left: 60px;
      margin-top: 0px;
            
    }
+   .botonEliminar a{   
+     border: 2px red solid;
+     margin-right: 40px;
+      margin-top: -66px;
+}
 a:hover{
   background-color: rgb(208, 207, 197);
  }
@@ -76,24 +81,19 @@ a:hover{
     background-color: #0fa1eb;
   }
 
-.card-header{
-  font-weight: bolder;
-}
-
 </style>
-<app-detalle-nota-v *ngIf="notaSeleccionada" [NotaV]="notaSeleccionada" style="display:block"></app-detalle-nota-v>
 <div id="contenedor">
             <!--CONTENIDO-->          
           <nav class="navbar navbar-light ">
               <a  class="navbar-brand" href="#">
-                   NOTAS DE VENTA
+                   RESERVACIONES
               </a>             
-              <a class="btn btn-info" [routerLink]="['/nueva_nota_de_venta']"> 
+              <a class="btn btn-info" [routerLink]="['/nueva_reserva']"> 
                 <i class="bi bi-plus-circle-fill"></i>
                 Nuevo</a>
           </nav>
           <form class="input-group" style="width: 400px">
-            <input type="search" class="form-control" placeholder="# De Nota De Venta" aria-label="Search" />
+            <input type="search" class="form-control" placeholder="# De Reservacion" aria-label="Search" />
             <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
               <i class="bi bi-search"> Buscar</i>
             </button>
@@ -106,37 +106,37 @@ a:hover{
                       <th scope="col">#</th>
                       <th scope="col">Fecha</th>
                       <th scope="col">Vendedor</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Ver</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Abono</th>
+                      <th scope="col">Saldo</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page }">
-                      <th scope="row">{{not.idNotaventa}}</th>
-                      <td>{{not.fechaRegistro}}</td>
-                      <td>{{not.cuenta.usuario.nombres}}</td>
-                      <td>{{not.valorTotal.toFixed(2)}}</td>
+                    <tr   >
+                      <th scope="row">1</th>
+                      <td>uno</td>
+                      <td>DOS</td>
+                      <td>TRES</td>
+                      <td>cueatp</td>
+                      <td>cinco</td>
                       <td id="botones">
                         <div class="botonEditar">
-                            <a class="btn btn-default" type="button" (click)="openSM(not)">
-                              <i class="bi bi-eye-fill"></i>
+                            <a class="btn btn-default" type="button">
+                              <i class="bi bi-pencil-square"></i>
+                            </a>
+                          </div>
+                          <div class="botonEliminar">
+                            <a class="btn btn-default" type="button">
+                              <i class="bi bi-trash-fill"></i>
                             </a>
                           </div>
                       </td>
                     </tr>
                   </tbody>
             </table>
-          </div>      
-          <pagination-controls 
-          (pageChange)="page = $event"
-          previousLabel="Anterior"
-          nextLabel="Siguiente"
-          ></pagination-controls>        
+          </div>
+              
 </div>
-
-
-
-
- 
 
 

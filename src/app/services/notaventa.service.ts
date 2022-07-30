@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Libro } from '../models/libro';
 import { NotaVenta } from '../models/nota-venta';
 import { UserLoginService } from './user-login.service';
-
+import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,8 +28,8 @@ getAll():Observable<NotaVenta[]>{
   return this.http.get<NotaVenta[]>(this.url,{headers:this.agregarAuthorizationHeader()});
 }
 
-getNota(id:Number):Observable<NotaVenta>{
-  return this.http.get<NotaVenta>(this.url+'/id',{headers:this.agregarAuthorizationHeader()});
+getNota(idNotaventa:number):Observable<NotaVenta>{
+  return this.http.get<NotaVenta>(this.url+'/id/'+idNotaventa,{headers:this.agregarAuthorizationHeader()});
 }
 /*
 get(idNotaventa:NotaVenta):Observable<NotaVenta>{

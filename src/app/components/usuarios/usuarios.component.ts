@@ -4,7 +4,6 @@ import { Cuenta } from 'src/app/models/cuenta';
 import { Rol } from 'src/app/models/rol';
 import { Usuario } from 'src/app/models/usuario';
 import { CuentaService } from 'src/app/services/cuenta.service';
-import { ROLService } from 'src/app/services/rol.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({

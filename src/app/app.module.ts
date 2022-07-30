@@ -25,6 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ListReservaComponent } from './components/list-reserva/list-reserva.component';
+import { DetalleNotaVComponent } from './components/nota-venta/detalle-nota-v/detalle-nota-v.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ListReservaComponent } from './components/list-reserva/list-reserva.com
     ModalNotaVComponent,
     ReservasComponent,
     ListReservaComponent,
+    DetalleNotaVComponent,
     
 
   ],

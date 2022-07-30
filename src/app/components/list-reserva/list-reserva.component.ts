@@ -9,7 +9,9 @@ import { ReservasService } from 'src/app/services/reservas.service';
 })
 export class ListReservaComponent implements OnInit {
 
-  reservas!:Reserva[];
+  public page!:number;
+
+  reservas!:Reserva[];///LISTA
   reserva:Reserva=new Reserva();
   constructor(private reservaService:ReservasService) { }
 

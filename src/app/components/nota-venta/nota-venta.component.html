@@ -114,7 +114,7 @@ a:hover{
                     <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page }">
                       <th scope="row">{{not.idNotaventa}}</th>
                       <td>{{not.fechaRegistro}}</td>
-                      <td>{{not.cuenta.usuario.nombres}}</td>
+                      <td>{{not.cuenta.usuario.nombres}} {{not.cuenta.usuario.apellidos}}</td>
                       <td>{{not.valorTotal.toFixed(2)}}</td>
                       <td id="botones">
                         <div class="botonEditar">

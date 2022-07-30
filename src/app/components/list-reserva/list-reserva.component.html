@@ -113,13 +113,13 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr   >
-                      <th scope="row">1</th>
-                      <td>uno</td>
-                      <td>DOS</td>
-                      <td>TRES</td>
-                      <td>cueatp</td>
-                      <td>cinco</td>
+                    <tr  *ngFor="let r of reservas | paginate: { itemsPerPage: 5, currentPage: page }" >
+                      <th scope="row">{{r.idReserva}}</th>
+                      <td>{{r.fechaCreacion}}</td>
+                      <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>
+                      <td>{{r.usuario.nombres}} {{r.usuario.apellidos}}</td>
+                      <td>{{r.abono}}</td>
+                      <td>{{r.saldo}}</td>
                       <td id="botones">
                         <div class="botonEditar">
                             <a class="btn btn-default" type="button">
@@ -136,7 +136,11 @@ a:hover{
                   </tbody>
             </table>
           </div>
-              
+          <pagination-controls 
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+          ></pagination-controls>     
 </div>
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Autor } from 'src/app/models/autor';
 import { Libro } from 'src/app/models/libro';
 import { LibroService } from 'src/app/services/libro.service';
-import { Observable } from 'rxjs';
+import { flatMap, map, Observable } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -14,11 +14,13 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 export class LibroComponent implements OnInit {
   public page!:number;
   autor!:Autor[];
-   libros!:Libro[];
-
+   libros:Libro[]=[];
+  libro:Libro=new Libro()
    //busqueda
-   myControl = new FormControl('');
-   filteredOptions!: Observable<Libro[]>;
+   search:string= "";
+   isbn:string= "";
+
+   nombreA:string="";
  
   constructor(private libroService:LibroService) { }
 
@@ -26,7 +28,11 @@ export class LibroComponent implements OnInit {
    
     this.libroService.getAllL().subscribe((l=>{this.libros=l;console.log(l)}));
 
+ //busqueda
+ 
   }
+
+  
 
   
   delete(libro:Libro):void{

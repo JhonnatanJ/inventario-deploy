@@ -66,7 +66,8 @@ get(idCuenta:number):Observable<Cuenta>{
 }
 //actualizar//*/
 update(cuentas:Cuenta):Observable<Cuenta>{
-  return this.http.put<Cuenta>(this.url+'/',cuentas,{headers:this.agregarAuthorizationHeader()});
+  console.log(cuentas);
+  return this.http.put<Cuenta>(this.url+'/'+cuentas.idCuenta,cuentas,{headers:this.agregarAuthorizationHeader()});
   }
 ///eliminar
 delete(idCuenta:number):Observable<Cuenta>{
@@ -77,7 +78,7 @@ delete(idCuenta:number):Observable<Cuenta>{
 }*/
 ///
 getRol():Observable<Rol[]>{
-  return this.http.get<Rol[]>(this.url)
+  return this.http.get<Rol[]>(this.url,{headers:this.agregarAuthorizationHeader()})
 }
 
 

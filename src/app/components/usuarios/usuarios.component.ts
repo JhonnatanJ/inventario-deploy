@@ -12,6 +12,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+///busquedas
+  search:string= "";//nombres
+  ced:string=""; ///cedula
+  correo:string="";//email
+
   public page!:number;
   cuentas!:Cuenta[];
  // rol!:Rol[];

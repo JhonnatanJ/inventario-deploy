@@ -9,6 +9,7 @@ import { ReservasService } from 'src/app/services/reservas.service';
 })
 export class ListReservaComponent implements OnInit {
 
+  search:string= "";
   public page!:number;
 
   reservas!:Reserva[];///LISTA

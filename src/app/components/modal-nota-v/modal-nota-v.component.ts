@@ -158,7 +158,7 @@ export class ModalNotaVComponent implements OnInit {
    console.log(this.nota);
     console.log(this.nota);
     this.notaventaService.create(this.nota).subscribe(res=>{ 
-      Swal.fire(this.titulo,`creada con extito`,'success');
+      Swal.fire(this.titulo,`CREADA CON EXITO`,'success');
       this.router.navigate(['/notas_de_venta']);
     });
       //res=>this.router.navigate(['/notas_de_venta']))

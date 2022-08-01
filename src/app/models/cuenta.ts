@@ -14,5 +14,6 @@ export class Cuenta {
     usuario!:Usuario;
     roles:Rol[]=[];
     enabled:Boolean;
-    ///cuenta-rol posiblemente desaparesca por que no vamos asignar fecha fin
+    opcion:string;
+    
 }

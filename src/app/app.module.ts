@@ -26,6 +26,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ListReservaComponent } from './components/list-reserva/list-reserva.component';
 import { DetalleNotaVComponent } from './components/nota-venta/detalle-nota-v/detalle-nota-v.component';
+import { BusquedaPipe } from './Pipe/busqueda.pipe';
+import { BusquedaUsurioPipe } from './Pipe/busqueda-usurio.pipe';
+import { BNotasVentaPipe } from './Pipe/b-notas-venta.pipe';
+import { LibroISBNPipe } from './Pipe/libro-isbn.pipe';
+import { BLibroAutorPipe } from './Pipe/b-libro-autor.pipe';
+import { BUsuarioCedPipe } from './Pipe/b-usuario-ced.pipe';
+import { BUsuarioEmailPipe } from './Pipe/b-usuario-email.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +48,13 @@ import { DetalleNotaVComponent } from './components/nota-venta/detalle-nota-v/de
     ReservasComponent,
     ListReservaComponent,
     DetalleNotaVComponent,
+    BusquedaPipe,
+    BusquedaUsurioPipe,
+    BNotasVentaPipe,
+    LibroISBNPipe,
+    BLibroAutorPipe,
+    BUsuarioCedPipe,
+    BUsuarioEmailPipe,
     
 
   ],

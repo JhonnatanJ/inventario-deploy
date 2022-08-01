@@ -24,21 +24,17 @@
     font-weight: bold;
     color: black;
 }
-.input-group{
+.filtrar{
     margin: 10px;
-    
+    display: flex;
+    width: 50%;
+ 
 }
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
+
+
 .table-responsive{
     margin: 10px;
+    
 }
 thead tr{
     background-color: #2d8fd4;
@@ -75,13 +71,33 @@ a:hover{
                 LIBROS
             </a>             
         </nav>
-          <form class="input-group" style="width: 400px">
+          
+        <div class="filtrar">
             
-            <input type="search" class="form-control" placeholder="ISBN" aria-label="Search" />
-            <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
+            <input *ngIf="libro.opcion == '1'" type="search" class="form-control" placeholder="ISBN" aria-label="Search"
+            [(ngModel)]="isbn" name="isbn" />
+
+            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TITULOS" aria-label="Search"
+            [(ngModel)]="search" name="search" />
+
+            <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
+            [(ngModel)]="nombreA" name="nombreA" />
+            
+            <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
               <i class="bi bi-search"> Buscar</i>
-            </button>
-          </form>
+            </button> -->
+
+            <div class="form-floating" style="width: 50%; height: -10%;">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="libro.opcion" name="libros" >
+       
+              <option value="1">ISBN</option>
+              <option value="2">TITULOS</option>
+              <option value="3">Autor</option>
+            </select>
+            <label for="floatingTextarea">BUSCAR POR:</label>
+       </div>
+          </div>
+       
             <!--TABLA-->
             <div class="table-responsive">
               <table class="table">
@@ -100,7 +116,7 @@ a:hover{
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page };let i=index ">
+                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page } | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA ;let i=index ">
                   <!-- <th scope="row">{{i+1}}</th> -->
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
                   <td>{{lib.isbn}}</td>

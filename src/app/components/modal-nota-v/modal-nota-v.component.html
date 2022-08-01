@@ -131,9 +131,9 @@
 </div> -->
 <form class="input-group" style="width: 400px">
   <mat-form-field appearance="fill">
-    <mat-label>Number</mat-label>
+    <mat-label>TITULO</mat-label>
     <input type="text"
-           placeholder="Pick one"
+           placeholder="Buscar"
            aria-label="Libros"
            matInput
            [formControl]="myControl"
@@ -153,7 +153,7 @@
 <form > <!--[formGroup]="Minotaventa"(submit)="onSubmit(Minotaventa.value)"-->
  <!---->
  <div class="alert alert-info my-4" *ngIf="nota.detalles.length == 0">
-  No hay lineas asignadas para la Nota De Venta. Debe agregar al menos una!
+  No hay Libros Asignados para la Nota De Venta. Debe agregar al menos uno!
  </div>
   <div class="table-responsive">
     <table class="table" *ngIf="nota.detalles.length > 0">
@@ -175,7 +175,7 @@
         
         <tr *ngFor="let p of nota.detalles;let i=index" > <!--*ngFor="let p of librosSeleccionados;let i=index"-->
           
-          <th >{{i+1}}</th><!--[(ngModel)]="nota.idNotaventa" name="idNotaventa"-->
+          <th >{{nota.idNotaventa}}</th><!--[(ngModel)]="nota.idNotaventa" name="idNotaventa"-->
 
         
           <th >{{p.libro.isbn}}</th> <!--[(ngModel)]="nota.detalles[i+1].libro.isbn" name="isbn" ngDefaultControl-->

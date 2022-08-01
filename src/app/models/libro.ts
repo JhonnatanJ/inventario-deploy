@@ -23,5 +23,5 @@ export class Libro {
     generos!:Genero[];
     editoriales!:Editorial[];
     cuenta!:Cuenta;
-    canti!:number;
+    opcion:string;
 }

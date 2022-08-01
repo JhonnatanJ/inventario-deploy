@@ -2,70 +2,72 @@
 <style>
 
 #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
+        margin-left: 30%;
+        margin-right:25%;
         margin-top:20px ;
-        /* border: 50px;
-        border:2px #194bf0 solid;       
+        
+     border:2px #194bf0 solid;       
         border-top-left-radius: 5px;
-        border-top-right-radius: 5px; */
+        border-top-right-radius: 5px; 
     }
-    body {
-      overflow-x: hidden;
-    }
-     
-    #wrapper.toggled {
-      padding-left: 250px;
-    }  
-    
-    #page-content-wrapper {
-      width: 100%;
-      position: absolute;
-      padding: 15px;
-    }
-    
-    #wrapper.toggled #page-content-wrapper {
-      position: absolute;
-      margin-right: -250px;
-    }
-      
-    @media(min-width:768px) {
-      #wrapper {
-        padding-left: 0;
-      }
-      #wrapper.toggled {
-        padding-left: 250px;
-      }
-      #sidebar-wrapper {
-        width: 0;
-      }
-      #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
-      }
-      #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-      }
-      #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-      }
-      .content {
-        
-        margin: 20px auto 32px;
-        padding: 0 10px;
-        max-width: 900px;
-        flex-direction: column;
-        align-items: center;
-        /*border:3px solid rgb(7, 32, 78);
-        border-radius:30px;*/
-      }
-      /*.content button{
-        background-color: red;
-        position:relative;
-        
-      }*/
-    }
+
+.opciones{  
+  display: flex;
+  justify-content:space-evenly;
+  margin-right:1%;
+
+}    
+.roles{
+  margin-top: 2%;
+  margin-left: -5%;
+  width: 230px;
+  margin-right: -5%;
+}
+
+.habilitar{
+  width: 230px;
+  margin-top: 2%;
+  margin-left: 8%;
+  margin-right: -7%;
+  
+}
+
+.content{
+  font-weight: bolder; 
+  color: black;
+
+}
+.content form{
+  margin-left: 18%;
+  margin-right:-5;
+}
+
+.ingresos{
+  display: flex;
+  justify-content: space-evenly;
+}
+.ingresos2{
+  display: flex;
+  justify-content: space-evenly;
+}
+.ingresos3{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navbar.navbar-light{
+    background-color: #2d8fd4;
+   
+
+}
+
+.navbar.navbar-light .navbar-brand {
+    margin-left: 35%;/*NOTAS DE VENTA*/
+    font-weight: bold;
+   
+}
+
+
     </style>
   <body>
     <div id="wrapper" class="toggled">  
@@ -73,72 +75,85 @@
           <div class="container-fluid">
             <!--CONTENIDO-->
             <div id="contenedor">
-            <h1>REGISTRO</h1>
-            <div class="content">
-            <form *ngIf="flag" class="col-8">
 
-               <!-- <div [formGroup]="Miformulario"(submit)="onSubmit(Miformulario.value)"> -->
-                <label for="rol" class="form-label">Rol</label>
-                <!-- <div formArrayName="roles"> -->
-             
-              <select  id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="roles" [ngModelOptions]="{standalone: true}">   
-                <!-- *ngFor=" let item of getRoles.controls; let pointIndex=index" [formGroupName]="pointIndex"         -->
-                <!-- -->
-                <!-- *ngFor="let cuent of cuentas"  -->
-                <option selected  [ngValue]="''" > -- Escoga la Opcion --</option>
-                <!-- <div *ngFor=" let item of getRoles.controls; let pointIndex=index" [formGroupName]="pointIndex" > -->
-                <option [ngValue]="r" *ngFor="let r of rol" >{{r.nombre}}</option>
-                <!-- <option formControlName="nombre" id="rol" >"ROLE_VENDEDOR"</option> -->
-                <!-- <option  [(ngModel)]="roles.nombre" name ="nombre" ngValue="ROLE_VENDEDOR">ROLE_VENDEDOR</option> -->
-                <!-- ngValue="ROLE_ADMINISTRADOR" (click)='createRol("ROLE_ADMINISTRADOR")' -->
-                <!-- <opti vaon ngValue="ROLE_VENDEDOR" [ngModel]="r.nombre" nombre="nombre">ROLE_VENDEDOR</option> -->
-                <!-- ngValue="ROLE_VENDEDOR" (click)='createRol("ROLE_VENDEDOR")' -->
-                <!-- *ngFor="let r of rol" [ngValue]="r" -->
-                <!-- {{r.nombre}} -->
-                <!-- </div> -->
+
+              <nav class="navbar navbar-light ">
+                  <a  class="navbar-brand" >
+                      REGISTRO DE USUARIOS
+                  </a>             
+              </nav>
+
+            <div class="content">            
+            <form *ngIf="flag" class="col-8">
+    <div class="opciones">
+
+      <div class="roles">
+             <div class="form-floating mb-3">           
+              <select  id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="roles" [ngModelOptions]="{standalone: true}">  <!--[value]="this.roles.nombre"-->
+                <!-- <option selected  [ngValue]="''" > -- Escoga la Opcion --</option> -->
+                <option [ngValue]="r" *ngFor="let r of rol" >{{r.nombre}}</option> 
+<!-- [(ngModel)]="roles" [ngModelOptions]="{standalone: true}"   -->
               </select>
-            <!-- </div> -->
-           <!-- </div> -->
-              <!-- </form> -->
-              
+              <label for="floatingInput">ROL</label>
+            </div>
+         </div>
+
+
+            <div class="habilitar">
+<!--opcines de habilitar-->
+         <div class="form-floating mb-3">  
+            <select class="form-select" [(ngModel)]="estado" name="estado">
+              <option  value="Habilitado">Habilitado</option>
+              <option value="Desabilitado">Desabilitado</option>
+            </select>
+            <label for="floatingInput">HABILITAR O DESABILITAR</label>
+         </div>
+        </div>
+    </div>
               <br>
-              <div class="mb-3">
-                <label for="ci"  class="form-label">Cedula</label>
+<div class="ingresos">
+              <div class="form-floating mb-3">               
                 <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci">
-                </div>    
-                <div class="mb-3">
-                  <label for="nombre" class="form-label">Nombre</label>
+                <label for="floatingInput">CÉDULA</label>
+               </div> 
+
+               <div class="form-floating mb-3">   
                   <input type="text" class="form-control" id="nombre" [(ngModel)]="cuenta.usuario.nombres" name="nombre">
-                  </div>   
-                  <div class="mb-3">
-                    <label for="apellidos" class="form-label">Apellido</label>
+                  <label for="floatingInput">NOMBRE</label>
+                </div>   
+</div>  
+
+<div class="ingresos2">
+                <div class="form-floating mb-3">                       
                     <input type="text" class="form-control" id="apellidos" [(ngModel)]="cuenta.usuario.apellidos" name="apellidos">
-                    </div>         
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
+                    <label for="floatingInput">APELLIDO</label>
+                </div> 
+
+                <div class="form-floating mb-3"> 
                   <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuenta.email" name="email">
-                  </div>
-                  <div class="mb-3">
-                    <label for="telefono" class="form-label">Telefono</label>
+                  <label for="floatingInput">CORREO</label>
+                </div>
+ </div>
+
+ <div class="ingresos3">
+                 <div class="form-floating mb-3">   
                     <input type="text" class="form-control" id="telefono" [(ngModel)]="cuenta.usuario.telefono" name="telefono">
-                    </div>
-              <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
+                    <label for="floatingInput">TELEFONO</label>
+                  </div>
+
+                <div class="form-floating mb-3">   
                 <input type="" class="form-control" id="contrasena" [(ngModel)]="cuenta.contrasena" name="contrasena" >
+                <label for="floatingInput">CONTRASEÑA</label>
               </div>
-              
-              <select class="form-select" [(ngModel)]="estado" name="estado">
-                <option  value="Habilitado">Habilitado</option>
-                <option value="Desabilitado">Desabilitado</option>
-              </select>
-              
+ </div>            
+         
               
               <br>
-              <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); " type="submit" class="btn btn-primary" (click)='create()' *ngIf="!cuenta.idCuenta else elseBlock">Guardar</button>
+              <button style="background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); margin-top: -10%; margin-left: 30%;" type="submit" class="btn btn-primary" (click)='create()' *ngIf="!cuenta.idCuenta else elseBlock">Guardar</button>
         
-              <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);" type="reset" class="btn btn-primary" >Cancelar</button>
+              <button style=" background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-top: -10%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/usuarios']" >Cancelar</button>
               <ng-template #elseBlock >
-              <button style="margin:10px" class="btn btn-success" role="button"(click)='create()'>Actualizar</button> 
+              <button style="margin-top: -10%; margin-left: 30%;" class="btn btn-success" role="button"(click)='update()' >Actualizar</button> 
             </ng-template>
              
             </form>

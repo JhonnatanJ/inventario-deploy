@@ -93,10 +93,10 @@ a:hover{
                 Nuevo</a>
           </nav>
           <form class="input-group" style="width: 400px">
-            <input type="search" class="form-control" placeholder="# De Nota De Venta" aria-label="Search" />
-            <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
+            <input type="search" class="form-control" placeholder="# De Nota De Venta" aria-label="Search" [(ngModel)]="search" name="search" />
+            <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
               <i class="bi bi-search"> Buscar</i>
-            </button>
+            </button> -->
           </form>
 
           <div class="table-responsive">
@@ -111,7 +111,7 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page }">
+                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page } | bNotasVenta:search">
                       <th scope="row">{{not.idNotaventa}}</th>
                       <td>{{not.fechaRegistro}}</td>
                       <td>{{not.cuenta.usuario.nombres}} {{not.cuenta.usuario.apellidos}}</td>

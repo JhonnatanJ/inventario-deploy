@@ -39,30 +39,7 @@ export class UsuarioFormsComponent implements OnInit {
    
     this.cargar();
   }
-
-   onSubmit(formValue:any){
-     const cuenta=new Cuenta();
-    //  cuenta.email=formValue.email;
-    //  cuenta.contrasena=formValue.contrasena;
-    //  cuenta.usuario.nombres=formValue.usuario;
-    //  cuenta.usuario.apellidos=formValue.usuario;
-    //  cuenta.usuario.ci=formValue.usuario;
-    //  cuenta.usuario.telefono=formValue.usuario;
-     cuenta.roles=formValue.roles;
-
-     this.cuentaServicio.create(cuenta).subscribe(
-       rep=> this.cuenta=rep);
-   }
-
-   get getRoles(){
-     return this.Miformulario.get('roles') as FormArray;
-   }
-   addRol(){
-     const control=<FormArray>this.Miformulario.controls['roles'];
-     control.push(this.fb.group({nombre:[]}));
-   }
-
-   
+  
 
   cargar():void{
    this.activatedRoute.params.subscribe(
@@ -70,18 +47,11 @@ export class UsuarioFormsComponent implements OnInit {
       let id=a['id'];
       if(id){
         this.cuentaServicio.get(id).subscribe(
-          es=>this.cuenta=es);
+          es=>{this.cuenta=es;
+            this.roles=es.roles[0]});
       }})
   }
 
-  /*createRol(roles?:string):void{
-    this.roles.nombre=roles;
-    console.log(this.roles.nombre);
-    this.cuentaServicio.createRol(this.cuenta).subscribe(
-      rep=> this.cuenta=rep);
-      /* this.cuentaServicio.createRol(this.roles).subscribe(
-      rep=> this.roles=rep); */
- // }
 
   create():void{
     
@@ -104,6 +74,10 @@ export class UsuarioFormsComponent implements OnInit {
   
 
   update():void{
+    console.log(this.roles);
+   this.cuenta.roles[0]=(this.roles);
+   console.log(this.roles);
+   console.log(this.cuenta);
     this.cuentaServicio.update(this.cuenta).subscribe(
       u=>this.router.navigate(['/usuarios']));
   }

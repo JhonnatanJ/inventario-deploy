@@ -11,6 +11,9 @@ import { modalService } from './detalle-nota-v/modal.service';
   styleUrls: ['./nota-venta.component.css']
 })
 export class NotaVentaComponent implements OnInit {
+
+  search:number;
+  
   public page!:number;
 
   venta:NotaVenta[];

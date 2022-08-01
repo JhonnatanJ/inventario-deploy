@@ -175,7 +175,7 @@
         
         <tr *ngFor="let p of nota.detalles;let i=index" > <!--*ngFor="let p of librosSeleccionados;let i=index"-->
           
-          <th >{{nota.idNotaventa}}</th><!--[(ngModel)]="nota.idNotaventa" name="idNotaventa"-->
+          <th >{{i+1}}</th><!--[(ngModel)]="nota.idNotaventa" name="idNotaventa"-->
 
         
           <th >{{p.libro.isbn}}</th> <!--[(ngModel)]="nota.detalles[i+1].libro.isbn" name="isbn" ngDefaultControl-->

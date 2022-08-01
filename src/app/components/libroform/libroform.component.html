@@ -1,12 +1,12 @@
 <style>
 #contenedor{
-        margin-left: 20%;
+        margin-left: 10%;
         margin-right: 10%;
-        margin-top:20px ;
-        /* border: 50px;
+        margin-top:-5px ;
+         border: 50px;
         border:2px #194bf0 solid;       
         border-top-left-radius: 5px;
-        border-top-right-radius: 5px; */
+        border-top-right-radius: 5px; 
     }
 
   body {
@@ -81,7 +81,7 @@
   transform:translate(-50%, -50%);
   width:40%;
   height:0;
-  border-top:3px solid #50a0d4;
+  border-top:3px solid #0a74bb;/*linea horizontal botones*/
 }
 
 .boton.mas::after {
@@ -92,12 +92,12 @@
   transform:translate(-50%, -50%);
   width:0;
   height:40%;
-  border-left:3px solid #50a0d4;
+  border-left:3px solid #0a74bb;/*linea vertical  boton mas */
 }
 .boton.mas{
   top: -10px;
   left: 0%;
-  border:2px solid #50a0d4;
+  border:2px solid #6d6d6c;
   }
 .boton.menos.btn .btn-link{
   top: -50px;
@@ -106,13 +106,29 @@
   .boton.menos{
     left:102%;
     top: -35px;
-    border:2px solid #000000;
-    background:#efade0;
+    border:2px solid #6d6d6c;
+    background:#ffffff;/*fondo boton menos*/
   }
   .dropdown-menu{
     padding: 10%;
     width: 110%;
   }
+  .navbar.navbar-light{
+    background-color: #2d8fd4;
+   }
+
+.navbar.navbar-light .navbar-brand {
+    margin-left: 35%;/*NOTAS DE VENTA*/
+    font-weight: bold;   
+}
+  
+.content form{
+  margin-left: 15%;
+  margin-right:-8;
+}
+.form-floating.mb-3{
+  font-weight: bold;
+}
   </style>
 <body>
   <div id="wrapper" class="toggled">  
@@ -120,7 +136,13 @@
         <div class="container-fluid">
           <!--CONTENIDO-->
           <div id="contenedor">
-          <h1>REGISTRO</h1>
+
+            <nav class="navbar navbar-light ">
+              <a  class="navbar-brand" >
+                  REGISTRO DE LIBROS
+              </a>             
+          </nav>
+
           <div class="content"> 
 
             <ngx-spinner
@@ -136,6 +158,7 @@
             <div class="input-group">
               <input   type="file" class="form-control" id="imagen" aria-describedby="inputGroupFileAddon04" aria-label="Upload" #imagenInputFile
               (change)="onFileChange($event)" accept="image/png, image/jpeg, image/gif">
+              <button  class="btn btn-outline-danger" [disabled]="!imagen" (click)="reset()"><i class="bi bi-arrow-clockwise"></i>Reset</button>
               <!-- <button class="btn btn-outline-secondary" type="button" id="Imagen">Button</button> -->
             </div>
             <div *ngIf="imagen" class="mt-5">
@@ -144,45 +167,42 @@
                 <img class="image-thumbnail" style="max-width: 100px;" [src]="imagenMin" >
               </div>
             </div>
-            <div class="form-group d-flex justify-content-between">
-              <!-- <button type="submit" class="btn btn-outline-success" [disabled]="!imagen"><i class="bi bi-upload"></i> Subir</button> -->
-              <button  class="btn btn-outline-danger" [disabled]="!imagen" (click)="reset()"><i class="bi bi-arrow-clockwise"></i>Reset</button>
-            </div>
             
             
-            <div class="mb-3">
-              <label for="isbn" class="form-label">ISBN</label>
-              <input type="text" class="form-control" id="isbn" formControlName="isbn">
-              </div>    
+            <br>
+            <div class="form-floating mb-3">                  
+                  <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn">
+                  <label for="isbn" class="form-label">ISBN</label>
+              </div>   
+
+              <div class="form-floating mb-3">                      
+                  <input type="text" class="form-control"  id="titulo" formControlName="titulo">
+                  <label for="titulo" class="form-label">TITULO</label>
+              </div>  
+
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control"  id="stock" formControlName="stock">
+                <label for="stock" class="form-label">STOCK</label>
+              </div> 
+
+              <div class="form-floating mb-3">              
+                <input type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
+                <label for="precioUnitario" class="form-label">PRECIO UNITARIO</label>
+              </div>
+              
+
+                <!--AUTOR-->
               <div class="mb-3">
-                <label for="titulo" class="form-label">Titulo</label>
-                <input type="text" class="form-control"  id="titulo" formControlName="titulo">
-                </div>  
-                <!--<div class="mb-3">
-                  <label for="autor" class="form-label">Autor(es)</label>
-                  <input type="text" class="form-control"  id="autor" >
-                  </div> -->
-                 
-                  <!--AUTOR-->
-                  
-                  <div class="mb-3">
-                    <label for="autor" class="form-label">Autor(es)</label>
+                      <label for="autor" class="form-label">Autor(es)</label>
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                          <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
+                           <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
                         </div>
-                      </div>
+                    </div>
                       <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
-                   </div> 
+              </div> 
                   <!--FIN AUTOR-->
-                  <div class="mb-3">
-                    <label for="stock" class="form-label">Stock</label>
-                    <input type="number" class="form-control"  id="stock" formControlName="stock">
-                    </div> 
-                  <div class="mb-3">
-                  <label for="precioUnitario" class="form-label">Precio Unitario</label>
-                  <input type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
-                  </div>
+
                   <!--GENERO-->                 
                   <div class="mb-3">
                     <label for="autor" class="form-label">Genero(s)</label>
@@ -206,9 +226,9 @@
                      </div> 
                     <!--FIN EDITORIAL-->
                 <!-- Message input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="descripcion">Descripcion</label>
+                <div class="form-floating mb-3">                   
                   <textarea class="form-control"  id="descripcion" rows="4" formControlName="descripcion"></textarea>
+                  <label class="form-label" for="descripcion">DESCRIPCIÓN</label>
                   </div> 
                        
             <!--<label for="exampleInputRol" class="form-label">Rol</label>
@@ -218,11 +238,11 @@
               <option value="2">Vendedor</option>
             </select>-->
             <br>
-            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
+            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-top: -5%; margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
       
-            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
+            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);margin-top: -5%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>
-            <button type="submit" class="btn btn-success" >Actualizar</button>
+            <button style="margin-top: -5%; margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
           </ng-template>
           </form>
         </div> 

@@ -9,7 +9,12 @@ import { ReservasService } from 'src/app/services/reservas.service';
 })
 export class ListReservaComponent implements OnInit {
 
-  search:string= "";
+  ///busqueda
+  idR:number;
+  search:string= "";//cliente
+  vendedor:string="";
+
+
   public page!:number;
 
   reservas!:Reserva[];///LISTA

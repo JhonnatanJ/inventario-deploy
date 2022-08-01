@@ -13,6 +13,7 @@ export class NotaVenta {
     fechaRegistro!:Date;//Date OJO
    valorTotal!:number;
     detalles:Detalle[]=[];
+    opcion:string;
 
     calcularGranTotal():number{
         this.valorTotal=0;

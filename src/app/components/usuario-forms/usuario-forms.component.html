@@ -13,13 +13,13 @@
 
 .opciones{  
   display: flex;
-  justify-content:space-evenly;
-  margin-right:1%;
+  justify-content:space-between;
+ 
 
 }    
 .roles{
   margin-top: 2%;
-  margin-left: -5%;
+  margin-left: -3%;
   width: 230px;
   margin-right: -5%;
 }
@@ -27,8 +27,8 @@
 .habilitar{
   width: 230px;
   margin-top: 2%;
-  margin-left: 8%;
-  margin-right: -7%;
+  margin-left: 7%;
+  margin-right: -8%;
   
 }
 
@@ -38,8 +38,9 @@
 
 }
 .content form{
-  margin-left: 18%;
+  margin-left: 15%;
   margin-right:-5;
+  
 }
 
 .ingresos{
@@ -48,7 +49,7 @@
 }
 .ingresos2{
   display: flex;
-  justify-content: space-evenly;
+  justify-content:space-evenly;
 }
 .ingresos3{
   display: flex;
@@ -63,8 +64,23 @@
 
 .navbar.navbar-light .navbar-brand {
     margin-left: 35%;/*NOTAS DE VENTA*/
-    font-weight: bold;
-   
+    font-weight: bold;  
+}
+.entradas{
+  width: 75%;
+  margin-top: -5%; 
+
+}
+
+.columna1{
+  margin-right: 10%;
+  margin-left: -5%;
+  width: 230px;
+}
+.columna2{
+  margin-right: -45%;
+  
+  width: 230px;
 }
 
 
@@ -111,43 +127,63 @@
         </div>
     </div>
               <br>
+
+       <div class="entradas">    
 <div class="ingresos">
+
+  <div class="columna1">
               <div class="form-floating mb-3">               
                 <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci">
                 <label for="floatingInput">CÉDULA</label>
                </div> 
-
+  </div>
+  
+  <div class="columna2">
                <div class="form-floating mb-3">   
                   <input type="text" class="form-control" id="nombre" [(ngModel)]="cuenta.usuario.nombres" name="nombre">
                   <label for="floatingInput">NOMBRE</label>
-                </div>   
+                </div> 
+  </div>
+
 </div>  
 
 <div class="ingresos2">
+
+  <div class="columna1">
                 <div class="form-floating mb-3">                       
                     <input type="text" class="form-control" id="apellidos" [(ngModel)]="cuenta.usuario.apellidos" name="apellidos">
                     <label for="floatingInput">APELLIDO</label>
                 </div> 
+   </div>
 
+   <div class="columna2">
                 <div class="form-floating mb-3"> 
                   <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuenta.email" name="email">
                   <label for="floatingInput">CORREO</label>
                 </div>
+  </div>
+
  </div>
 
  <div class="ingresos3">
+
+    <div class="columna1">
                  <div class="form-floating mb-3">   
                     <input type="text" class="form-control" id="telefono" [(ngModel)]="cuenta.usuario.telefono" name="telefono">
                     <label for="floatingInput">TELEFONO</label>
                   </div>
+    </div>
 
+    <div class="columna2">
                 <div class="form-floating mb-3">   
                 <input type="" class="form-control" id="contrasena" [(ngModel)]="cuenta.contrasena" name="contrasena" >
                 <label for="floatingInput">CONTRASEÑA</label>
               </div>
+    </div>
+
  </div>            
          
-              
+</div>               
               <br>
               <button style="background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); margin-top: -10%; margin-left: 30%;" type="submit" class="btn btn-primary" (click)='create()' *ngIf="!cuenta.idCuenta else elseBlock">Guardar</button>
         

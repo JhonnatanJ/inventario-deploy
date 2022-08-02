@@ -14,6 +14,7 @@ export class NotaVentaComponent implements OnInit {
 //busqueda
   search:number;
   vendedor:string="";
+  fecha:string="";
   
   public page!:number;
 

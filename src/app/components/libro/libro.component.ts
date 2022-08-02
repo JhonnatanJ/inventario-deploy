@@ -17,10 +17,11 @@ export class LibroComponent implements OnInit {
    libros:Libro[]=[];
   libro:Libro=new Libro()
    //busqueda
-   search:string= "";
-   isbn:string= "";
-
-   nombreA:string="";
+   search:string= "";///titulos
+   isbn:string= "";//isbn
+   nombreA:string="";//autor
+   genero:string="";//genero
+   editorial:string="";//editorial
  
   constructor(private libroService:LibroService) { }
 

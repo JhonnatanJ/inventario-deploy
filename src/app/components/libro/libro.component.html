@@ -82,17 +82,22 @@ a:hover{
 
             <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
             [(ngModel)]="nombreA" name="nombreA" />
+
+            <input *ngIf="libro.opcion == '4'" type="search" class="form-control" placeholder="GENERO" aria-label="Search"
+            [(ngModel)]="genero" name="genero" />
+
+            <input *ngIf="libro.opcion == '5'" type="search" class="form-control" placeholder="EDITORIAL" aria-label="Search"
+            [(ngModel)]="editorial" name="editorial" />
             
-            <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-              <i class="bi bi-search"> Buscar</i>
-            </button> -->
 
             <div class="form-floating" style="width: 50%; height: -10%;">
             <select class="form-select" aria-label="Default select example" [(ngModel)]="libro.opcion" name="libros" >
        
               <option value="1">ISBN</option>
               <option value="2">TITULOS</option>
-              <option value="3">Autor</option>
+              <option value="3">AUTOR</option>
+              <option value="4">GENERO</option>
+              <option value="5">EDITORIAL</option>
             </select>
             <label for="floatingTextarea">BUSCAR POR:</label>
        </div>
@@ -116,7 +121,7 @@ a:hover{
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page } | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA ;let i=index ">
+                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page } | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial;let i=index ">
                   <!-- <th scope="row">{{i+1}}</th> -->
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
                   <td>{{lib.isbn}}</td>

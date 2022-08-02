@@ -13,6 +13,7 @@ export class ListReservaComponent implements OnInit {
   idR:number;
   search:string= "";//cliente
   vendedor:string="";
+  fecha:string="";
 
 
   public page!:number;

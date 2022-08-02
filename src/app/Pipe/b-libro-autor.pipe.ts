@@ -12,18 +12,17 @@ export class BLibroAutorPipe implements PipeTransform {
       return libr
     }
 
-
     const result=[];
     for(const a of libr){
       for(const au of a.autores){
           if(au.nombre.toLowerCase().indexOf(nombreA.toLowerCase())>-1 ){
-              result.push(au);
+              result.push(a);
           }
       }
       
     }
 
-    return JSON.parse(JSON.stringify(result));
+    return result;
   }
 
 }

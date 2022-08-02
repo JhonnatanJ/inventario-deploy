@@ -108,9 +108,9 @@ a:hover{
             <input *ngIf="reserva.opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
             [(ngModel)]="vendedor" name="vendedor" />
             
-            <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-              <i class="bi bi-search"> Buscar</i>
-            </button> -->
+            <input *ngIf="reserva.opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
+              value="2022-07-22"
+              min="2022-01-01" max="2030-12-31">
 
             <div class="form-floating" style="width: 50%; height: -10%;">
             <select class="form-select" aria-label="Default select example" [(ngModel)]="reserva.opcion" name="libros" >
@@ -118,6 +118,7 @@ a:hover{
               <option value="1">ID DE RESERVA</option>
               <option value="2">CLIENTE</option>
               <option value="3">VENDEDOR</option>
+              <option value="4">FECHA</option>
             </select>
             <label for="floatingTextarea">BUSCAR POR:</label>
        </div>
@@ -137,7 +138,7 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr  *ngFor="let r of reservas | paginate: { itemsPerPage: 5, currentPage: page } | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor" >
+                    <tr  *ngFor="let r of reservas | paginate: { itemsPerPage: 5, currentPage: page } | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor | bReservaFecha:fecha" >
                       <th scope="row">{{r.idReserva}}</th>
                       <td>{{r.fechaCreacion}}</td>
                       <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>

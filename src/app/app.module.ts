@@ -37,6 +37,10 @@ import { BReservaNombrePipe } from './Pipe/b-reserva-nombre.pipe';
 import { BReservaIDPipe } from './Pipe/b-reserva-id.pipe';
 import { BReservaVendedorPipe } from './Pipe/b-reserva-vendedor.pipe';
 import { BVentaVendedorPipe } from './Pipe/b-venta-vendedor.pipe';
+import { BLibroGeneroPipe } from './Pipe/b-libro-genero.pipe';
+import { BLibroEditorialPipe } from './Pipe/b-libro-editorial.pipe';
+import { BVentaFechaPipe } from './Pipe/b-venta-fecha.pipe';
+import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,10 @@ import { BVentaVendedorPipe } from './Pipe/b-venta-vendedor.pipe';
     BReservaIDPipe,
     BReservaVendedorPipe,
     BVentaVendedorPipe,
+    BLibroGeneroPipe,
+    BLibroEditorialPipe,
+    BVentaFechaPipe,
+    BReservaFechaPipe,
     
 
   ],

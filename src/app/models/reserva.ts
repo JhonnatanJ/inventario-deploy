@@ -9,7 +9,7 @@ export class Reserva {
        // this.detalleReservas=[new DetalleReserva()];
     }
     idReserva!:number;
-    fechaCreacion!:Date;//Date ojo
+    fechaCreacion!:string;//Date ojo
     fechaAbono!:Date;
     valorTotal!:number;
     saldo!:number;

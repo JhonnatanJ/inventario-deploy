@@ -106,7 +106,11 @@ a:hover{
         [(ngModel)]="search" name="search" /> 
 
         <input *ngIf="nota.opcion == '2'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
-        [(ngModel)]="vendedor" name="ced" />
+        [(ngModel)]="vendedor" name="vendedor" />
+
+        <input *ngIf="nota.opcion == '3'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
+       value="2022-07-22"
+       min="2022-01-01" max="2030-12-31">
 
         <!-- <input *ngIf="nota.opcion == '3'" type="search" class="form-control" placeholder="CORREO" aria-label="Search"
         [(ngModel)]="" name="" />
@@ -120,7 +124,7 @@ a:hover{
    
           <option value="1"># NOTA DE VENTA</option>
           <option value="2">VENDEDOR</option>
-          <!-- <option value="3">EMAIL</option> -->
+          <option value="3">FECHA</option>
         </select>
         <label for="floatingTextarea">BUSCAR POR:</label>
    </div>
@@ -139,7 +143,7 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page } | bNotasVenta:search | bVentaVendedor:vendedor">
+                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page } | bNotasVenta:search | bVentaVendedor:vendedor | bVentaFecha:fecha">
                       <th scope="row">{{not.idNotaventa}}</th>
                       <td>{{not.fechaRegistro}}</td>
                       <td>{{not.cuenta.usuario.nombres}} {{not.cuenta.usuario.apellidos}}</td>

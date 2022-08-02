@@ -6,6 +6,7 @@ import { Cuenta } from '../models/cuenta';
 import { DatosLogin } from '../models/datos-login';
 import { CuentaService } from './cuenta.service';
 import { Observable } from 'rxjs';
+import { Rol } from '../models/rol';
 
 @Injectable({
   providedIn: 'root'
@@ -89,11 +90,20 @@ obtenerDatosToken(accessToken:string):any{
 
   isAuthenticated():boolean{
     let payload=this.obtenerDatosToken(this.token);
-    if(payload !=null && payload.user_name && payload.user_name.length>0 ){
-     
+    if(payload !=null && payload.user_name && payload.user_name.length>0 ){    
       return true;
     }
-   
+    return false;
+  }
+  
+  hasRole(role:string):boolean{///ojo con rol
+     
+  // let aux= JSON.parse(sessionStorage.getItem("cuenta"));
+  if(role==JSON.parse(sessionStorage.getItem("cuenta")).roles[0]){
+
+    return true;
+  }
+    
     return false;
   }
 

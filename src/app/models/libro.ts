@@ -19,9 +19,9 @@ export class Libro {
     precioUnitario!:number;
     fechaRegistro!:Date;
     imagen!:Imagen;
-    autores!:Autor[];
-    generos!:Genero[];
-    editoriales!:Editorial[];
+    autores:Autor[]=[];
+    generos:Genero[]=[];
+    editoriales:Editorial[]=[];
     cuenta!:Cuenta;
     opcion:string;
 }

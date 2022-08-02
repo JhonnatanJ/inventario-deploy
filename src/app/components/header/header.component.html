@@ -190,7 +190,7 @@
       <a [routerLink]="['/reservas']"><li>
         <i class="bi bi-journal-bookmark"></i>
         Reservas</li></a>
-      <a href="#"><li>
+      <a *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')" href="#"><li>
         <i class="bi bi-graph-up-arrow"></i>
         Reportes</li></a>
       <li class="nav-item dropdown" id="submenu">
@@ -202,7 +202,7 @@
           <li><a class="dropdown-item" [routerLink]="['/formulario']">Registro de Libros</a></li>
         </ul>
       </li>
-      <li class="nav-item dropdown" id="submenu">
+      <li *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')"  class="nav-item dropdown" id="submenu">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-people"></i>
           Usuarios

@@ -5,7 +5,7 @@ export class DetalleReserva {
         this.libro= new Libro();
     }
 
-    idDetalleReserva!:string;
+    idDetalleReserva:string="";
     cantidad:number=1;
     subtotal!:number;
     libro!:Libro;

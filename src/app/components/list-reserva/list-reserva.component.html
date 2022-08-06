@@ -54,14 +54,14 @@ table #botones{
   text-align: center;
 }
 
-.botonEditar a{     
-     border: 2px burlywood solid;
+.botonEliminar a{     
+     border: 2px rgb(238, 71, 20) solid;
      margin-left: 60px;
-     margin-top: 0px;
+     margin-top: -1px;
            
    }
-   .botonEliminar a{   
-     border: 2px red solid;
+   .botonAumentar a{   
+     border: 2px rgb(0, 26, 255) solid;
      margin-right: 40px;
       margin-top: -66px;
 }
@@ -146,14 +146,14 @@ a:hover{
                       <td>{{r.abono}}</td>
                       <td>{{r.saldo}}</td>
                       <td id="botones">
-                        <div class="botonEditar">
-                            <a class="btn btn-default" type="button">
-                              <i class="bi bi-pencil-square"></i>
-                            </a>
-                          </div>
-                          <div class="botonEliminar">
+                        <div class="botonEliminar">
                             <a class="btn btn-default" type="button">
                               <i class="bi bi-trash-fill"></i>
+                            </a>
+                          </div>
+                          <div class="botonAumentar">
+                            <a class="btn btn-default" type="button" [routerLink]="['/nueva_reserva',r.idReserva]">
+                              <i class="bi bi-plus-circle-fill"></i>
                             </a>
                           </div>
                       </td>

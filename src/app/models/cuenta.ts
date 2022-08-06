@@ -13,7 +13,7 @@ export class Cuenta {
     contrasena!:string; 
     usuario!:Usuario;
     roles:Rol[]=[];
-    enabled:Boolean;
+    enabled:boolean;
     opcion:string;
     
 }

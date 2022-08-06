@@ -21,6 +21,13 @@ export class LibroformComponent implements OnInit {
   flag=false;///condicional de mostrar o no mostrar
   libros:any[]=[];///para el for
   libro:Libro=new Libro();
+  
+  autorLibro:string="";
+  generoLibro:string="";
+  editorialLibro:string="";
+
+  load: boolean;
+at:string;
  
 
     @ViewChild('imagenInputFile',{static:false}) imagenFile:ElementRef;
@@ -102,22 +109,25 @@ export class LibroformComponent implements OnInit {
           this.libroservice.get(id).subscribe(
             (ac=>{
               this.libro = ac;
+              this.autorLibro=ac.autores[0].nombre;
+              this.generoLibro=ac.generos[0].nombre;
+              this.editorialLibro=ac.editoriales[0].nombre;             
               console.log(ac);
               this.Miformulario.patchValue({
                   isbn:(ac.isbn),
                   titulo:(ac.titulo),
                   stock:(ac.stock),
                   precioUnitario:(ac.precioUnitario),
-                  descripcion:(ac.descripcion), 
-                  autores:[''],
-                  generos:[''],
-                  editoriales:[ac.editoriales[0].nombre]
+                  descripcion:(ac.descripcion)
+                });
 
-   });
- 
-   console.log(ac.autores[0].nombre)}
+  
    
-   ));
+   console.log(ac.imagen.imagenUrl)
+   console.log(ac.autores[0].nombre)
+   this.load=true}
+   
+   )); //this.libro.autores[0].nombre=this.at
         }})
       }
 // cargar():void{

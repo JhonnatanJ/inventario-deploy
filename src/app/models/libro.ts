@@ -10,6 +10,7 @@ export class Libro {
         //this.generos=new Genero();
         //this.editoriales=new Editorial();
     this.cuenta=new Cuenta();
+    this.imagen=new Imagen();
     }
 
     isbn!: string;

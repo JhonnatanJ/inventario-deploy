@@ -156,7 +156,7 @@
             <!-- (ngSubmit)="onUpload()" -->
           <form class="col-8"[formGroup]="Miformulario"(ngSubmit)="onSubmit(Miformulario.value)"  novalidate enctype="multipart/form-data"><!-- -->
             <div class="input-group">
-              <input   type="file" class="form-control" id="imagen" aria-describedby="inputGroupFileAddon04" aria-label="Upload" #imagenInputFile
+              <input  type="file" class="form-control" id="imagen" aria-describedby="inputGroupFileAddon04" aria-label="Upload" #imagenInputFile
               (change)="onFileChange($event)" accept="image/png, image/jpeg, image/gif">
               <button  class="btn btn-outline-danger" [disabled]="!imagen" (click)="reset()"><i class="bi bi-arrow-clockwise"></i>Reset</button>
               <!-- <button class="btn btn-outline-secondary" type="button" id="Imagen">Button</button> -->
@@ -196,7 +196,7 @@
                       <label for="autor" class="form-label">Autor(es)</label>
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                           <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro"> <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
                         </div>
                     </div>
                       <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
@@ -208,7 +208,7 @@
                     <label for="autor" class="form-label">Genero(s)</label>
                     <div formArrayName="generos">
                         <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                          <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" ><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
                         </div>
                       </div>
                       <a class=" boton mas btn btn-link" (click)="addGenero()"></a>
@@ -219,7 +219,7 @@
                       <label for="editorial" class="form-label">Editorial(es)</label>
                       <div formArrayName="editoriales">
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                            <input formControlName="nombre" type="text" class="form-control" id="nombre"><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
+                            <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" ><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
                           </div>
                         </div>
                         <a class=" boton mas btn btn-link" (click)="addEditorial()"></a>

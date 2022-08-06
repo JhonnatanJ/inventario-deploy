@@ -6,6 +6,7 @@ import { Rol } from 'src/app/models/rol';
 import { Usuario } from 'src/app/models/usuario';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario-forms',
@@ -13,6 +14,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./usuario-forms.component.css']
 })
 export class UsuarioFormsComponent implements OnInit {
+
+  mostrar:boolean = false;///////
+  public nuevo:string="";
 
   cuenta:Cuenta= new Cuenta();
   cuentas:Cuenta[]=[]
@@ -22,8 +26,9 @@ export class UsuarioFormsComponent implements OnInit {
   flag!:boolean;
   estado:string='';
 
+  titulo:string='USUARIO';
   Miformulario!:FormGroup;
-  constructor( private cuentaServicio:CuentaService,private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder) { 
+  constructor( public cuentaServicio:CuentaService,private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder) { 
   /* */
   this.flag=true
   }
@@ -38,6 +43,13 @@ export class UsuarioFormsComponent implements OnInit {
 
    
     this.cargar();
+
+
+    if(this.mostrar==true){
+
+      this.cuenta.contrasena=this.nuevo;
+
+    }
   }
   
 
@@ -59,15 +71,18 @@ export class UsuarioFormsComponent implements OnInit {
    console.log(this.roles);
    this.cuenta.roles.unshift(this.roles);
    console.log(this.cuenta);
-    this.cuentaServicio.create(this.cuenta).subscribe
-    (res=> this.router.navigate(['/usuarios']));
-   
-    if(this.estado =='Habilitado'){
+   if(this.estado =='Habilitado'){
+      console.log(this.cuenta);
       this.cuenta.enabled=true;
     }
     else{
       this.cuenta.enabled=false;
     }
+    this.cuentaServicio.create(this.cuenta).subscribe
+    (res=> this.router.navigate(['/usuarios']));
+    
+    console.log(this.cuenta);
+    
     /*this.cuentaServicio.create(this.cuenta).subscribe
     (res=> console.log(this.cuenta)); */    
   }
@@ -78,8 +93,19 @@ export class UsuarioFormsComponent implements OnInit {
    this.cuenta.roles[0]=(this.roles);
    console.log(this.roles);
    console.log(this.cuenta);
+   if(this.estado =='Habilitado'){
+    console.log(this.cuenta);
+    this.cuenta.enabled=true;
+  }
+  else{
+    this.cuenta.enabled=false;
+  }
     this.cuentaServicio.update(this.cuenta).subscribe(
       u=>this.router.navigate(['/usuarios']));
+      Swal.fire(this.titulo,`EDITADO CON EXITO`,'success');
   }
+
+  
+
 
 }

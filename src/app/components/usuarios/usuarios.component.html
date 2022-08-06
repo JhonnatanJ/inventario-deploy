@@ -122,11 +122,13 @@ a:hover{
                   <th scope="col">Email</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Rol</th>
+                  <th scope="col">Estado</th>
                   <th style="text-align: center;" scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody  >              
-                <tr  *ngFor="let cuent of cuentas  | paginate: { itemsPerPage: 5, currentPage: page} | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo" >                 
+                <tr  *ngFor="let cuent of cuentas  | paginate: { itemsPerPage: 5, currentPage: page} | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo" 
+                [ngClass]="{'desabilitado': cuent.enabled == false}" >                 
                  
                 
                   
@@ -137,10 +139,10 @@ a:hover{
                   <td >{{cuent.email}}</td>
                   <td >{{cuent.usuario.telefono}}</td>
                   <td *ngFor="let r of cuent.roles">{{r.nombre}}</td> 
-                  
+                  <td>{{imprimirEstado(cuent.enabled)}}</td>
                   <td id="botones">
                     <div class="botonEditar">
-                    <a id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]" >
+                    <a (click)="cuentaService.habilitar=!cuentaService.habilitar" id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]"  >
                       <i class="bi bi-pencil-square"></i>
                       </a>
                   </div>

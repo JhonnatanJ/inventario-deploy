@@ -5,6 +5,7 @@ import { Rol } from 'src/app/models/rol';
 import { Usuario } from 'src/app/models/usuario';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,6 +13,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+
+  
+ 
 ///busquedas
   search:string= "";//nombres
   ced:string=""; ///cedula
@@ -23,26 +27,50 @@ export class UsuariosComponent implements OnInit {
   users!:Usuario[];
   cuenta:Cuenta=new Cuenta();
   //roles:Rol= new Rol();
-  constructor(private cuentaService:CuentaService,private router:Router) { }
+  constructor(public cuentaService:CuentaService,private router:Router) { }
   
   ngOnInit() {
    this.cuentaService.getAll().subscribe(
     c =>{this.cuentas=c; console.log(this.cuentas)}
    );
 
-   /*///getAll es metodo de cuentas services
-   this.rolService.getAllid().subscribe(
-    r =>this.roles=r
-   );
-
-   this.userService.getAllus().subscribe(
-    u =>this.users=u
-   ); */
+   this.cuentaService.habilitar=false;
   }
   delete(cuenta:Cuenta):void{
-    console.log("hello form delete");///cuenta.idCuenta
-    this.cuentaService.delete(cuenta.idCuenta).subscribe(
-      res=>this.cuentaService.getAll().subscribe(
-        response=>this.cuentas=response));
+
+    Swal.fire({
+      title: '¿Estas Seguro?',
+      //text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Deshabilitar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("hello form delete");///cuenta.idCuenta
+        this.cuentaService.delete(cuenta.idCuenta).subscribe(
+          res=>this.cuentaService.getAll().subscribe(
+            response=>this.cuentas=response));
+
+        //
+        Swal.fire(
+          'Deshabilitado!',
+          'El Usuario ha sido Deshabilitado',
+          'success'
+        )
+      }
+    })      
+  }
+
+  
+
+  imprimirEstado(estado: boolean): string{
+    if(estado){
+      return 'Habilitado';
+    }
+    else{
+      return 'Desabilitado';
+    }
   }
 }

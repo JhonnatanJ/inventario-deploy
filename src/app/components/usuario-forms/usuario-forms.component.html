@@ -1,257 +1,222 @@
-
 <style>
+  #contenedor {
+    margin-left: 30%;
+    margin-right: 25%;
+    margin-top: 20px;
 
-#contenedor{
-        margin-left: 30%;
-        margin-right:25%;
-        margin-top:20px ;
-        
-     border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px; 
-    }
+    border: 2px #194bf0 solid;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
 
-.opciones{  
-  display: flex;
-  justify-content:space-between;
- 
+  .opciones {
+    display: flex;
+    justify-content: space-between;
 
-}    
-.roles{
-  margin-top: 2%;
-  margin-left: -3%;
-  width: 230px;
-  margin-right: -5%;
-}
 
-.habilitar{
-  width: 230px;
-  margin-top: 2%;
-  margin-left: 7%;
-  margin-right: -8%;
-  
-}
+  }
 
-.content{
-  font-weight: bolder; 
-  color: black;
+  .roles {
+    margin-top: 2%;
+    margin-left: -3%;
+    width: 230px;
+    margin-right: -5%;
+  }
 
-}
-.content form{
-  margin-left: 15%;
-  margin-right:-5;
-  
-}
+  .habilitar {
+    width: 230px;
+    margin-top: 2%;
+    margin-left: 7%;
+    margin-right: -8%;
 
-.ingresos{
-  display: flex;
-  justify-content: space-evenly;
-}
-.ingresos2{
-  display: flex;
-  justify-content:space-evenly;
-}
-.ingresos3{
-  display: flex;
-  justify-content: space-evenly;
-}
+  }
 
-.navbar.navbar-light{
+  .content {
+    font-weight: bolder;
+    color: black;
+
+  }
+
+  .content form {
+    margin-left: 15%;
+    margin-right: -5;
+
+  }
+
+  .ingresos {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .ingresos2 {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .ingresos3 {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .navbar.navbar-light {
     background-color: #2d8fd4;
-   
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 35%;/*NOTAS DE VENTA*/
-    font-weight: bold;  
-}
-.entradas{
-  width: 75%;
-  margin-top: -5%; 
-
-}
-
-.columna1{
-  margin-right: 10%;
-  margin-left: -5%;
-  width: 230px;
-}
-.columna2{
-  margin-right: -45%;
-  
-  width: 230px;
-}
 
 
-    </style>
-  <body>
-    <div id="wrapper" class="toggled">  
-      <div id="page-content-wrapper">
-          <div class="container-fluid">
-            <!--CONTENIDO-->
-            <div id="contenedor">
+  }
+
+  .navbar.navbar-light .navbar-brand {
+    margin-left: 35%;
+    /*NOTAS DE VENTA*/
+    font-weight: bold;
+  }
+
+  .entradas {
+    width: 75%;
+    margin-top: -5%;
+
+  }
+
+  .columna1 {
+    margin-right: 10%;
+    margin-left: -5%;
+    width: 230px;
+  }
+
+  .columna2 {
+    margin-right: -45%;
+
+    width: 230px;
+  }
+</style>
+
+<body>
+  <div id="wrapper" class="toggled">
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <!--CONTENIDO-->
+        <div id="contenedor">
 
 
-              <nav class="navbar navbar-light ">
-                  <a  class="navbar-brand" >
-                      REGISTRO DE USUARIOS
-                  </a>             
-              </nav>
+          <nav class="navbar navbar-light ">
+            <a class="navbar-brand">
+              REGISTRO DE USUARIOS
+            </a>
+          </nav>
 
-            <div class="content">            
+          <div class="content">
             <form *ngIf="flag" class="col-8">
-    <div class="opciones">
-
-      <div class="roles">
-             <div class="form-floating mb-3">           
-              <select  id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="roles" [ngModelOptions]="{standalone: true}">  <!--[value]="this.roles.nombre"-->
-                <!-- <option selected  [ngValue]="''" > -- Escoga la Opcion --</option> -->
-                <option [ngValue]="r" *ngFor="let r of rol" >{{r.nombre}}</option> 
-<!-- [(ngModel)]="roles" [ngModelOptions]="{standalone: true}"   -->
-              </select>
-              <label for="floatingInput">ROL</label>
-            </div>
-         </div>
-
-
-            <div class="habilitar">
-<!--opcines de habilitar-->
-         <div class="form-floating mb-3">  
-            <select class="form-select" [(ngModel)]="estado" name="estado">
-              <option  value="Habilitado">Habilitado</option>
-              <option value="Desabilitado">Desabilitado</option>
-            </select>
-            <label for="floatingInput">HABILITAR O DESABILITAR</label>
-         </div>
-        </div>
-    </div>
-              <br>
-
-       <div class="entradas">    
-<div class="ingresos">
-
-  <div class="columna1">
-              <div class="form-floating mb-3">               
-                <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci">
-                <label for="floatingInput">CÉDULA</label>
-               </div> 
-  </div>
-  
-  <div class="columna2">
-               <div class="form-floating mb-3">   
-                  <input type="text" class="form-control" id="nombre" [(ngModel)]="cuenta.usuario.nombres" name="nombre">
-                  <label for="floatingInput">NOMBRE</label>
-                </div> 
-  </div>
-
-</div>  
-
-<div class="ingresos2">
-
-  <div class="columna1">
-                <div class="form-floating mb-3">                       
-                    <input type="text" class="form-control" id="apellidos" [(ngModel)]="cuenta.usuario.apellidos" name="apellidos">
-                    <label for="floatingInput">APELLIDO</label>
-                </div> 
-   </div>
-
-   <div class="columna2">
-                <div class="form-floating mb-3"> 
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="cuenta.email" name="email">
-                  <label for="floatingInput">CORREO</label>
-                </div>
-  </div>
-
- </div>
-
- <div class="ingresos3">
-
-    <div class="columna1">
-                 <div class="form-floating mb-3">   
-                    <input type="text" class="form-control" id="telefono" [(ngModel)]="cuenta.usuario.telefono" name="telefono">
-                    <label for="floatingInput">TELEFONO</label>
+              <div class="opciones">
+                <div class="roles">
+                  <div class="form-floating mb-3">
+                    <select id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="roles"
+                      [ngModelOptions]="{standalone: true}">
+                      <!--[value]="this.roles.nombre"-->
+                      <!-- <option selected  [ngValue]="''" > -- Escoga la Opcion --</option> -->
+                      <option [ngValue]="r" *ngFor="let r of rol">{{r.nombre}}</option>
+                      <!-- [(ngModel)]="roles" [ngModelOptions]="{standalone: true}"   -->
+                    </select>
+                    <label for="floatingInput">ROL</label>
                   </div>
-    </div>
+                </div>
 
-    <div class="columna2">
-                <div class="form-floating mb-3">   
-                <input type="" class="form-control" id="contrasena" [(ngModel)]="cuenta.contrasena" name="contrasena" >
-                <label for="floatingInput">CONTRASEÑA</label>
+
+                <div class="habilitar">
+                  <!--opcines de habilitar-->
+                  <div class="form-floating mb-3">
+                    <select class="form-select" [(ngModel)]="estado" name="estado">
+                      <option>Habilitado</option>
+                      <option>Deshabilitado</option>
+                    </select>
+                    <label for="floatingInput">ESTADO</label>
+                  </div>
+                </div>
               </div>
-    </div>
-
- </div>            
-         
-</div>               
               <br>
-              <button style="background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); margin-top: -10%; margin-left: 30%;" type="submit" class="btn btn-primary" (click)='create()' *ngIf="!cuenta.idCuenta else elseBlock">Guardar</button>
-        
-              <button style=" background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-top: -10%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/usuarios']" >Cancelar</button>
-              <ng-template #elseBlock >
-              <button style="margin-top: -10%; margin-left: 30%;" class="btn btn-success" role="button"(click)='update()' >Actualizar</button> 
-            </ng-template>
-             
+
+              <div class="entradas">
+                <div class="ingresos">
+                  <div class="columna1">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci">
+                      <label for="floatingInput">CÉDULA</label>
+                    </div>
+                  </div>
+                  <div class="columna2">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="nombre" [(ngModel)]="cuenta.usuario.nombres"
+                        name="nombre">
+                      <label for="floatingInput">NOMBRE</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="ingresos2">
+                  <div class="columna1">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="apellidos" [(ngModel)]="cuenta.usuario.apellidos"
+                        name="apellidos">
+                      <label for="floatingInput">APELLIDO</label>
+                    </div>
+                  </div>
+                  <div class="columna2">
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        [(ngModel)]="cuenta.email" name="email">
+                      <label for="floatingInput">CORREO</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="ingresos3">
+                  <div class="columna1">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="telefono" [(ngModel)]="cuenta.usuario.telefono"
+                        name="telefono">
+                      <label for="floatingInput">TELEFONO</label>
+                    </div>
+                  </div>
+                  <div class="columna2">
+                    <div class="form-floating mb-3">
+                      <input type="password" [disabled]="cuentaServicio.habilitar" class="form-control" id="contrasena"
+                        [(ngModel)]="cuenta.contrasena" name="contrasena" >
+                      <label for="floatingInput">CONTRASEÑA</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <button
+                style="background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); margin-top: 1%; margin-left: 30%;"
+                type="submit" class="btn btn-primary" (click)='create()'
+                *ngIf="!cuenta.idCuenta else elseBlock ">Guardar</button>
+
+              <button
+                style=" background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-top: -10%; margin-left: 3%;"
+                type="reset" class="btn btn-primary mt-1" [routerLink]="['/usuarios']">Cancelar</button>
+              <ng-template #elseBlock>
+                
+               
+                <div class="form-check" style="margin-top: -8%;">
+                  <input class="form-check-input" type="checkbox" (click)="mostrar=true" value="false" id="nuevo">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Cambiar Contraseña
+                  </label>
+                </div>
+
+                <div *ngIf="mostrar" class="form-floating mb-3">
+                  <input type="password" class="form-control" id="contrasena"
+                    [(ngModel)]="nuevo" name="nuevo" >
+                  <label for="floatingInput"> NUEVA CONTRASEÑA</label>
+                </div>
+
+                <button style="margin-top: -12%; margin-left: 30%;" class="btn btn-success mt-1" role="button"
+                  (click)='update()'>Actualizar</button>
+                  
+              </ng-template>
+
             </form>
-          </div> 
-        </div>                         
-            <!--FINAL CONTENIDO-->
           </div>
+        </div>
+        <!--FINAL CONTENIDO-->
       </div>
     </div>
-  </body>
-  <!--
-  <style>
-    body {
-      overflow-x: hidden;
-    }
-     
-    #wrapper.toggled {
-      padding-left: 250px;
-    }  
-    
-    #page-content-wrapper {
-      width: 100%;
-      position: absolute;
-      padding: 15px;
-    }
-    
-    #wrapper.toggled #page-content-wrapper {
-      position: absolute;
-      margin-right: -250px;
-    }
-      
-    @media(min-width:768px) {
-      #wrapper {
-        padding-left: 0;
-      }
-      #wrapper.toggled {
-        padding-left: 250px;
-      }
-      #sidebar-wrapper {
-        width: 0;
-      }
-      #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
-      }
-      #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-      }
-      #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-      }
-    }
-    </style>
-  <body>
-    <div id="wrapper" class="toggled">  
-      <div id="page-content-wrapper">
-          <div class="container-fluid">
-            ///CONTENIDO
-            <h1>LOGO GEOMUNDO</h1>
-            //FINAL CONTENIDO
-          </div>
-      </div>
-    </div>
-  </body>-->
+  </div>
+</body>

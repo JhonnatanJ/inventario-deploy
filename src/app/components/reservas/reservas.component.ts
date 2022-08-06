@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { flatMap, map, Observable } from 'rxjs';
 import { DetalleReserva } from 'src/app/models/detalle-reserva';
@@ -34,7 +34,8 @@ export class ReservasComponent implements OnInit {
     private cuentaService:CuentaService, 
     private libroService:LibroService,
     private reservaService:ReservasService,
-    private router:Router) { }
+    private router:Router,
+    private activateRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.libroService.getAllL().subscribe((l=>{this.libros=l}));
@@ -49,6 +50,7 @@ export class ReservasComponent implements OnInit {
  
        flatMap(value => value? this._filter(value):[]),
      );
+     this.cargar();
   }//fin NgOnInit
 
   private _filter(value: string): Observable<Libro[]> {
@@ -128,6 +130,22 @@ export class ReservasComponent implements OnInit {
        this.router.navigate(['/reservas']);
      });
        //res=>this.router.navigate(['/notas_de_venta']))
+   }
+
+   cargar(){
+    this.activateRoute.params.subscribe(
+      a=>{
+        let id=a['id'];
+        if(id){
+          this.reservaService.get(id).subscribe(
+            es=>{this.reserva=es;
+              
+                  console.log(es);
+            }
+          )
+        }
+      }
+    )
    }
   
   

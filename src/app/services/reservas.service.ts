@@ -35,6 +35,10 @@ export class ReservasService {
  delete(idReserva:number):Observable<Reserva>{
   return this.http.delete<Reserva>(this.url+'/'+idReserva,{headers:this.agregarAuthorizationHeader()})};
 
+  get(idReserva:number):Observable<Reserva>{
+    return this.http.get<Reserva>(this.url+'/id/'+idReserva,{headers:this.agregarAuthorizationHeader()});
+  }
+
   filtrarProductos(term:string):Observable<Libro[]>{
     return this.http.get<Libro[]>(this.urlLib+'/'+term,{headers:this.agregarAuthorizationHeader()})
   }

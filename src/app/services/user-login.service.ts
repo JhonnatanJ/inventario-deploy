@@ -100,10 +100,8 @@ obtenerDatosToken(accessToken:string):any{
      
   // let aux= JSON.parse(sessionStorage.getItem("cuenta"));
   if(role==JSON.parse(sessionStorage.getItem("cuenta")).roles[0]){
-
     return true;
-  }
-    
+   } 
     return false;
   }
 

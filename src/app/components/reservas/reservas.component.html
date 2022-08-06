@@ -136,7 +136,7 @@ justify-content: space-evenly;
 
     <form class="input-group" style="width: 400px">
       <mat-form-field appearance="fill">
-        <mat-label>Number</mat-label>
+        <mat-label>Libros</mat-label>
         <input type="text"
                placeholder="Pick one"
                aria-label="Libros"
@@ -172,12 +172,12 @@ justify-content: space-evenly;
               
               <th>{{i+1}}</th>                    
               <th>{{p.libro.isbn}}</th>                      
-              <td  ><input min="1" type="number" value="{{p.cantidad}}"  class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td>
+              <td  ><input  min="1" type="number" value="{{p.cantidad}}"  class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td>
             
               <td>{{p.libro.titulo}}</td>
-              <td>{{p.libro.precioUnitario}}</td>
+              <td > {{p.libro.precioUnitario}}</td>
              
-              <td id="subtotal" >{{p.calcularTotal().toFixed(2)}}</td>
+              <td id="subtotal">{{p.calcularTotal().toFixed(2)}}</td>
             
               <td>
                 <a class="btn btn-danger" 
@@ -188,13 +188,19 @@ justify-content: space-evenly;
             </tr>      
             <tr>
               <td colspan="5" class="text-end">TOTAL $</td>
-              <td>{{reserva.calcularGranTotal().toFixed(2)}}</td>
+              <td> {{reserva.calcularGranTotal().toFixed(2)}}</td>
             </tr>
             </tbody>
         </table>
-        <a id="guardar" class="btn btn-info" type="submit" (click)="create()">
+        <button id="guardar" class="btn btn-info" type="submit" (click)='create()' *ngIf="!reserva.idReserva else elseBlock ">
           Reservar
-        </a>
+        </button>
+        <ng-template #elseBlock>
+          <button id="actualizar" class="btn btn-success" type="submit" >
+            Actualizar Reserva
+          </button>
+        </ng-template >
+
       </div>
     </form>     
 </div> <!--FIN CONTENIDO-->

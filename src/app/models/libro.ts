@@ -10,6 +10,7 @@ export class Libro {
         //this.generos=new Genero();
         //this.editoriales=new Editorial();
     this.cuenta=new Cuenta();
+    this.imagen=new Imagen();
     }
 
     isbn!: string;
@@ -19,9 +20,9 @@ export class Libro {
     precioUnitario!:number;
     fechaRegistro!:Date;
     imagen!:Imagen;
-    autores!:Autor[];
-    generos!:Genero[];
-    editoriales!:Editorial[];
+    autores:Autor[]=[];
+    generos:Genero[]=[];
+    editoriales:Editorial[]=[];
     cuenta!:Cuenta;
-    canti!:number;
+    opcion:string;
 }

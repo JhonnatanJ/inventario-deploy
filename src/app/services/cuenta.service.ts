@@ -15,12 +15,15 @@ import { UserLoginService } from './user-login.service';
 })
 export class CuentaService {
  // cuenta!:Cuenta;
+ public habilitar:boolean=false;///
   private url:string="http://localhost:8088/geolib/cuentas";
   private urlRol:string="http://localhost:8088/geolib/roles";
   
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
 
   constructor(private http:HttpClient, public userloginService:UserLoginService, private router:Router) { }
+
+
 
   private agregarAuthorizationHeader(){
     let token=this.userloginService.token;
@@ -66,7 +69,8 @@ get(idCuenta:number):Observable<Cuenta>{
 }
 //actualizar//*/
 update(cuentas:Cuenta):Observable<Cuenta>{
-  return this.http.put<Cuenta>(this.url+'/',cuentas,{headers:this.agregarAuthorizationHeader()});
+  console.log(cuentas);
+  return this.http.put<Cuenta>(this.url+'/'+cuentas.idCuenta,cuentas,{headers:this.agregarAuthorizationHeader()});
   }
 ///eliminar
 delete(idCuenta:number):Observable<Cuenta>{
@@ -77,7 +81,7 @@ delete(idCuenta:number):Observable<Cuenta>{
 }*/
 ///
 getRol():Observable<Rol[]>{
-  return this.http.get<Rol[]>(this.url)
+  return this.http.get<Rol[]>(this.url,{headers:this.agregarAuthorizationHeader()})
 }
 
 

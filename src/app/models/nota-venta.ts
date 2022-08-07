@@ -10,9 +10,10 @@ export class NotaVenta {
     }
     idNotaventa!:number;
     cuenta!:Cuenta;
-    fechaRegistro!:Date;//Date OJO
+    fechaRegistro:string="";//Date OJO
    valorTotal!:number;
     detalles:Detalle[]=[];
+    opcion:string;
 
     calcularGranTotal():number{
         this.valorTotal=0;

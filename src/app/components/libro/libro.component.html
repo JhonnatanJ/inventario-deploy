@@ -24,21 +24,17 @@
     font-weight: bold;
     color: black;
 }
-.input-group{
+.filtrar{
     margin: 10px;
-    
+    display: flex;
+    width: 50%;
+ 
 }
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
+
+
 .table-responsive{
     margin: 10px;
+    
 }
 thead tr{
     background-color: #2d8fd4;
@@ -75,19 +71,45 @@ a:hover{
                 LIBROS
             </a>             
         </nav>
-          <form class="input-group" style="width: 400px">
+          
+        <div class="filtrar">
             
-            <input type="search" class="form-control" placeholder="ISBN" aria-label="Search" />
-            <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-              <i class="bi bi-search"> Buscar</i>
-            </button>
-          </form>
+            <input *ngIf="libro.opcion == '1'" type="search" class="form-control" placeholder="ISBN" aria-label="Search"
+            [(ngModel)]="isbn" name="isbn" />
+
+            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TITULOS" aria-label="Search"
+            [(ngModel)]="search" name="search" />
+
+            <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
+            [(ngModel)]="nombreA" name="nombreA" />
+
+            <input *ngIf="libro.opcion == '4'" type="search" class="form-control" placeholder="GENERO" aria-label="Search"
+            [(ngModel)]="genero" name="genero" />
+
+            <input *ngIf="libro.opcion == '5'" type="search" class="form-control" placeholder="EDITORIAL" aria-label="Search"
+            [(ngModel)]="editorial" name="editorial" />
+            
+
+            <div class="form-floating" style="width: 50%; height: -10%;">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="libro.opcion" name="libros" >
+       
+              <option value="1">ISBN</option>
+              <option value="2">TITULOS</option>
+              <option value="3">AUTOR</option>
+              <option value="4">GENERO</option>
+              <option value="5">EDITORIAL</option>
+            </select>
+            <label for="floatingTextarea">BUSCAR POR:</label>
+       </div>
+          </div>
+       
             <!--TABLA-->
             <div class="table-responsive">
               <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">Imágen</th>
                   <th scope="col">ISBN</th>
                   <th scope="col">Titulo</th>
                   <th scope="col">Autor</th>                
@@ -99,18 +121,19 @@ a:hover{
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page };let i=index ">
-                  <th scope="row">{{i+1}}</th>
+                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page } | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial;let i=index ">
+                  <!-- <th scope="row">{{i+1}}</th> -->
+                  <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
                   <td>{{lib.isbn}}</td>
                   <td>{{lib.titulo}}</td>
                   <td *ngFor="let au of lib.autores">{{au.nombre}}</td>                
                   <td>{{lib.stock}}</td>
-                  <td>{{lib.precioUnitario}}</td>
+                  <td>${{lib.precioUnitario.toFixed(2)}}</td>
                   <td *ngFor="let ge of lib.generos">{{ge.nombre}}</td>    
                   <td *ngFor="let ed of lib.editoriales">{{ed.nombre}}</td>                     
                   <td id="botones">
                     <div class="botonEditar">
-                    <a class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
+                    <a (click)="libroService.habilitar=!libroService.habilitar" class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
                       <i class="bi bi-pencil-square"></i>
                     </a>
                   </div>

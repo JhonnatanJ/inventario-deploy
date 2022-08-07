@@ -67,7 +67,13 @@ table #botones{
 }
 a:hover{
   background-color: rgb(208, 207, 197);
- }  
+ } 
+ .filtrar{
+    margin: 10px;
+    display: flex;
+    width: 50%;
+ 
+} 
 </style>
 <div id="contenedor">
         <nav class="navbar navbar-light ">
@@ -75,15 +81,38 @@ a:hover{
               USUARIOS
           </a>             
       </nav>
-        <form class="input-group" style="width: 400px">
-          <input type="search" class="form-control" placeholder="usuarios" aria-label="Search" />
-          <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-            <i class="bi bi-search"> Buscar</i>
-          </button>
-        </form>
+     
+      <div class="filtrar">
+            
+        <input *ngIf="cuenta.opcion == '1'" type="search" class="form-control" placeholder="CEDULA" aria-label="Search"
+        [(ngModel)]="ced" name="ced" />
+
+        <input *ngIf="cuenta.opcion == '2'" type="search" class="form-control" placeholder="NOMBRE" aria-label="Search"
+        [(ngModel)]="search" name="search" />
+
+        <input *ngIf="cuenta.opcion == '3'" type="search" class="form-control" placeholder="CORREO" aria-label="Search"
+        [(ngModel)]="correo" name="correo" />
+        
+        <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
+          <i class="bi bi-search"> Buscar</i>
+        </button> -->
+
+        <div class="form-floating" style="width: 50%; height: -10%;">
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="cuenta.opcion" name="cuenta" >
+   
+          <option value="1">CEDULA</option>
+          <option value="2">NOMBRE</option>
+          <option value="3">EMAIL</option>
+        </select>
+        <label for="floatingTextarea">BUSCAR POR:</label>
+   </div>
+      </div>
+
+      
+
             <!--TABLA-->
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" >
                 <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -93,11 +122,16 @@ a:hover{
                   <th scope="col">Email</th>
                   <th scope="col">Telefono</th>
                   <th scope="col">Rol</th>
+                  <th scope="col">Estado</th>
                   <th style="text-align: center;" scope="col">Acciones</th>
                 </tr>
               </thead>
-              <tbody>              
-                <tr *ngFor="let cuent of cuentas  | paginate: { itemsPerPage: 5, currentPage: page }">                 
+              <tbody  >              
+                <tr  *ngFor="let cuent of cuentas  | paginate: { itemsPerPage: 5, currentPage: page} | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo" 
+                [ngClass]="{'desabilitado': cuent.enabled == false}" >                 
+                 
+                
+                  
                   <th scope="row">{{cuent.idCuenta}}</th>
                   <td >{{cuent.usuario.ci}}</td>
                   <td >{{cuent.usuario.nombres}}</td>
@@ -105,10 +139,10 @@ a:hover{
                   <td >{{cuent.email}}</td>
                   <td >{{cuent.usuario.telefono}}</td>
                   <td *ngFor="let r of cuent.roles">{{r.nombre}}</td> 
-                  
+                  <td>{{imprimirEstado(cuent.enabled)}}</td>
                   <td id="botones">
                     <div class="botonEditar">
-                    <a id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]" >
+                    <a (click)="cuentaService.habilitar=!cuentaService.habilitar" id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]"  >
                       <i class="bi bi-pencil-square"></i>
                       </a>
                   </div>
@@ -117,8 +151,6 @@ a:hover{
                       <i class="bi bi-trash-fill"></i>
                     </a><!--(click)="delete(cuent)"-->
                   </div>               
-                  </td>
-                  <td>                    
                   </td>                            
                  </tr> 
               </tbody>             

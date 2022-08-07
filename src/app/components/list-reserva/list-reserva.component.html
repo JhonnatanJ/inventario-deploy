@@ -1,0 +1,173 @@
+
+<style>
+    #contenedor{
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-top:20px ;
+        border: 50px;
+        border:2px #194bf0 solid;       
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    
+.navbar.navbar-light{
+    background-color: #2d8fd4;
+
+}
+
+.navbar.navbar-light .navbar-brand {
+    margin-left: 10px;/*NOTAS DE VENTA*/
+    font-weight: bold;
+}
+.btn.btn-info{
+    margin-right: 10px;/*Boton nuevo*/
+    font-weight: bold;
+    color: black;
+}
+.input-group{
+    margin: 10px;
+    
+}
+.input-group button{
+    left: 0;
+    border-top-left-radius: 10px;
+    font-weight: bold;
+    background-color:darkblue ;
+    color:white;
+    margin-top: 0;
+    height: 37px;
+}
+.table-responsive{
+    margin: 10px;
+}
+thead tr{
+    background-color: #2d8fd4;
+    border: #194bf0 2px solid;
+}
+table th{
+    text-align: center; /*titulos*/
+}
+table tr{     
+  text-align: center; /*filas*/
+}
+table #botones{
+  text-align: center;
+}
+
+.botonEliminar a{     
+     border: 2px rgb(238, 71, 20) solid;
+     margin-left: 60px;
+     margin-top: -1px;
+           
+   }
+   .botonAumentar a{   
+    /* border: 2px rgb(118, 130, 239) solid; */
+     margin-left: 10px;
+     margin-top: 0px;
+     font-size:x-large;
+}
+a:hover{
+  background-color: rgb(208, 207, 197);
+ }
+ /***/
+ .oscuro .modal-content {
+    background-color: #021f2e;
+    color: white;
+  }
+  .oscuro .close {
+    color: white;
+  }
+
+.azul {
+    background-color: #0fa1eb;
+  }
+  .filtrar{
+    margin: 10px;
+    display: flex;
+    width: 50%;
+ 
+}
+</style>
+<app-detalle-reserva *ngIf="reservaSeleccionada" [reserva]="reservaSeleccionada" style="display:block"></app-detalle-reserva>
+<div id="contenedor">
+            <!--CONTENIDO-->          
+          <nav class="navbar navbar-light ">
+              <a  class="navbar-brand" href="#">
+                   RESERVACIONES
+              </a>             
+              <a class="btn btn-info" [routerLink]="['/nueva_reserva']"> 
+                <i class="bi bi-plus-circle-fill"></i>
+                Nuevo</a>
+          </nav>
+          <div class="filtrar">
+            
+            <input *ngIf="opcion == '1'" type="search" class="form-control" placeholder="ID DE RESERVA" aria-label="Search"
+            [(ngModel)]="idR" name="idR" />
+
+            <input *ngIf="opcion == '2'" type="search" class="form-control" placeholder="CLIENTE" aria-label="Search"
+            [(ngModel)]="search" name="search" />
+
+            <input *ngIf="opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
+            [(ngModel)]="vendedor" name="vendedor" />
+            
+            <input *ngIf="opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
+              value="2022-07-22"
+              min="2022-01-01" max="2030-12-31">
+
+            <div class="form-floating" style="width: 50%; height: -10%;">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="opcion" name="libros" >
+       
+              <option value="1">ID DE RESERVA</option>
+              <option value="2">CLIENTE</option>
+              <option value="3">VENDEDOR</option>
+              <option value="4">FECHA</option>
+            </select>
+            <label for="floatingTextarea">BUSCAR POR:</label>
+       </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Vendedor</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Abono</th>
+                      <th scope="col">Saldo</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let r of reservas | paginate: { itemsPerPage: 5, currentPage: page } | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor | bReservaFecha:fecha" >
+                      <th scope="row">{{r.idReserva}}</th>
+                      <td>{{r.fechaCreacion}}</td>
+                      <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>
+                      <td>{{r.usuario.nombres}} {{r.usuario.apellidos}}</td>
+                      <td>${{r.abono}}</td>
+                      <td>${{r.saldo}}</td>
+                      <td id="botones">
+                        <!-- <div class="botonEliminar">
+                            <a class="btn btn-default" type="button">
+                              <i class="bi bi-trash-fill"></i>
+                            </a>
+                          </div> -->
+                          <div class="botonAumentar">
+                            <a class="btn btn-default" type="button"  (click)="openSM(r)">
+                              <i class="bi bi-journal-bookmark-fill" ></i>
+                            </a>
+                          </div>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+          </div>
+          <pagination-controls 
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+          ></pagination-controls>     
+</div>
+
+

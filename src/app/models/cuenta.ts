@@ -13,6 +13,7 @@ export class Cuenta {
     contrasena!:string; 
     usuario!:Usuario;
     roles:Rol[]=[];
-    enabled:Boolean;
-    ///cuenta-rol posiblemente desaparesca por que no vamos asignar fecha fin
+    enabled:boolean;
+    opcion:string;
+    
 }

@@ -16,12 +16,32 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { NotaVentaComponent } from './components/nota-venta/nota-venta.component';
 import { ModalNotaVComponent } from './components/modal-nota-v/modal-nota-v.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule,NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ListReservaComponent } from './components/list-reserva/list-reserva.component';
+import { DetalleNotaVComponent } from './components/nota-venta/detalle-nota-v/detalle-nota-v.component';
+import { BusquedaPipe } from './Pipe/busqueda.pipe';
+import { BusquedaUsurioPipe } from './Pipe/busqueda-usurio.pipe';
+import { BNotasVentaPipe } from './Pipe/b-notas-venta.pipe';
+import { LibroISBNPipe } from './Pipe/libro-isbn.pipe';
+import { BLibroAutorPipe } from './Pipe/b-libro-autor.pipe';
+import { BUsuarioCedPipe } from './Pipe/b-usuario-ced.pipe';
+import { BUsuarioEmailPipe } from './Pipe/b-usuario-email.pipe';
+import { BReservaNombrePipe } from './Pipe/b-reserva-nombre.pipe';
+import { BReservaIDPipe } from './Pipe/b-reserva-id.pipe';
+import { BReservaVendedorPipe } from './Pipe/b-reserva-vendedor.pipe';
+import { BVentaVendedorPipe } from './Pipe/b-venta-vendedor.pipe';
+import { BLibroGeneroPipe } from './Pipe/b-libro-genero.pipe';
+import { BLibroEditorialPipe } from './Pipe/b-libro-editorial.pipe';
+import { BVentaFechaPipe } from './Pipe/b-venta-fecha.pipe';
+import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
+import { DetalleReservaComponent } from './components/list-reserva/detalle-reserva/detalle-reserva.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +55,25 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     NotaVentaComponent,
     ModalNotaVComponent,
     ReservasComponent,
-  
+    ListReservaComponent,
+    DetalleNotaVComponent,
+    BusquedaPipe,
+    BusquedaUsurioPipe,
+    BNotasVentaPipe,
+    LibroISBNPipe,
+    BLibroAutorPipe,
+    BUsuarioCedPipe,
+    BUsuarioEmailPipe,
+    BReservaNombrePipe,
+    BReservaIDPipe,
+    BReservaVendedorPipe,
+    BVentaVendedorPipe,
+    BLibroGeneroPipe,
+    BLibroEditorialPipe,
+    BVentaFechaPipe,
+    BReservaFechaPipe,
+    DetalleReservaComponent,
+    
 
   ],
   imports: [
@@ -46,11 +84,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule,
+    NgbModalModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-
+    NgxSpinnerModule ,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

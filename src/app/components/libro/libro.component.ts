@@ -24,13 +24,13 @@ export class LibroComponent implements OnInit {
    genero:string="";//genero
    editorial:string="";//editorial
  
-  constructor(private libroService:LibroService) { }
+  constructor(public libroService:LibroService) { }
 
   ngOnInit(): void {
    
     this.libroService.getAllL().subscribe((l=>{this.libros=l;console.log(l)}));
 
- //busqueda
+    this.libroService.habilitar=false;
  
   }
 

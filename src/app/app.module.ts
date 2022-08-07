@@ -41,6 +41,7 @@ import { BLibroGeneroPipe } from './Pipe/b-libro-genero.pipe';
 import { BLibroEditorialPipe } from './Pipe/b-libro-editorial.pipe';
 import { BVentaFechaPipe } from './Pipe/b-venta-fecha.pipe';
 import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
+import { DetalleReservaComponent } from './components/list-reserva/detalle-reserva/detalle-reserva.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
     BLibroEditorialPipe,
     BVentaFechaPipe,
     BReservaFechaPipe,
+    DetalleReservaComponent,
     
 
   ],

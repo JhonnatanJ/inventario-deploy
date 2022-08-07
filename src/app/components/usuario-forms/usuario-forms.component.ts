@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class UsuarioFormsComponent implements OnInit {
 
   mostrar:boolean = false;///////
   public nuevo:string="";
+  
 
   cuenta:Cuenta= new Cuenta();
   cuentas:Cuenta[]=[]
@@ -24,7 +26,8 @@ export class UsuarioFormsComponent implements OnInit {
   usuario:Usuario[]=[];
   rol!:Rol[]; 
   flag!:boolean;
-  estado:string='';
+  estado:string='Habilitado';
+  rolE:string="ADMINISTRADOR";
 
   titulo:string='USUARIO';
   Miformulario!:FormGroup;
@@ -45,14 +48,10 @@ export class UsuarioFormsComponent implements OnInit {
     this.cargar();
 
 
-    if(this.mostrar==true){
-
-      this.cuenta.contrasena=this.nuevo;
-
-    }
+    
   }
   
-
+  
   cargar():void{
    this.activatedRoute.params.subscribe(
     a=>{
@@ -60,14 +59,31 @@ export class UsuarioFormsComponent implements OnInit {
       if(id){
         this.cuentaServicio.get(id).subscribe(
           es=>{this.cuenta=es;
-            this.roles=es.roles[0]});
+            this.roles=es.roles[0];
+            if(es.enabled){
+            this.estado='Habilitado'}else{
+              this.estado='Deshabilitado'
+            };
+            //
+            if(es.roles[0].nombre=='ROLE_ADMINISTRADOR'){
+              this.rolE='ADMINISTRADOR'}
+              else{
+                this.rolE='VENDEDOR'
+              }
+          });
+            
       }})
   }
 
 
   create():void{
-    
-  // this.createRol(this.roles.nombre); //this.createRol(this.cuenta.rol.nombre);
+    if(this.rolE=='ADMINISTRADOR'){
+      this.roles.nombre='ROLE_ADMINISTRADOR'
+    }else{
+      this.roles.nombre='ROLE_VENDEDOR'
+    }
+
+  
    console.log(this.roles);
    this.cuenta.roles.unshift(this.roles);
    console.log(this.cuenta);
@@ -82,17 +98,21 @@ export class UsuarioFormsComponent implements OnInit {
     (res=> this.router.navigate(['/usuarios']));
     
     console.log(this.cuenta);
-    
-    /*this.cuentaServicio.create(this.cuenta).subscribe
-    (res=> console.log(this.cuenta)); */    
   }
   
 
   update():void{
+    if(this.rolE=='ADMINISTRADOR'){
+      this.roles.nombre='ROLE_ADMINISTRADOR'
+    }else{
+      this.roles.nombre='ROLE_VENDEDOR'
+    }
+    
     console.log(this.roles);
    this.cuenta.roles[0]=(this.roles);
    console.log(this.roles);
    console.log(this.cuenta);
+
    if(this.estado =='Habilitado'){
     console.log(this.cuenta);
     this.cuenta.enabled=true;
@@ -100,12 +120,18 @@ export class UsuarioFormsComponent implements OnInit {
   else{
     this.cuenta.enabled=false;
   }
+
+  if(this.mostrar==true){
+    console.log('cambiando contraseña')   
+    this.cuenta.contrasena=this.nuevo;
+  }
+
     this.cuentaServicio.update(this.cuenta).subscribe(
       u=>this.router.navigate(['/usuarios']));
       Swal.fire(this.titulo,`EDITADO CON EXITO`,'success');
   }
 
   
-
+ 
 
 }

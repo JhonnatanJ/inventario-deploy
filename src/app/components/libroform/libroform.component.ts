@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControlName } from '@angular/forms';
+import { FormBuilder, FormControlName, Validators } from '@angular/forms';
 import { Libro } from 'src/app/models/libro';
 import { LibroService } from 'src/app/services/libro.service';
 import { FormControl,FormGroup, FormArray } from '@angular/forms';
@@ -27,14 +27,14 @@ export class LibroformComponent implements OnInit {
   editorialLibro:string="";
 
   load: boolean;
-at:string;
+   nuevoS:number=0;
  
 
     @ViewChild('imagenInputFile',{static:false}) imagenFile:ElementRef;
 
     imagen:File;
     imagenMin:File;
-  constructor(private libroservice:LibroService, 
+  constructor(public libroservice:LibroService, 
     private fb:FormBuilder, private router:Router, 
     private activatedRoute:ActivatedRoute,
     private spinner:NgxSpinnerService) { }
@@ -46,7 +46,7 @@ at:string;
     this.Miformulario= this.fb.group({
       isbn:[''],
       titulo:[''],
-      stock:[],
+      stock:[0],
       precioUnitario:[],
       descripcion:[''],
       autores:this.fb.array([this.fb.group({nombre:['']})]),
@@ -66,40 +66,53 @@ at:string;
 
   onSubmit(formValue: any){ 
  
-    const libro= new Libro();
-   
-    libro.isbn=formValue.isbn;
-    
+    const libro= new Libro(); 
+    libro.isbn=formValue.isbn;   
     libro.titulo=formValue.titulo;
-    libro.stock=formValue.stock;
+    this.libro.titulo=formValue.titulo;
+    libro.stock=formValue.stock+this.nuevoS;
+    this.libro.stock=this.libro.stock+this.nuevoS;
     libro.precioUnitario=formValue.precioUnitario;
+    this.libro.precioUnitario=formValue.precioUnitario;
     libro.descripcion=formValue.descripcion;   
+    this.libro.descripcion=formValue.descripcion;
     libro.autores=formValue.autores;
     libro.generos=formValue.generos;
     libro.editoriales=formValue.editoriales;
     libro.cuenta.idCuenta=formValue.cuenta;
-    //libro.imagen=formValue.this.libroservice.uploadImg(this.imagen)
-    //libro.imagen=formValue.Imagen;
-      console.log(libro);
-      //this.onUpload(libro.isbn,this.imagen);
-      
-    //this.libroservice.addlibro(libro);*/
-    //this.libroservice.addautor(autor);//ojo
 
-    console.log(this.imagen);
-    this.libroservice.uploadImg(this.imagen,libro.isbn).subscribe(
-      data=>{
-        this.spinner.hide();
-        this.libroservice.createLi(libro).subscribe
-          (resp=>this.router.navigate(['/lista']));
-        //this.router.navigate(['/lista']);
-      },
-      err=>{
-        this.spinner.hide();
-        Swal.fire('Alerta',`Imagen No subida`, 'warning' );
-        this.reset();
+      console.log(libro);
+
+
+    if(this.imagen && this.libro.imagen.id){
+      this.libroservice.updateImg(this.imagen,this.libro.isbn).subscribe(
+        data=>{
+          this.spinner.hide();
+          this.libroservice.update(this.libro).subscribe
+            (resp=>this.router.navigate(['/lista']));
+        }
+      );
+    }else{
+      if(this.libro.imagen.id){
+        this.libroservice.update(this.libro).subscribe
+            (resp=>this.router.navigate(['/lista']));
+      }else{
+        this.libroservice.uploadImg(this.imagen,libro.isbn).subscribe(
+          data=>{
+            this.spinner.hide();
+            this.libroservice.createLi(libro).subscribe
+              (resp=>this.router.navigate(['/lista']));
+          },
+          err=>{
+            this.spinner.hide();
+            Swal.fire('Alerta',`Imagen No subida`, 'warning' );
+            this.reset();
+          }
+        );
       }
-    );
+      
+    }
+
   }
   cargar():void{
     this.activatedRoute.params.subscribe(
@@ -117,30 +130,17 @@ at:string;
                   isbn:(ac.isbn),
                   titulo:(ac.titulo),
                   stock:(ac.stock),
-                  precioUnitario:(ac.precioUnitario),
+                  precioUnitario:(ac.precioUnitario.toFixed(2)),
                   descripcion:(ac.descripcion)
                 });
-
-  
-   
-   console.log(ac.imagen.imagenUrl)
-   console.log(ac.autores[0].nombre)
+                this.Miformulario.controls['stock'].disable();
+                this.Miformulario.controls['isbn'].disable();
+                
    this.load=true}
    
-   )); //this.libro.autores[0].nombre=this.at
+   )); 
         }})
       }
-// cargar():void{
-//   //const libro= new Libro();
-//   this.activatedRoute.params.subscribe(
-//     b=>{
-//       let id = b['id'];
-//       if(id){
-//         this.libroservice.get(id).subscribe(
-//           (ac=>{this.libro=ac;console.log(ac)}));
-//       }})
-//     }
-
       ///edit
       update():void{
         this.libroservice.update(this.libro).subscribe(

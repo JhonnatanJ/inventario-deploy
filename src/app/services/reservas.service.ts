@@ -42,6 +42,11 @@ export class ReservasService {
   filtrarProductos(term:string):Observable<Libro[]>{
     return this.http.get<Libro[]>(this.urlLib+'/'+term,{headers:this.agregarAuthorizationHeader()})
   }
+  ///reserva update abono
+  update(idReserva:number,reserv:Reserva):Observable<Reserva>{
+    console.log(reserv);
+    return this.http.put<Reserva>(this.url+'/'+idReserva,reserv,{headers:this.agregarAuthorizationHeader()});
+   }
 
 
 }

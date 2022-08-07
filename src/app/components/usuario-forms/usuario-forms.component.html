@@ -108,12 +108,10 @@
               <div class="opciones">
                 <div class="roles">
                   <div class="form-floating mb-3">
-                    <select id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="roles"
-                      [ngModelOptions]="{standalone: true}">
-                      <!--[value]="this.roles.nombre"-->
-                      <!-- <option selected  [ngValue]="''" > -- Escoga la Opcion --</option> -->
-                      <option [ngValue]="r" *ngFor="let r of rol">{{r.nombre}}</option>
-                      <!-- [(ngModel)]="roles" [ngModelOptions]="{standalone: true}"   -->
+                    <select id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="rolE"
+                      name="rolE">
+                      <option >ADMINISTRADOR</option>
+                      <option >VENDEDOR</option>
                     </select>
                     <label for="floatingInput">ROL</label>
                   </div>
@@ -124,7 +122,7 @@
                   <!--opcines de habilitar-->
                   <div class="form-floating mb-3">
                     <select class="form-select" [(ngModel)]="estado" name="estado">
-                      <option>Habilitado</option>
+                      <option selected>Habilitado</option>
                       <option>Deshabilitado</option>
                     </select>
                     <label for="floatingInput">ESTADO</label>
@@ -195,7 +193,7 @@
                 
                
                 <div class="form-check" style="margin-top: -8%;">
-                  <input class="form-check-input" type="checkbox" (click)="mostrar=true" value="false" id="nuevo">
+                  <input class="form-check-input" type="checkbox" (click)="mostrar=true" id="nuevo">
                   <label class="form-check-label" for="defaultCheck1">
                     Cambiar Contraseña
                   </label>

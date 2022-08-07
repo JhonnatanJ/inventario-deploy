@@ -162,9 +162,16 @@
               <!-- <button class="btn btn-outline-secondary" type="button" id="Imagen">Button</button> -->
             </div>
             <div *ngIf="imagen" class="mt-5">
-              <h5>Vista Previa:</h5>
+              <h5>NUEVA PORTADA:</h5>
               <div>
                 <img class="image-thumbnail" style="max-width: 100px;" [src]="imagenMin" >
+              </div>
+            </div>
+
+            <div *ngIf="this.libro.imagen.id" class="mt-5">
+              <h5>PORTADA ACTUAL:</h5>
+              <div>
+                <img  class="image-thumbnail" style="max-width: 100px;" src="{{this.libro.imagen.imagenUrl}}" >
               </div>
             </div>
             
@@ -176,18 +183,19 @@
               </div>   
 
               <div class="form-floating mb-3">                      
-                  <input type="text" class="form-control"  id="titulo" formControlName="titulo">
+                  <input  type="text" class="form-control"  id="titulo" formControlName="titulo" >
                   <label for="titulo" class="form-label">TITULO</label>
               </div>  
 
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control"  id="stock" formControlName="stock">
-                <label for="stock" class="form-label">STOCK</label>
+              <div class="form-floating mb-3 " disabled style=" margin-right:250px">
+                <input min="0" type="number" class="form-control"  id="stock" formControlName="stock"  >
+                <label for="stock" class="form-label">STOCK ACTUAL</label>
               </div> 
 
+
               <div class="form-floating mb-3">              
-                <input type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
-                <label for="precioUnitario" class="form-label">PRECIO UNITARIO</label>
+                <input min="1" type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
+                <label for="precioUnitario" class="form-label">PRECIO UNITARIO ($)</label>
               </div>
               
 
@@ -231,17 +239,17 @@
                   <label class="form-label" for="descripcion">DESCRIPCIÓN</label>
                   </div> 
                        
-            <!--<label for="exampleInputRol" class="form-label">Rol</label>
-            <select class="form-select" aria-label="Default select example">           
-              //<option selected>ROL</option>//
-              <option value="1">Administrador</option>
-              <option value="2">Vendedor</option>
-            </select>-->
             <br>
             <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-top: -5%; margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
       
             <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);margin-top: -5%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>
+
+            <div class="form-floating mb-3 " style="top: -685px; margin-left:250px">
+              <input min="0" type="number" class="form-control"  id="nuevostock" [(ngModel)]="nuevoS" [ngModelOptions]="{standalone: true}">
+              <label for="nuevostock" class="form-label">NUEVO STOCK</label>
+            </div> 
+
             <button style="margin-top: -5%; margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
           </ng-template>
           </form>

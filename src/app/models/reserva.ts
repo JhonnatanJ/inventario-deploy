@@ -17,7 +17,8 @@ export class Reserva {
     cuenta!:Cuenta;
     usuario!:Usuario;
     detalleReservas:DetalleReserva[]=[];
-    opcion:string;
+
+    
 
     calcularGranTotal():number{
         this.valorTotal=0;

@@ -133,7 +133,7 @@ a:hover{
                   <td *ngFor="let ed of lib.editoriales">{{ed.nombre}}</td>                     
                   <td id="botones">
                     <div class="botonEditar">
-                    <a class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
+                    <a (click)="libroService.habilitar=!libroService.habilitar" class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
                       <i class="bi bi-pencil-square"></i>
                     </a>
                   </div>

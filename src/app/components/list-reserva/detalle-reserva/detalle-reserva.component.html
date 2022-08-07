@@ -1,0 +1,97 @@
+<style>
+    ul{       
+        margin-right: 20px;
+    }
+
+.card-header{
+    font-weight: bolder;    
+}
+
+.list-group-item.list-group-item-primary{
+    text-align: center;
+    font-weight: bolder;    
+}
+
+.table{
+  text-align: center;
+}
+.text-end{
+  text-align:right ;
+  padding: .5rem 7rem;
+  font-weight: bold;
+}
+</style>
+
+<!--MODAL-->
+
+<div *ngIf="modalRservice.modal"  class="abrir-modal  fadeIn" > <!--si se quiere incluis animacion aumentae: animacion antes del FadeIn-->
+  <div tabindex="-1" style="display:block ;" class="modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+        </div>    
+        <div>
+          <div class="card-header"> RESERVA </div>
+        </div>
+        <br>
+        <ul class="vendedor">
+            <li class="list-group-item list-group-item-primary">CLIENTE</li>
+            <li class="list-group-item">{{reserva.usuario.nombres}} {{reserva.usuario.apellidos}}</li>
+          </ul>
+        
+          <ul>
+            <li class="list-group-item list-group-item-primary">DATOS DE LA RESERVA</li>
+            <li class="list-group-item">CÓDIGO:{{reserva.idReserva}}</li>
+            <li class="list-group-item">FECHA: {{reserva.fechaCreacion}}</li>
+            <li class="list-group-item">SALDO: $ {{reserva.saldo}}</li>
+            <li class="list-group-item">ABONO ACTUAL: $ {{reservas.abono}} </li>    
+            <li class="list-group-item" style="display: flex;" >
+               <!-- <div class="form-floating mb-3"> -->
+                <label for="abono" class="form-label">NUEVO ABONO:</label>
+                 <input min="0" style="width: 100px;height:40px; margin-left: 25px;" type="number" class="form-control" [(ngModel)]="nuevoA" name="nuevoA" > <!--  -->
+                
+               <!-- </div> -->
+               <button class="btn btn-success" style="margin-left:25px; height:40px" (click)="suma()">Añadir</button>
+            </li>          
+          </ul>
+
+
+          <div class="modal-body">  
+            <div class="table-responsive">
+             <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">LIBRO</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">SUBTOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor=" let re of reserva.detalleReservas">           
+                    <td>{{re.libro.isbn}}</td>
+                    <td>{{re.libro.titulo}}</td>  
+                    <td>{{re.cantidad}}</td> 
+                    <td> $ {{re.libro.precioUnitario}}</td>
+                    <td>$ {{re.subtotal}}</td>
+                </tr>   
+                <tr>
+                    <td colspan="4" class="text-end">TOTAL $</td>
+                    <td>
+                        $ {{reserva.valorTotal}}
+                    </td>
+                </tr>
+                  </tbody>
+              </table>   
+            </div> 
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

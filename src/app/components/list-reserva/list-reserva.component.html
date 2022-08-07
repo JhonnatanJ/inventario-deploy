@@ -61,9 +61,10 @@ table #botones{
            
    }
    .botonAumentar a{   
-     border: 2px rgb(0, 26, 255) solid;
-     margin-right: 40px;
-      margin-top: -66px;
+    /* border: 2px rgb(118, 130, 239) solid; */
+     margin-left: 10px;
+     margin-top: 0px;
+     font-size:x-large;
 }
 a:hover{
   background-color: rgb(208, 207, 197);
@@ -87,6 +88,7 @@ a:hover{
  
 }
 </style>
+<app-detalle-reserva *ngIf="reservaSeleccionada" [reserva]="reservaSeleccionada" style="display:block"></app-detalle-reserva>
 <div id="contenedor">
             <!--CONTENIDO-->          
           <nav class="navbar navbar-light ">
@@ -99,21 +101,21 @@ a:hover{
           </nav>
           <div class="filtrar">
             
-            <input *ngIf="reserva.opcion == '1'" type="search" class="form-control" placeholder="ID DE RESERVA" aria-label="Search"
+            <input *ngIf="opcion == '1'" type="search" class="form-control" placeholder="ID DE RESERVA" aria-label="Search"
             [(ngModel)]="idR" name="idR" />
 
-            <input *ngIf="reserva.opcion == '2'" type="search" class="form-control" placeholder="CLIENTE" aria-label="Search"
+            <input *ngIf="opcion == '2'" type="search" class="form-control" placeholder="CLIENTE" aria-label="Search"
             [(ngModel)]="search" name="search" />
 
-            <input *ngIf="reserva.opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
+            <input *ngIf="opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
             [(ngModel)]="vendedor" name="vendedor" />
             
-            <input *ngIf="reserva.opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
+            <input *ngIf="opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
               value="2022-07-22"
               min="2022-01-01" max="2030-12-31">
 
             <div class="form-floating" style="width: 50%; height: -10%;">
-            <select class="form-select" aria-label="Default select example" [(ngModel)]="reserva.opcion" name="libros" >
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="opcion" name="libros" >
        
               <option value="1">ID DE RESERVA</option>
               <option value="2">CLIENTE</option>
@@ -143,17 +145,17 @@ a:hover{
                       <td>{{r.fechaCreacion}}</td>
                       <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>
                       <td>{{r.usuario.nombres}} {{r.usuario.apellidos}}</td>
-                      <td>{{r.abono}}</td>
-                      <td>{{r.saldo}}</td>
+                      <td>${{r.abono}}</td>
+                      <td>${{r.saldo}}</td>
                       <td id="botones">
-                        <div class="botonEliminar">
+                        <!-- <div class="botonEliminar">
                             <a class="btn btn-default" type="button">
                               <i class="bi bi-trash-fill"></i>
                             </a>
-                          </div>
+                          </div> -->
                           <div class="botonAumentar">
-                            <a class="btn btn-default" type="button" [routerLink]="['/nueva_reserva',r.idReserva]">
-                              <i class="bi bi-plus-circle-fill"></i>
+                            <a class="btn btn-default" type="button"  (click)="openSM(r)">
+                              <i class="bi bi-journal-bookmark-fill" ></i>
                             </a>
                           </div>
                       </td>

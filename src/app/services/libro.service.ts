@@ -11,10 +11,12 @@ import { UserLoginService } from './user-login.service';
 })
 export class LibroService {
 
+  public habilitar:boolean=false;///
+
   libro!:Libro;
   private url:string="http://localhost:8088/geolib/libros";
   private urlLib:string="http://localhost:8088/geolib/libros/nombre";
-  private ImgUrl:string="http://localhost:8088/geolib/imagenes/"
+  private ImgUrl:string="http://localhost:8088/geolib/imagenes"
   
   
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
@@ -39,7 +41,13 @@ export class LibroService {
     formData.append('multipartFile',imagen);
     console.log(formData);
     console.log(imagen);
-    return this.http.post<any>(this.ImgUrl+`${isbn}`,formData);
+    return this.http.post<any>(this.ImgUrl+`/${isbn}`,formData);
+  }
+
+  updateImg(imagen:File,isbn:string):Observable<any>{
+     const formData=new FormData();
+     formData.append('multipartFile',imagen);
+    return this.http.put<any>(this.ImgUrl+`/${isbn}`,formData);
   }
 
   deleteImg(isbn:string):Observable<any>{
@@ -58,7 +66,7 @@ export class LibroService {
   }
   ///actualizar
   update(libros:Libro):Observable<Libro>{
-    return this.http.put<Libro>(this.url+'/',libros,{headers:this.agregarAuthorizationHeader()});
+    return this.http.put<Libro>(this.url+'/'+libros.isbn,libros,{headers:this.agregarAuthorizationHeader()});
   }
   ///eliminar
   delete(isbn:string):Observable<Libro>{

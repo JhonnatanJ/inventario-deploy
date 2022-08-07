@@ -11,6 +11,7 @@ import { CuentaService } from 'src/app/services/cuenta.service';
 import { LibroService } from 'src/app/services/libro.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import Swal from 'sweetalert2';
+import { ModalReservaService } from '../list-reserva/detalle-reserva/modal-reserva.service';
 
 @Component({
   selector: 'app-reservas',
@@ -34,8 +35,10 @@ export class ReservasComponent implements OnInit {
     private cuentaService:CuentaService, 
     private libroService:LibroService,
     private reservaService:ReservasService,
-    private router:Router,
-    private activateRoute:ActivatedRoute) { }
+    private router:Router
+    // private activateRoute:ActivatedRoute,
+    // private modalRservice:ModalReservaService
+    ) { }
 
   ngOnInit(): void {
     this.libroService.getAllL().subscribe((l=>{this.libros=l}));
@@ -50,7 +53,7 @@ export class ReservasComponent implements OnInit {
  
        flatMap(value => value? this._filter(value):[]),
      );
-     this.cargar();
+     
   }//fin NgOnInit
 
   private _filter(value: string): Observable<Libro[]> {
@@ -124,7 +127,6 @@ export class ReservasComponent implements OnInit {
   create():void{
     this.reserva.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
     console.log(this.reserva);
-     console.log(this.reserva);
      this.reservaService.create(this.reserva).subscribe(res=>{ 
        Swal.fire(this.titulo,`creada con extito`,'success');
        this.router.navigate(['/reservas']);
@@ -132,21 +134,7 @@ export class ReservasComponent implements OnInit {
        //res=>this.router.navigate(['/notas_de_venta']))
    }
 
-   cargar(){
-    this.activateRoute.params.subscribe(
-      a=>{
-        let id=a['id'];
-        if(id){
-          this.reservaService.get(id).subscribe(
-            es=>{this.reserva=es;
-              
-                  console.log(es);
-            }
-          )
-        }
-      }
-    )
-   }
+
   
   
 }

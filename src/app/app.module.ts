@@ -44,6 +44,8 @@ import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
 import { DetalleReservaComponent } from './components/list-reserva/detalle-reserva/detalle-reserva.component';
 import { ReporteDiarioComponent } from './components/reporte-diario/reporte-diario.component';
 import { ReportePersonalizadoComponent } from './components/reporte-personalizado/reporte-personalizado.component';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @NgModule({
   declarations: [
@@ -76,8 +78,7 @@ import { ReportePersonalizadoComponent } from './components/reporte-personalizad
     BReservaFechaPipe,
     DetalleReservaComponent,
     ReporteDiarioComponent,
-    ReportePersonalizadoComponent,
-    
+    ReportePersonalizadoComponent,    
 
   ],
   imports: [
@@ -93,8 +94,7 @@ import { ReportePersonalizadoComponent } from './components/reporte-personalizad
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-    NgxSpinnerModule ,
-    
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -4,7 +4,14 @@
     <div class="p-0 container-fluid">
         <div class="d-flex flex-column justify-content-center align-items-start my-2"> 
             <div class="row ms-1 p-0">
-                <h1>REPORTE DIARIO</h1>
+                <div class="col-3">
+                    <h1>REPORTE DIARIO</h1>
+                </div>
+                <div class="col-auto">
+                    <button class="btn" (click)="this.createPdf()">
+                        Imprimir
+                    </button>
+                </div>
             </div>           
             <div class="container-fluid info">
                 <div class="row mt-3">

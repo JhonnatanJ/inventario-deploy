@@ -157,7 +157,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -186,13 +186,16 @@
         Inicio</li></a>
       <a [routerLink]="['/notas_de_venta']"><li>
         <i class="bi bi-receipt"></i>
-        Ventas</li></a>
+        Ventas</li>
+      </a>
       <a [routerLink]="['/reservas']"><li>
         <i class="bi bi-journal-bookmark"></i>
-        Reservas</li></a>
-      <a *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')" href="#"><li>
+        Reservas</li>
+      </a>
+      <a [routerLink]="['/reporte_diario']"><li>
         <i class="bi bi-graph-up-arrow"></i>
-        Reportes</li></a>
+        Reporte Diario</li>
+      </a>
       <li class="nav-item dropdown" id="submenu">
         <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-book"></i>

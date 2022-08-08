@@ -1,0 +1,15 @@
+.contenedor{
+    margin-left: 20%;
+    margin-right: 10%;
+    margin-top:20px ;
+    border: 50px;
+    border:2px #194bf0 solid;       
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+h1{
+    color: black;
+    font-size: large;
+
+}

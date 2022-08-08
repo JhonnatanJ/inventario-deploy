@@ -30,7 +30,7 @@ export class UserLoginComponent implements OnInit {
     //console.log(JSON.parse(sessionStorage.getItem("token")));
     // if(sessionStorage.getItem("token")!=""){
       if(this.userloginService.isAuthenticated()){
-        Swal.fire('Login',`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,'info' );
+        Swal.fire({title:'Login',icon:'info',text:`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,timer:1200, showConfirmButton:false});
         this.userloginService.iniciar=true;
          this.router.navigate(['/lista']);
       //}
@@ -57,7 +57,7 @@ export class UserLoginComponent implements OnInit {
 
 
       this.router.navigate(['/lista']);
-      Swal.fire('Login',`Bienvenido  ${cuenta.email}, has iniciado sesion con éxito!`, 'success' );
+      Swal.fire({title:'Login',icon:'success',text:`Bienvenido  ${cuenta.email}, has iniciado sesion con éxito!`, timer: 1500, showConfirmButton:false});
     }, err=>{
      if(err.status ==400 || err.status==401){
       Swal.fire('Error Login', 'Email o Contraseña Incorrectas!','error');

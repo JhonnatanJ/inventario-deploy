@@ -1,0 +1,234 @@
+
+<div class="contenedor">
+
+    <div class="p-0 container-fluid">
+        <div class="d-flex flex-column justify-content-center align-items-start my-2"> 
+            <div class="row ms-1 p-0">
+                <h1>REPORTE DIARIO</h1>
+            </div>           
+            <div class="container-fluid info">
+                <div class="row mt-3">
+                    <h3><strong>Generado Por: </strong>{{this.cuenta.usuario.nombres}} {{this.cuenta.usuario.apellidos}}</h3>
+                    <h3><strong>Fecha: </strong>{{this.fechaActual}}<strong class="ms-3"> Hora: </strong>{{this.horaActual}}</h3>
+                    <h3 class="mb-0"><strong>Descripción: </strong>Reporte de Ventas y Reservas del día</h3>                    
+                </div>
+                <hr>
+                <table *ngIf="this.notasventa.length > 0; else vacioVentas" class="table caption-top table-hover">
+                    <caption>Notas de Venta</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Nota Venta</th>
+                        <th scope="col">Vendedor</th>
+                        <th scope="col">Libros</th>
+                        <th scope="col">Valor Total</th>
+                        <th scope="col">Ver Detalle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let notaventa of notasventa; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{notaventa.idNotaventa}}</td>
+                        <td>{{notaventa.cuenta.email}}</td>
+                        <td>
+                            <div *ngFor="let detalle of notaventa.detalles">
+                                ({{detalle.cantidad}}){{detalle.libro.titulo}},
+                            </div>
+                        </td>                          
+                            
+                        <td><strong>${{notaventa.valorTotal.toFixed(2)}}</strong></td>
+                        <td>
+                            <button class="btn ver" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="this.indice = i">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>                                 
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title" id="exampleModalLabel">Nota de Venta: {{notasventa[this.indice].idNotaventa}}</h2>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="container-fluid">
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>DATOS-VENDEDOR</strong></h3>
+                                            <p><strong>Nombre: </strong>{{notasventa[this.indice].cuenta.usuario.nombres}} {{notasventa[this.indice].cuenta.usuario.apellidos}}</p>
+                                            <p><strong>Email: </strong>{{notasventa[this.indice].cuenta.email}}</p>
+                                            <p><strong>Fecha: </strong>{{notasventa[this.indice].fechaRegistro}}</p>
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>PRODUCTOS</strong></h3> 
+                                        </div>
+                                        <div *ngFor="let detalle of notasventa[this.indice].detalles">
+                                            <div class="row mb-2" >
+                                                <div class="col-4">
+                                                    <img src="{{detalle.libro.imagen.imagenUrl}}" alt="portada" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-auto justify-content-center">
+                                                    <p><strong>{{detalle.libro.titulo}}</strong></p>
+                                                    <p><strong>Autor: </strong>{{detalle.libro.autores[0].nombre}}</p>
+                                                    <p><strong>Cantidad: </strong>{{detalle.cantidad}}</p>
+                                                    <p><strong>Precio Unitario: </strong>${{detalle.libro.precioUnitario.toFixed(2)}}</p>
+                                                    <p><strong>Subtotal: </strong>${{(detalle.cantidad*detalle.libro.precioUnitario).toFixed(2)}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <hr>
+                                        <div class="row">
+                                            <h3 class="titulo m-0"><strong>TOTAL: $</strong>{{notasventa[this.indice].valorTotal.toFixed(2)}}</h3>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer d-flex flex-column align-items-center">
+                                      <button type="button" class="btn modalDetalle"data-bs-dismiss="modal">Aceptar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>                         
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>TOTAL DE VENTAS DIARIO: </strong></td>
+                            <td><strong>${{this.totalVentasDiario.toFixed(2)}}</strong></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                  </table>
+<!-- ----------------------------------------------------------------------------------------------- RESERVAS---------------------------- -->
+                  <table *ngIf="this.reservas.length > 0; else vacioReservas" class="table caption-top table-hover">
+                    <caption>Reservas</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Reserva</th>
+                        <th scope="col">Vendedor</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Libros</th>
+                        <th scope="col">Abono</th>
+                        <th scope="col">Saldo</th>
+                        <th scope="col">Valor Total</th>
+                        <th scope="col">Ver Detalle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let reserva of reservas; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{reserva.idReserva}}</td>
+                        <td>{{reserva.cuenta.email}}</td>
+                        <td>{{reserva.usuario.ci}}</td>
+                        <td>
+                            <div *ngFor="let detalle of reserva.detalleReservas">
+                                ({{detalle.cantidad}}){{detalle.libro.titulo}},
+                            </div>
+                        </td>  
+                        <td><strong>${{reserva.abono.toFixed(2)}}</strong></td>
+                        <td>${{reserva.saldo.toFixed(2)}}</td>
+                        <td>${{reserva.valorTotal.toFixed(2)}}</td>
+                        <td>
+                            <button class="btn ver" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalReservas" (click)="this.indice = i">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>                                 
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModalReservas" tabindex="-1" aria-labelledby="exampleModalReservasLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title" id="exampleModalReservasLabel">Reserva: {{reservas[this.indice].idReserva}}</h2>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="container-fluid">
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>DATOS DE VENDEDOR</strong></h3>
+                                            <p><strong>Nombre: </strong>{{reservas[this.indice].cuenta.usuario.nombres}} {{reservas[this.indice].cuenta.usuario.apellidos}}</p>
+                                            <p><strong>Email: </strong>{{reservas[this.indice].cuenta.email}}</p>
+                                            <p><strong>Fecha Registro: </strong>{{reservas[this.indice].fechaCreacion}}</p>
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>DATOS DE CLIENTE</strong></h3>
+                                            <p><strong>Cédula: </strong>{{reservas[this.indice].usuario.ci}}</p>
+                                            <p><strong>Nombre: </strong>{{reservas[this.indice].usuario.nombres}} {{reservas[this.indice].usuario.apellidos}}</p>                                            
+                                            <p><strong>Telefono: </strong>{{reservas[this.indice].usuario.telefono}}</p>
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>DATOS DE PAGO</strong></h3>
+                                            <p><strong>Fecha Abono: </strong>{{reservas[this.indice].fechaAbono}}</p>
+                                            <p><strong>Abono Actual: </strong> ${{reservas[this.indice].abono.toFixed(2)}} <strong class="ms-3">Saldo Actual: </strong> ${{reservas[this.indice].saldo.toFixed(2)}}</p>                                            
+                                            <p></p>
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <h3 class="titulo"><strong>PRODUCTOS</strong></h3> 
+                                        </div>
+                                        <div *ngFor="let detalle of reservas[this.indice].detalleReservas">
+                                            <div class="row mb-2" >
+                                                <div class="col-4">
+                                                    <img src="{{detalle.libro.imagen.imagenUrl}}" alt="portada" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-auto justify-content-center">
+                                                    <p><strong>{{detalle.libro.titulo}}</strong></p>
+                                                    <p><strong>Autor: </strong>{{detalle.libro.autores[0].nombre}}</p>
+                                                    <p><strong>Cantidad: </strong>{{detalle.cantidad}}</p>
+                                                    <p><strong>Precio Unitario: </strong>${{detalle.libro.precioUnitario.toFixed(2)}}</p>
+                                                    <p><strong>Subtotal: </strong>${{(detalle.cantidad*detalle.libro.precioUnitario).toFixed(2)}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <hr>
+                                        <div class="row">
+                                            <h3 class="titulo m-0"><strong>TOTAL: </strong>${{reservas[this.indice].valorTotal.toFixed(2)}}</h3>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer d-flex flex-column align-items-center">
+                                      <button type="button" class="btn modalDetalle"data-bs-dismiss="modal">Aceptar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>                         
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>TOTAL DE ABONOS DIARIO: </strong></td>
+                            <td><strong>${{this.totalAbonosDiario.toFixed(2)}}</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                  </table> 
+                  <ng-template #vacioVentas>
+                    <h2>
+                        NO EXISTEN DATOS DE VENTAS
+                    </h2>
+                  </ng-template>
+                  <ng-template #vacioReservas>
+                    <h2>
+                        NO EXISTEN DATOS DE RESERVAS
+                    </h2>
+                  </ng-template>
+                                 
+            </div>
+            <div class="row ms-1 mt-2 mb-0 p-0">
+                    <h1 class="m-0">TOTAL DE INGRESOS DIARIO: ${{this.totalDiario.toFixed(2)}}</h1>
+                </div>
+        </div>
+    </div>
+
+</div>

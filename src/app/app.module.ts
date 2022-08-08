@@ -42,6 +42,8 @@ import { BLibroEditorialPipe } from './Pipe/b-libro-editorial.pipe';
 import { BVentaFechaPipe } from './Pipe/b-venta-fecha.pipe';
 import { BReservaFechaPipe } from './Pipe/b-reserva-fecha.pipe';
 import { DetalleReservaComponent } from './components/list-reserva/detalle-reserva/detalle-reserva.component';
+import { ReporteDiarioComponent } from './components/reporte-diario/reporte-diario.component';
+import { ReportePersonalizadoComponent } from './components/reporte-personalizado/reporte-personalizado.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { DetalleReservaComponent } from './components/list-reserva/detalle-reser
     BVentaFechaPipe,
     BReservaFechaPipe,
     DetalleReservaComponent,
+    ReporteDiarioComponent,
+    ReportePersonalizadoComponent,
     
 
   ],

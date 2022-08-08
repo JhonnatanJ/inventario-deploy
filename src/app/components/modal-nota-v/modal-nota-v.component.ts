@@ -88,14 +88,19 @@ export class ModalNotaVComponent implements OnInit {
     let libro = event.option.value as Libro;
     console.log(libro);
 
-    if(this. existeLibro(libro.isbn)){
-      this.incrementaCantidad(libro.isbn);
-    }  else{
-      let nuevoDetalle= new Detalle();
-      nuevoDetalle.libro=libro;
-      this.nota.detalles.push(nuevoDetalle);
-       }
+    if(libro.stock===0){
+      Swal.fire('ERROR',`LIBRO CON STOCK EN CERO`,'warning')
+      }
+      else{
 
+        if(this. existeLibro(libro.isbn)){
+          this.incrementaCantidad(libro.isbn);
+        }  else{
+          let nuevoDetalle= new Detalle();
+          nuevoDetalle.libro=libro;
+          this.nota.detalles.push(nuevoDetalle);
+           }
+      }
    
     
     this.myControl.setValue('');
@@ -143,6 +148,7 @@ export class ModalNotaVComponent implements OnInit {
   }
 
   create():void{
+    
    this.nota.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
    console.log(this.nota);
     console.log(this.nota);

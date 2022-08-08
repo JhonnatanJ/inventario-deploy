@@ -70,6 +70,10 @@ export class ReservasComponent implements OnInit {
     let libro = event.option.value as Libro;
     console.log(libro);
 
+    if(libro.stock===0){
+      Swal.fire('ERROR',`LIBRO CON STOCK EN CERO`,'warning')
+      }else{
+
     if(this. existeLibro(libro.isbn)){
       this.incrementaCantidad(libro.isbn);
     }  else{
@@ -78,7 +82,7 @@ export class ReservasComponent implements OnInit {
       this.reserva.detalleReservas.push(nuevoDetalle);
        }
 
-   
+      }
     
     this.myControl.setValue('');
     event.option.focus();

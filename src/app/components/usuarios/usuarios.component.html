@@ -1,80 +1,4 @@
 
-<style>
-   #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.input-group{
-    margin: 10px;
-    
-}
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
-.table-responsive{
-    margin: 10px;
-}
-thead tr{
-    background-color: #2d8fd4;
-    border: #194bf0 2px solid;
-}
-table th{
-    text-align: center; /*titulos*/
-}
-table tr{     
-  text-align: center; /*filas*/
-}
-table #botones{
-  text-align: center;
-}
-
-.botonEditar a{     
-     border: 2px burlywood solid;
-     margin-left: 60px;
-     margin-top: 0px;
-           
-   }
-   .botonEliminar a{   
-     border: 2px red solid;
-     margin-right: 40px;
-      margin-top: -66px;
-}
-a:hover{
-  background-color: rgb(208, 207, 197);
- } 
- .filtrar{
-    margin: 10px;
-    display: flex;
-    width: 50%;
- 
-} 
-</style>
 <div id="contenedor">
         <nav class="navbar navbar-light ">
           <a  class="navbar-brand" >
@@ -84,7 +8,7 @@ a:hover{
      
       <div class="filtrar">
             
-        <input *ngIf="cuenta.opcion == '1'" type="search" class="form-control" placeholder="CEDULA" aria-label="Search" maxlength="10"
+        <input *ngIf="cuenta.opcion == '1'" type="search" class="form-control" placeholder="CÉDULA" aria-label="Search" maxlength="10"
           onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="ced" name="ced" />
 
         <input *ngIf="cuenta.opcion == '2'" type="search" class="form-control" placeholder="NOMBRE" aria-label="Search"
@@ -100,7 +24,7 @@ a:hover{
         <div class="form-floating" style="width: 50%; height: -10%;">
         <select class="form-select" aria-label="Default select example" [(ngModel)]="cuenta.opcion" name="cuenta" >
    
-          <option value="1">CEDULA</option>
+          <option value="1">CÉDULA</option>
           <option value="2">NOMBRE</option>
           <option value="3">EMAIL</option>
         </select>
@@ -116,18 +40,18 @@ a:hover{
                 <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Cedula</th>
+                  <th scope="col">Cédula</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Telefono</th>
+                  <th scope="col">Teléfono</th>
                   <th scope="col">Rol</th>
                   <th scope="col">Estado</th>
                   <th style="text-align: center;" scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody  >              
-                <tr  *ngFor="let cuent of cuentas  | paginate: { itemsPerPage: 5, currentPage: page} | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo" 
+                <tr  *ngFor="let cuent of cuentas  | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo  | paginate: { itemsPerPage: 5, currentPage: page}" 
                 [ngClass]="{'desabilitado': cuent.enabled == false}" >                 
                  
                 

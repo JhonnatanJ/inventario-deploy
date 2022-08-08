@@ -1,0 +1,101 @@
+#contenedor{
+    margin-left: 25%;
+    margin-right: 4%;
+    margin-top:20px ;
+    border: 50px;
+    border:2px #194bf0 solid;       
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.navbar.navbar-light{
+background-color: #2d8fd4;
+}
+
+
+.navbar.navbar-light .navbar-brand {
+margin-left: 10px;/*NOTAS DE VENTA*/
+font-weight: bold;
+}
+
+.row.g-3{
+margin: 1%;
+margin-top: 0%;
+font-weight: bold;
+}
+.fecha{
+margin: 1%;
+font-weight: bold;
+color: black;
+margin-right: 5%;
+}
+
+.entrada {
+
+display: flex;
+justify-content: space-evenly;
+margin-top: -4%;
+margin-right: 10%;
+margin-left: 2%;
+
+}
+
+.entrada #fecha{
+display: flex;
+font-weight: bold;
+margin-left: 10%;
+
+}
+
+.entrada #fecha label{
+margin-right: 5%;
+margin-left: -40%;
+}
+
+.entrada #fecha input{
+height: 100%;
+width: 80%;
+}
+
+.table-responsive{
+margin: 10px;
+} 
+
+a:hover{
+background-color: rgb(208, 207, 197);
+}
+
+.botones a{
+margin-left: 70%;
+margin-top: 1%;
+color: #1f2a4f;
+border:#1f2a4f 2px solid;
+font-weight: bold;
+max-height: -10%;
+max-width: 120%;
+margin-right: 10%;
+
+}
+.botones a:hover{
+background-color: rgb(134, 183, 222);
+}
+.entrada.botones{
+justify-content: space-evenly;
+}
+.table{
+text-align: center;
+}
+.text-end{
+text-align:right ;
+padding: .5rem 7rem;
+font-weight: bold;
+}
+.table input{
+width: 20%;
+margin-left: 40%;
+padding-left: 0 ;
+padding-right: 0;
+}
+
+.table-responsive #guardar{
+margin-left: 90%;
+}

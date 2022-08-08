@@ -71,17 +71,6 @@ export class ModalNotaVComponent implements OnInit {
       flatMap(value => value? this._filter(value):[]),
     );
     
-    
-   
-  /*this.Minotaventa=this.fb.group({
-    //idNotaventa:[],
-    //idCuenta:[''],
-    detalles:this.fb.array([this.fb.group({libro:[this.fb.group({isbn:['']})],cantidad:[]  })]),
-   // detalle2:this.fb.array([this.fb.group({cantidad:[]})]),
-
-    cuenta:1,
-  })*/
-  
 
   }///NgOnInt
 
@@ -161,26 +150,8 @@ export class ModalNotaVComponent implements OnInit {
       Swal.fire(this.titulo,`CREADA CON EXITO`,'success');
       this.router.navigate(['/notas_de_venta']);
     });
-      //res=>this.router.navigate(['/notas_de_venta']))
-  }
- /* onSubmit(formValue:any){
-    const notaventa=new NotaVenta();
-    //notaventa.idNotaventa=formValue.idNotaventa;
-   //notaventa.valorTotal=formValue.valorTotal;
-   // notaventa.detalles=formValue.detalle;
-    notaventa.detalles=formValue.detalles;
-    notaventa.cuenta=formValue.cuenta;
-   //this.notaventaService.create(notaventa);
-   console.log(notaventa);
-    this.notaventaService.create(notaventa).subscribe(
-      res=>this.router.navigate(['/notas_de_venta']));
       
-  }*/
-  
- /* create():void{
-    this.notaventaService.create(this.nota).subscribe(
-      res=>this.router.navigate(['/notas_de_venta']))
-  }*/
+  }
 
   openSM(contenido:any)
   {
@@ -215,26 +186,6 @@ export class ModalNotaVComponent implements OnInit {
     ) => (obj.canti*obj.precioUnitario)- acc,
     0 );
     }
-
-/*
-  ///detalle cantidad
-  get getdetallecantidad(){
-    return this.Minotaventa.get('detalles')as FormArray;
-  }
-  addDetallecantidad(){
-    const control=<FormArray>this.Minotaventa.controls['detalles'];
-    control.push(this.fb.group({cantidad:[]}));
-  }
-///detalle isbn
-get getdetalleisbn(){
-  return this.Minotaventa.get('detalles')as FormArray;
-}
-addDetalleisbn(){
-  const control=<FormArray>this.Minotaventa.controls['detalles'];
-  control.push(this.fb.group({libro:[this.fb.group({isbn:[]})]}));
-}*/
-
-
 
 
 }//fin

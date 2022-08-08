@@ -1,107 +1,4 @@
-<style>
-   #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
 
-    .navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.input-group{
-    margin: 10px;
-    
-}
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
-.table-responsive{
-    margin: 10px;
-}  
-.entrada {
-
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 10px;
-  margin-right: 10%;
-  margin-left: 2%;
- 
-}
-
-.entrada #fecha{
-  display: flex;
-  font-weight: bold;
-  margin-left: 10%;
-}
-
-.entrada #fecha label{
-  margin-right: 5%;
-  margin-left: -40%;
-}
-
-.entrada #fecha input{
-  height: 100%;
-  width: 80%;
-}
-.entrada.botones{
-
-  justify-content: space-evenly;
-}
-.botones a{
-  margin-left: 65%;
-  margin-top: -6%;
-  color: #1f2a4f;
-  border:#1f2a4f 2px solid;
-  font-weight: bold;
-  max-height: -10%;
-  max-width: 120%;
-  margin-right: 10%;
-
-}
-.botones a:hover{
-  background-color: rgb(134, 183, 222);
-}
-.table{
-  text-align: center;
-}
-.text-end{
-  text-align:right ;
-  padding: .5rem 7rem;
-  font-weight: bold;
-}
-.table input{
-  width: 20%;
-  margin-left: 40%;
-  padding-left: 0 ;
-  padding-right: 0;
-}
-
-.table-responsive #guardar{
- margin-left: 90%;
-}
-
-</style>
 <div id="contenedor">
   <nav class="navbar navbar-light ">
     <a  class="navbar-brand" >
@@ -109,29 +6,9 @@
          NUEVA NOTA DE VENTA
     </a>             
 </nav>
- <!---->
- 
-<!-- <div class="entrada">
-  <div id="fecha">
-  <label for="usuario"  class="form-label">Vendedor</label>
-
-  <select > 
-    <option >--Seleccionar un Vendedor</option> 
-     <option *ngFor="let usuario of usuarios" [ngValue]="usuario">{{usuario.nombres}}</option> -->
-  <!-- </select> -->
-
-  <!-- </div>  -->
-<!-- </div>  -->
-
-<!-- <div class="botones">
-  <a class="btn btn-outline-danger" (click)="openSM(contenido)"> 
-    <i class="bi bi-search"></i>
-    Agregar Producto
-  </a>
-</div> -->
 <form class="input-group" style="width: 400px">
   <mat-form-field appearance="fill">
-    <mat-label>TITULO</mat-label>
+    <mat-label>TÍTULO</mat-label>
     <input type="text"
            placeholder="Buscar"
            aria-label="Libros"
@@ -144,14 +21,9 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-
- <!--<button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-    <i class="bi bi-search"> Buscar</i>
-  </button>-->
 </form>
 
-<form > <!--[formGroup]="Minotaventa"(submit)="onSubmit(Minotaventa.value)"-->
- <!---->
+<form >
  <div class="alert alert-info my-4" *ngIf="nota.detalles.length == 0">
   No hay Libros Asignados para la Nota De Venta. Debe agregar al menos uno!
  </div>
@@ -159,7 +31,7 @@
     <table class="table" *ngIf="nota.detalles.length > 0">
       <thead>
         <tr>
-          <th scope="col">CODIGO</th>
+          <th scope="col">CÓDIGO</th>
           <th scope="col">ISBN</th>
           <th scope="col">CANT.</th>
           <th scope="col">LIBRO</th>
@@ -170,38 +42,25 @@
       </thead>
      
       <tbody >
-
-       <!--<ng-container formArrayName="detalles">--> 
         
-        <tr *ngFor="let p of nota.detalles;let i=index" > <!--*ngFor="let p of librosSeleccionados;let i=index"-->
+        <tr *ngFor="let p of nota.detalles;let i=index" >
           
-          <th >{{i+1}}</th><!--[(ngModel)]="nota.idNotaventa" name="idNotaventa"-->
-
-        
-          <th >{{p.libro.isbn}}</th> <!--[(ngModel)]="nota.detalles[i+1].libro.isbn" name="isbn" ngDefaultControl-->
-       
-     
-          <td> <input min="1" type="number" value="{{p.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td> <!-- [(ngModel)]="nota.detalles[i+1].cantidad" name="cantidad" ngDefaultControl-->
-       
-        
-          <!--formControlName="cantidad" id="cantidad" ngDefaultControl-->
+          <th >{{i+1}}</th>       
+          <th >{{p.libro.isbn}}</th>       
+          <td> <input min="1" type="number" value="{{p.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td>        
           <td>{{p.libro.titulo}}</td>
-          <td>{{p.libro.precioUnitario}}</td>
-         
-          <td id="subtotal" >{{p.calcularTotal().toFixed(2)}}</td><!--{{cant*p.precioUnitario}}-->
-        
+          <td>${{p.libro.precioUnitario}}</td>      
+          <td id="subtotal" >${{p.calcularTotal().toFixed(2)}}</td>        
           <td>
             <a class="btn btn-danger" 
-            (click)="eleminarItemLibro(p.libro.isbn)"> <!-- (click)="eliminar(i)"-->
+            (click)="eleminarItemLibro(p.libro.isbn)">
             <i class="bi bi-trash-fill"></i>
           </a>
-          </td>
-       
+          </td>       
         </tr>
-  
         <tr>
           <td colspan="5" class="text-end">TOTAL $</td>
-          <td >{{nota.calcularGranTotal().toFixed(2)}}</td> <!--[(ngModel)]="nota.valorTotal" --> <!--{{total|currency}}-->
+          <td >${{nota.calcularGranTotal().toFixed(2)}}</td> 
         </tr>
    
         </tbody>
@@ -211,9 +70,6 @@
     </a>
   </div>
 </form>
-  </div><!--CONTENEDOR-->
-
-<!--<button type="button" class="btn btn-outline-danger" (click)="openSM(contenido)">lanzar modal SM</button>-->
-
+  </div>
 
        

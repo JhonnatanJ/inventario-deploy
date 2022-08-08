@@ -1,135 +1,4 @@
-<style>
-#contenedor{
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top:-5px ;
-         border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px; 
-    }
 
-  body {
-    overflow-x: hidden;
-  }
-   
-  #wrapper.toggled {
-    padding-left: 250px;
-  }  
-  
-  #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-  }
-  
-  #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-  }
-    
-  @media(min-width:768px) {
-    #wrapper {
-      padding-left: 0;
-    }
-    #wrapper.toggled {
-      padding-left: 250px;
-    }
-    #sidebar-wrapper {
-      width: 0;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-      width: 250px;
-    }
-    #page-content-wrapper {
-      padding: 20px;
-      position: relative;
-    }
-    #wrapper.toggled #page-content-wrapper {
-      position: relative;
-      margin-right: 0;
-    }
-  }
-    .content {
-      margin: 20px auto 32px;
-      padding: 0 10px;
-      max-width: 900px;
-      flex-direction: column;
-      align-items: center;
-      /*border:3px solid rgb(7, 32, 78);
-      border-radius:30px;*/
-    }
-    /*.content button{
-      background-color: red;
-      position:relative;
-      <div class="boton menos"></div>///menos
-    }*/
-    /*botone + -*/
-    .boton {
-  display:inline-block;
-  width:30px;
-  height:30px;
-  border-radius:100%; 
-  position:relative;
-}
-
-.boton.mas::before, .boton.menos::before {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:40%;
-  height:0;
-  border-top:3px solid #0a74bb;/*linea horizontal botones*/
-}
-
-.boton.mas::after {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:0;
-  height:40%;
-  border-left:3px solid #0a74bb;/*linea vertical  boton mas */
-}
-.boton.mas{
-  top: -10px;
-  left: 0%;
-  border:2px solid #6d6d6c;
-  }
-.boton.menos.btn .btn-link{
-  top: -50px;
-  left: 102%;
-  }
-  .boton.menos{
-    left:102%;
-    top: -35px;
-    border:2px solid #6d6d6c;
-    background:#ffffff;/*fondo boton menos*/
-  }
-  .dropdown-menu{
-    padding: 10%;
-    width: 110%;
-  }
-  .navbar.navbar-light{
-    background-color: #2d8fd4;
-   }
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 35%;/*NOTAS DE VENTA*/
-    font-weight: bold;   
-}
-  
-.content form{
-  margin-left: 15%;
-  margin-right:-8;
-}
-.form-floating.mb-3{
-  font-weight: bold;
-}
-  </style>
 <body>
   <div id="wrapper" class="toggled">  
     <div id="page-content-wrapper">
@@ -151,7 +20,7 @@
               color="#fff"
               type="ball-scale-multiple"
             >
-              <p style="font-size: 20px; color: white">Loading Imagen...</p>
+              <p style="font-size: 20px; color: white">Loading Imágen...</p>
             </ngx-spinner>
             <!-- (ngSubmit)="onUpload()" -->
           <form class="col-8"[formGroup]="Miformulario"(ngSubmit)="onSubmit(Miformulario.value)"  novalidate enctype="multipart/form-data"><!-- -->
@@ -186,7 +55,7 @@
 
               <div class="form-floating mb-3">                      
                   <input  type="text" class="form-control"  id="titulo" formControlName="titulo" >
-                  <label for="titulo" class="form-label">TITULO</label>
+                  <label for="titulo" class="form-label">TÍTULO</label>
               </div>  
             </div>
 
@@ -204,7 +73,7 @@
 
                 <!--AUTOR-->
               <div class="mb-3">
-                      <label for="autor" class="form-label">Autor(es)</label>
+                      <label for="autor" class="form-label">AUTOR(ES)</label>
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro"> <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
@@ -216,7 +85,7 @@
 
                   <!--GENERO-->                 
                   <div class="mb-3">
-                    <label for="autor" class="form-label">Genero(s)</label>
+                    <label for="autor" class="form-label">GÉNERO(S)</label>
                     <div formArrayName="generos">
                         <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" ><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
@@ -227,7 +96,7 @@
                   <!--FIN GENERO-->
                     <!--EDITORIAL-->
                     <div class="mb-3">
-                      <label for="editorial" class="form-label">Editorial(es)</label>
+                      <label for="editorial" class="form-label">EDITORIAL(ES)</label>
                       <div formArrayName="editoriales">
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
                             <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" ><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>

@@ -1,93 +1,4 @@
 
-<style>
-    #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.input-group{
-    margin: 10px;
-    
-}
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
-.table-responsive{
-    margin: 10px;
-}
-thead tr{
-    background-color: #2d8fd4;
-    border: #194bf0 2px solid;
-}
-table th{
-    text-align: center; /*titulos*/
-}
-table tr{     
-  text-align: center; /*filas*/
-}
-table #botones{
-  text-align: center;
-}
-
-.botonEditar a{     
-     border: 2px burlywood solid;
-     margin-left: 10px;
-     margin-top: 0px;
-           
-   }
-a:hover{
-  background-color: rgb(208, 207, 197);
- }
- /***/
- .oscuro .modal-content {
-    background-color: #021f2e;
-    color: white;
-  }
-  .oscuro .close {
-    color: white;
-  }
-
-.azul {
-    background-color: #0fa1eb;
-  }
-
-.card-header{
-  font-weight: bolder;
-}
-
-.filtrar{
-    margin: 10px;
-    display: flex;
-    width: 50%;
- 
-}
-
-</style>
 <app-detalle-nota-v *ngIf="notaSeleccionada" [NotaV]="notaSeleccionada" style="display:block"></app-detalle-nota-v>
 <div id="contenedor">
             <!--CONTENIDO-->          
@@ -111,13 +22,6 @@ a:hover{
         <input *ngIf="nota.opcion == '3'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
        value="2022-07-22"
        min="2022-01-01" max="2030-12-31">
-
-        <!-- <input *ngIf="nota.opcion == '3'" type="search" class="form-control" placeholder="CORREO" aria-label="Search"
-        [(ngModel)]="" name="" />
-         -->
-        <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-          <i class="bi bi-search"> Buscar</i>
-        </button> -->
 
         <div class="form-floating" style="width: 50%; height: -10%;">
         <select class="form-select" aria-label="Default select example" [(ngModel)]="nota.opcion" name="cuenta" >
@@ -143,11 +47,11 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let not of venta | paginate: { itemsPerPage: 5, currentPage: page } | bNotasVenta:search | bVentaVendedor:vendedor | bVentaFecha:fecha">
+                    <tr *ngFor="let not of venta  | bNotasVenta:search | bVentaVendedor:vendedor | bVentaFecha:fecha | paginate: { itemsPerPage: 5, currentPage: page }">
                       <th scope="row">{{not.idNotaventa}}</th>
                       <td>{{not.fechaRegistro}}</td>
                       <td>{{not.cuenta.usuario.nombres}} {{not.cuenta.usuario.apellidos}}</td>
-                      <td>{{not.valorTotal.toFixed(2)}}</td>
+                      <td>${{not.valorTotal.toFixed(2)}}</td>
                       <td id="botones">
                         <div class="botonEditar">
                             <a class="btn btn-default" type="button" (click)="openSM(not)">

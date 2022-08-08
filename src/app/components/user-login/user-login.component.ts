@@ -12,23 +12,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
- // login=false;
-  //loginSuscription!:Subscription;
-  //entrar=true;
+
      isFormValid=false;//false
      areCredentialsInvalid=false//false
      cuenta:Cuenta;
   constructor(private router:Router, private userloginService:UserLoginService) {
     this.cuenta=new Cuenta();
-   }//,private userLoginService:UserLoginService
+   }
      
       vista=true;///amage
   ngOnInit(){
     
-    // let token:string="";
-    // sessionStorage.setItem("token",token);
-    //console.log(JSON.parse(sessionStorage.getItem("token")));
-    // if(sessionStorage.getItem("token")!=""){
       if(this.userloginService.isAuthenticated()){
         Swal.fire('Login',`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,'info' );
         this.userloginService.iniciar=true;
@@ -70,31 +64,5 @@ export class UserLoginComponent implements OnInit {
 
   }
 
-
-
-
-
-
-/*
-////
-  onSubmit(signInform:NgForm){
-   // console.log(signInform.value);
-    if(!signInform.valid){
-      this.isFormValid=true;//true
-      this.areCredentialsInvalid=false;//false
-      return;     
-    }
-    this.checkCredential(signInform);
-     
-  }
-
-  private checkCredential(signInform:NgForm){
-    const signinData=new DatosLogin(signInform.value.login,signInform.value.password);
-      if(!this.userloginService.autenticar(signinData)){//authentic
-          this.isFormValid=false;//false
-          this.areCredentialsInvalid=true;//true         
-      }
-    
-  }*/
     
 }

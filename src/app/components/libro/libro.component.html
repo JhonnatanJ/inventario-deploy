@@ -1,70 +1,4 @@
 
-<style>
-    #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.filtrar{
-    margin: 10px;
-    display: flex;
-    width: 50%;
- 
-}
-
-
-.table-responsive{
-    margin: 10px;
-    
-}
-thead tr{
-    background-color: #2d8fd4;
-    border: #194bf0 2px solid;
-}
-table th{
-    text-align: center; /*titulos*/
-}
-table tr{     
-  text-align: center; /*filas*/
-}
-table #botones{
-  text-align: center;
-}
-
-.botonEditar a{     
-     border: 2px burlywood solid;
-     margin-left: 60px;
-     margin-top: 0px;
-           
-   }
-   .botonEliminar a{   
-     border: 2px red solid;
-     margin-right: 40px;
-      margin-top: -66px;
-}
-a:hover{
-  background-color: rgb(208, 207, 197);
- }
-</style>
   <div id="contenedor">
           <nav class="navbar navbar-light ">
             <a  class="navbar-brand" >
@@ -77,7 +11,7 @@ a:hover{
             <input *ngIf="libro.opcion == '1'" type="search" class="form-control" placeholder="ISBN" aria-label="Search" maxlength="13"
             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="isbn" name="isbn" />
 
-            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TITULOS" aria-label="Search"
+            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TÍTULOS" aria-label="Search"
             onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="search" name="search" />
 
             <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
@@ -94,9 +28,9 @@ a:hover{
             <select class="form-select" aria-label="Default select example" [(ngModel)]="libro.opcion" name="libros" >
        
               <option value="1">ISBN</option>
-              <option value="2">TITULOS</option>
+              <option value="2">TÍTULOS</option>
               <option value="3">AUTOR</option>
-              <option value="4">GENERO</option>
+              <option value="4">GÉNERO</option>
               <option value="5">EDITORIAL</option>
             </select>
             <label for="floatingTextarea">BUSCAR POR:</label>
@@ -111,17 +45,17 @@ a:hover{
                   <!-- <th scope="col">#</th> -->
                   <th scope="col">Imágen</th>
                   <th scope="col">ISBN</th>
-                  <th scope="col">Titulo</th>
+                  <th scope="col">Título</th>
                   <th scope="col">Autor</th>                
                   <th scope="col">Stock</th>
                   <th scope="col">Precio Unitario</th>
-                  <th scope="col">Genero</th>
+                  <th scope="col">Género</th>
                   <th scope="col">Editorial</th>
-                  <th style="text-align: center;" scope="col">Accion</th>
+                  <th style="text-align: center;" scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page} | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial;let i=index ">
+                <tr *ngFor="let lib of libros  | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial | paginate: { itemsPerPage: 5, currentPage: page};let i=index ">
                   <!-- <th scope="row">{{i+1}}</th> -->
                   <!-- | paginate: { itemsPerPage: 5, currentPage: page} -->
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>

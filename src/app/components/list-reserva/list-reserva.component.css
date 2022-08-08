@@ -1,0 +1,87 @@
+#contenedor{
+    margin-left: 20%;
+    margin-right: 10%;
+    margin-top:20px ;
+    border: 50px;
+    border:2px #194bf0 solid;       
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.navbar.navbar-light{
+background-color: #2d8fd4;
+
+}
+
+.navbar.navbar-light .navbar-brand {
+margin-left: 10px;/*NOTAS DE VENTA*/
+font-weight: bold;
+}
+.btn.btn-info{
+margin-right: 10px;/*Boton nuevo*/
+font-weight: bold;
+color: black;
+}
+.input-group{
+margin: 10px;
+
+}
+.input-group button{
+left: 0;
+border-top-left-radius: 10px;
+font-weight: bold;
+background-color:darkblue ;
+color:white;
+margin-top: 0;
+height: 37px;
+}
+.table-responsive{
+margin: 10px;
+}
+thead tr{
+background-color: #2d8fd4;
+border: #194bf0 2px solid;
+}
+table th{
+text-align: center; /*titulos*/
+}
+table tr{     
+text-align: center; /*filas*/
+}
+table #botones{
+text-align: center;
+}
+
+.botonEliminar a{     
+ border: 2px rgb(238, 71, 20) solid;
+ margin-left: 60px;
+ margin-top: -1px;
+       
+}
+.botonAumentar a{   
+/* border: 2px rgb(118, 130, 239) solid; */
+ margin-left: 10px;
+ margin-top: -6px;
+ font-size:x-large;
+}
+a:hover{
+background-color: rgb(208, 207, 197);
+}
+/***/
+.oscuro .modal-content {
+background-color: #021f2e;
+color: white;
+}
+.oscuro .close {
+color: white;
+}
+
+.azul {
+background-color: #0fa1eb;
+}
+.filtrar{
+margin: 10px;
+display: flex;
+width: 50%;
+
+}

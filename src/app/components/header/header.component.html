@@ -160,11 +160,11 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a  class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{userloginService.cuenta.email}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
+            <li><a (click)="cuentaService.habilitar=true" (click)="cuentaService.mostrarUs=false" class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
             <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
         </li>
@@ -199,7 +199,7 @@
           Libros
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" [routerLink]="['/formulario']">Registro de Libros</a></li>
+          <li><a  class="dropdown-item" [routerLink]="['/formulario']">Registro de Libros</a></li>
         </ul>
       </li>
       <li *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')"  class="nav-item dropdown" id="submenu">
@@ -208,8 +208,8 @@
           Usuarios
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" [routerLink]="['/usuarios']">Nomina de Usuarios</a></li>
-          <li><a class="dropdown-item" [routerLink]="['/registroUsuarios']">Registro de Usuarios</a></li>
+          <li><a (click)="cuentaService.mostrarUs=true" (click)="cuentaService.habilitar=true" class="dropdown-item" [routerLink]="['/usuarios']">Nomina de Usuarios</a></li>
+          <li><a (click)="cuentaService.mostrarUs=true" (click)="cuentaService.habilitar=false" class="dropdown-item" [routerLink]="['/registroUsuarios']">Registro de Usuarios</a></li>
          </ul>
       </li>
       

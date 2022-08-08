@@ -8,7 +8,7 @@ import { Libro } from '../models/libro';
 
 export class BusquedaPipe implements PipeTransform {
 
-  transform(libros: Libro[], search:string=""): Libro[] {
+  transform(libros: Libro[] ,search:string=""): Libro[] {
     
     if(!search){
       return libros
@@ -22,5 +22,6 @@ export class BusquedaPipe implements PipeTransform {
     }
 
     return result;
+
   }
 }

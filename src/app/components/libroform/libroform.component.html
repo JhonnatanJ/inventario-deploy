@@ -161,24 +161,26 @@
               <button  class="btn btn-outline-danger" [disabled]="!imagen" (click)="reset()"><i class="bi bi-arrow-clockwise"></i>Reset</button>
               <!-- <button class="btn btn-outline-secondary" type="button" id="Imagen">Button</button> -->
             </div>
-            <div *ngIf="imagen" class="mt-5">
-              <h5>NUEVA PORTADA:</h5>
+            <div *ngIf="imagen" class="mt-5" style="margin-left: 40%;">
+              <h4  style="font-weight: bold ;">NUEVA PORTADA:</h4>
               <div>
                 <img class="image-thumbnail" style="max-width: 100px;" [src]="imagenMin" >
               </div>
             </div>
 
-            <div *ngIf="this.libro.imagen.id" class="mt-5">
-              <h5>PORTADA ACTUAL:</h5>
+            <div *ngIf="this.libro.imagen.id" class="mt-5" style="margin-left: 40%;">
+              <h4 style="font-weight: bold ;">PORTADA ACTUAL:</h4>
               <div>
                 <img  class="image-thumbnail" style="max-width: 100px;" src="{{this.libro.imagen.imagenUrl}}" >
               </div>
             </div>
-            
-            
+                      
             <br>
+
+            <div class="seccion1">
             <div class="form-floating mb-3">                  
-                  <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn">
+                  <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn" 
+                  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="13">
                   <label for="isbn" class="form-label">ISBN</label>
               </div>   
 
@@ -186,18 +188,19 @@
                   <input  type="text" class="form-control"  id="titulo" formControlName="titulo" >
                   <label for="titulo" class="form-label">TITULO</label>
               </div>  
+            </div>
 
-              <div class="form-floating mb-3 " disabled style=" margin-right:250px">
+            <div class="seccion2">
+              <div class="form-floating mb-3 " disabled style="min-width: 50px;max-width: 50%;">
                 <input min="0" type="number" class="form-control"  id="stock" formControlName="stock"  >
                 <label for="stock" class="form-label">STOCK ACTUAL</label>
               </div> 
-
 
               <div class="form-floating mb-3">              
                 <input min="1" type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
                 <label for="precioUnitario" class="form-label">PRECIO UNITARIO ($)</label>
               </div>
-              
+            </div>
 
                 <!--AUTOR-->
               <div class="mb-3">
@@ -240,17 +243,17 @@
                   </div> 
                        
             <br>
-            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-top: -5%; margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
+            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
       
-            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);margin-top: -5%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
+            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>
 
-            <div class="form-floating mb-3 " style="top: -685px; margin-left:250px">
+            <div class="form-floating mb-3 " style="top: -685px;min-width: 50px;max-width: 50%; margin-left: 300px ;">
               <input min="0" type="number" class="form-control"  id="nuevostock" [(ngModel)]="nuevoS" [ngModelOptions]="{standalone: true}">
               <label for="nuevostock" class="form-label">NUEVO STOCK</label>
             </div> 
 
-            <button style="margin-top: -5%; margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
+            <button style="margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
           </ng-template>
           </form>
         </div> 

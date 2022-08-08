@@ -84,13 +84,13 @@ a:hover{
      
       <div class="filtrar">
             
-        <input *ngIf="cuenta.opcion == '1'" type="search" class="form-control" placeholder="CEDULA" aria-label="Search"
-        [(ngModel)]="ced" name="ced" />
+        <input *ngIf="cuenta.opcion == '1'" type="search" class="form-control" placeholder="CEDULA" aria-label="Search" maxlength="10"
+          onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="ced" name="ced" />
 
         <input *ngIf="cuenta.opcion == '2'" type="search" class="form-control" placeholder="NOMBRE" aria-label="Search"
-        [(ngModel)]="search" name="search" />
+        onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="search" name="search" />
 
-        <input *ngIf="cuenta.opcion == '3'" type="search" class="form-control" placeholder="CORREO" aria-label="Search"
+        <input *ngIf="cuenta.opcion == '3'" type="email" class="form-control" placeholder="CORREO" aria-label="Search"
         [(ngModel)]="correo" name="correo" />
         
         <!-- <button class="btn btn-outline-default" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
@@ -142,13 +142,13 @@ a:hover{
                   <td>{{imprimirEstado(cuent.enabled)}}</td>
                   <td id="botones">
                     <div class="botonEditar">
-                    <a (click)="cuentaService.habilitar=!cuentaService.habilitar" id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]"  >
+                    <a (click)="cuentaService.habilitar=true" id="editar" class="btn btn-default" type="button" [routerLink]="['/registroUsuarios',cuent.idCuenta]"  >
                       <i class="bi bi-pencil-square"></i>
                       </a>
                   </div>
                   <div class="botonEliminar">
                     <a id="eliminar" class="btn btn-default" type="button" (click)="delete(cuent)">
-                      <i class="bi bi-trash-fill"></i>
+                      <i class="bi bi-x-circle-fill"></i>
                     </a><!--(click)="delete(cuent)"-->
                   </div>               
                   </td>                            

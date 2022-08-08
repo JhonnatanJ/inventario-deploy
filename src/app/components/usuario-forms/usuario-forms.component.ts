@@ -31,7 +31,10 @@ export class UsuarioFormsComponent implements OnInit {
 
   titulo:string='USUARIO';
   Miformulario!:FormGroup;
-  constructor( public cuentaServicio:CuentaService,private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder) { 
+  constructor( public cuentaServicio:CuentaService,
+    private router:Router,
+    private activatedRoute:ActivatedRoute,
+    private fb:FormBuilder) { 
   /* */
   this.flag=true
   }
@@ -46,7 +49,7 @@ export class UsuarioFormsComponent implements OnInit {
 
    
     this.cargar();
-
+   //this.cuentaServicio.mostrarUs=true;
 
     
   }

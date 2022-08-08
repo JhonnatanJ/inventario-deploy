@@ -102,13 +102,13 @@ a:hover{
           <div class="filtrar">
             
             <input *ngIf="opcion == '1'" type="search" class="form-control" placeholder="ID DE RESERVA" aria-label="Search"
-            [(ngModel)]="idR" name="idR" />
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="idR" name="idR" />
 
             <input *ngIf="opcion == '2'" type="search" class="form-control" placeholder="CLIENTE" aria-label="Search"
-            [(ngModel)]="search" name="search" />
+            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))" [(ngModel)]="search" name="search" />
 
             <input *ngIf="opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
-            [(ngModel)]="vendedor" name="vendedor" />
+            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="vendedor" name="vendedor" />
             
             <input *ngIf="opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
               value="2022-07-22"

@@ -103,10 +103,10 @@ a:hover{
              <div class="filtrar">
             
         <input *ngIf="nota.opcion == '1'" type="search" class="form-control" placeholder=" # NOTA DE VENTA" aria-label="Search"
-        [(ngModel)]="search" name="search" /> 
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="search" name="search" /> 
 
         <input *ngIf="nota.opcion == '2'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
-        [(ngModel)]="vendedor" name="vendedor" />
+        onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="vendedor" name="vendedor" />
 
         <input *ngIf="nota.opcion == '3'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
        value="2022-07-22"

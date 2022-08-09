@@ -49,3 +49,11 @@ button.modalDetalle{
     color: white;
     background-color:#2d8fd4;
 }
+button.impresion{
+    color:white;
+    margin-bottom: 0.5rem;
+}
+button.impresion:hover{
+    background-color:#86badf;
+    margin-bottom: 0.5rem;
+}

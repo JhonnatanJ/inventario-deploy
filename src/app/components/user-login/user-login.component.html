@@ -44,7 +44,7 @@ h1 {
   font-size: 0.875rem;
   color: #ffffff;
   font-weight: bold;
-  background-color: #0f375a;
+  background-color: #0065bd;
   width: 100%;
   display: block;
   padding: 0.875rem 1rem;
@@ -53,19 +53,21 @@ h1 {
   cursor: pointer;
 }
 </style>
-
-	<form class="custom-form" method="post"  > <!--(ngSubmit)="onSubmit(signInform)" #signInform="ngForm" -->
-	  <h1>Login</h1>
+  <div class="container-flui text-center mt-5 mb-0">
+    <img src="../assets/icon-Logo.png" alt="logo geomundo" class="img-fluid" width="23%">
+  </div>
+	<form class="custom-form mt-5" method="post"  > <!--(ngSubmit)="onSubmit(signInform)" #signInform="ngForm" -->
+	  <h1>Iniciar Sesión</h1>
 	  <input [(ngModel)]="cuenta.email"
 		type="email"placeholder="Email" id="inputLogin" class="form-control" name="login" ngModel required autofocus/>
 	  <input [(ngModel)]="cuenta.contrasena"
 		type="password"	placeholder="Password" id="inputPassword" class="form-control" name="password" autocomplete="on" ngModel required />
-	  <button class="btn btn-lg btn-primary btn-block"  type="submit" (click)="login()">Log in</button>
+	  <button class="btn btn-lg btn-primary btn-block"  type="submit" (click)="login()">Iniciar Sesión</button>
     <div  class="alert alert-danger" role="alert" *ngIf="isFormValid">
-        Por favor llenar todos los espacios
+        Por favor llenar todos los datos
     </div>
     <div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
-      Email o Contraseña Incorrectoqss
-  </div>
+      Email o Contraseña Incorrectos
+    </div>
   </form>
 

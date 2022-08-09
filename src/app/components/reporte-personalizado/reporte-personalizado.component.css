@@ -6,10 +6,74 @@
     border:2px #194bf0 solid;       
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    background-color: #2d8fd4;
 }
 
 h1{
-    color: black;
-    font-size: large;
+    color: white;
+    padding: 0%;
+    font-weight: bold;
+}
+h2{
+    font-weight: bold;
+    color: #2d8fd4;
+}
+h3.titulo{
+    align-items: center;
+}
+h3.opciones{
+    color: white;
+    font-weight: bold;
+}
 
+p{
+    text-align: start;
+    vertical-align: center;
+}
+
+div.info{
+    background-color: white;
+}
+thead{
+    background-color: #2d8fd4;
+    color: rgb(254, 253, 253);
+    font-weight: normal;
+}
+td{
+    text-align: center;
+    vertical-align: middle;
+}
+th{
+    text-align: center;
+}
+button.ver{
+    border: solid #2d8fd4 1px;
+}
+button.modalDetalle{
+    color: white;
+    background-color:#2d8fd4;
+}
+button.impresion{
+    color:white;
+    margin-bottom: 0.5rem;
+}
+button.impresion:hover{
+    background-color:#86badf;
+    margin-bottom: 0.5rem;
+}
+button.generar{
+    color:white;
+    border: 2px solid white;
+    margin-top: 0.5rem;
+    margin-bottom:0.5rem;
+}
+button.generar:hover{
+    color:white;
+    background-color:#86badf;
+    border: 2px solid white;
+    margin-top: 0.5rem;
+    margin-bottom:0.5rem;
+}
+label.inputFecha{
+    color: white;
 }

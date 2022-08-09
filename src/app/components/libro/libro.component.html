@@ -65,11 +65,23 @@
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
                   <td>{{lib.isbn}}</td>
                   <td>{{lib.titulo}}</td>
-                  <td *ngFor="let au of lib.autores">{{au.nombre}}</td>                
+                  <td >
+                    <div *ngFor="let au of lib.autores">
+                      {{au.nombre}}
+                    </div>
+                  </td>                
                   <td>{{lib.stock}}</td>
                   <td>${{lib.precioUnitario.toFixed(2)}}</td>
-                  <td *ngFor="let ge of lib.generos">{{ge.nombre}}</td>    
-                  <td *ngFor="let ed of lib.editoriales">{{ed.nombre}}</td>                     
+                  <td>
+                     <div *ngFor="let ge of lib.generos">
+                      {{ge.nombre}}
+                     </div>
+                  </td>    
+                  <td >
+                    <div *ngFor="let ed of lib.editoriales">
+                      {{ed.nombre}}
+                    </div>
+                   </td>                     
                   <td id="botones">
                     <div class="botonEditar">
                     <a (click)="libroService.habilitar=!libroService.habilitar" class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >

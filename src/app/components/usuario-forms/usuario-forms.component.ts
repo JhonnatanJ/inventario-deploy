@@ -79,7 +79,10 @@ export class UsuarioFormsComponent implements OnInit {
   }
 
 
-  create():void{
+  create(notasForm:any):void{
+
+    if(notasForm.form.valid ){
+
     if(this.rolE=='ADMINISTRADOR'){
       this.roles.nombre='ROLE_ADMINISTRADOR'
     }else{
@@ -101,6 +104,9 @@ export class UsuarioFormsComponent implements OnInit {
     (res=> this.router.navigate(['/usuarios']));
     
     console.log(this.cuenta);
+    
+  }
+
   }
   
 

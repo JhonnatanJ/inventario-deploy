@@ -33,14 +33,14 @@ export class UserLoginComponent implements OnInit {
   }
   ///UDEMI
   login():void{
-    console.log(this.cuenta);
+    
     if(this.cuenta.email==null || this.cuenta.contrasena== null){
       Swal.fire('Error Login','Email o Contraseña Vacias!','error')
       return;
     }
 
     this.userloginService.login(this.cuenta).subscribe(res=>{
-      console.log(res);
+      
      // let payload=JSON.parse(atob(res.access_token.split(".")[1]));
       
 

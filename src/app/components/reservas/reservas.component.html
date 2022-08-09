@@ -8,32 +8,48 @@
         </a>  
     </nav>
 
-<form action="">
+<form #notasForm="ngForm">
     <form class="row g-3">
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">NOMBRE</label>
           <input type="text" class="form-control" id="nombre" [(ngModel)]="reserva.usuario.nombres" name="nombres"
-          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          required #nombre="ngModel">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && nombre.touched || nombre.invalid && notasForm.submitted">
+            El Nombre Es Requerido
+          </div>
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">APELLIDO</label>
           <input type="text" class="form-control" id="apellido" [(ngModel)]="reserva.usuario.apellidos" name="apellidos"
-          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))">
+          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          required #apellido="ngModel">
+          <div class="alert alert-danger" *ngIf="apellido.invalid && apellido.touched || apellido.invalid && notasForm.submitted">
+            El Apellido Es Requerido
+          </div>
         </div>
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">CÉDULA</label>
             <input type="text" class="form-control" id="cedula" [(ngModel)]="reserva.usuario.ci" name="ci"  maxlength="10"
-            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            required #cedula="ngModel">
+            <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && notasForm.submitted">
+              La Cédula Es Requerida
+            </div>
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">TELÉFONO</label>
             <input type="text" class="form-control" id="telefono" [(ngModel)]="reserva.usuario.telefono" name="telefono" maxlength="10"
-            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            required #telefono="ngModel">
+            <div class="alert alert-danger" *ngIf="telefono.invalid && telefono.touched || telefono.invalid && notasForm.submitted">
+              El Teléfono Es Requerido
+            </div>
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">ABONO ($)</label>
             <input type="number" class="form-control" id="abono" [(ngModel)]="reserva.abono" name="abono"
-            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="0">
           </div>
     </form>
 
@@ -52,11 +68,17 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <div class="alert alert-danger" *ngIf="myControl.invalid && notasForm.submitted">
+        La Reserva No puede Estar Vacia!
+      </div>
       </form>
 
 
     <div class="table-responsive">
-        <table class="table">
+      <div class="alert alert-info my-4" *ngIf="reserva.detalleReservas.length == 0">
+        No hay Libros Asignados para la reserva. Debe agregar al menos uno!
+       </div>
+        <table class="table" *ngIf="reserva.detalleReservas.length > 0">
           <thead>
             <tr>
               <th scope="col">CODIGO</th>
@@ -95,7 +117,7 @@
             </tr>
             </tbody>
         </table>
-        <button id="guardar" class="btn btn-info" type="submit" (click)='create()'  style="font-weight: bold;" >
+        <button id="guardar" class="btn btn-info" type="submit" (click)='create(notasForm)'  style="font-weight: bold;" >
           Reservar
         </button>
       </div>

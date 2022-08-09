@@ -44,11 +44,11 @@ export class LibroformComponent implements OnInit {
    let aux= JSON.parse(sessionStorage.getItem("cuenta"));
    console.log(this.libro);
     this.Miformulario= this.fb.group({
-      isbn:[''],
-      titulo:[''],
-      stock:[0],
-      precioUnitario:[],
-      descripcion:[''],
+      isbn:['',Validators.required],
+      titulo:['',Validators.required],
+      stock:['',Validators.required],
+      precioUnitario:['',Validators.required],
+      descripcion:['',Validators.required],
       autores:this.fb.array([this.fb.group({nombre:['']})]),
       generos:this.fb.array([this.fb.group({nombre:['']})]),
       editoriales:this.fb.array([this.fb.group({nombre:['']})]),
@@ -65,6 +65,8 @@ export class LibroformComponent implements OnInit {
   }
 
   onSubmit(formValue: any){ 
+
+    if(this.Miformulario.valid){
  
     const libro= new Libro(); 
     libro.isbn=formValue.isbn;   
@@ -112,8 +114,18 @@ export class LibroformComponent implements OnInit {
       }
       
     }
-
   }
+
+
+  }///FIN
+
+  get isbn(){ return this.Miformulario.get('isbn');} 
+  get titulo(){ return this.Miformulario.get('titulo');} 
+  get stock(){ return this.Miformulario.get('stock')} 
+  get precioUnitario(){ return this.Miformulario.get('precioUnitario')} 
+  // get autor(){ return this.Miformulario.get('autor')} 
+  // get genero(){ return this.Miformulario.get('genero')} 
+  // get editorial(){ return this.Miformulario.get('editorial')} 
   cargar():void{
     this.activatedRoute.params.subscribe(
       b=>{

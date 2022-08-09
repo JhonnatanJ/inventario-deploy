@@ -13,7 +13,7 @@ export class Reserva {
     fechaAbono!:Date;
     valorTotal!:number;
     saldo!:number;
-    abono!:number;
+    abono:number=0;
     cuenta!:Cuenta;
     usuario!:Usuario;
     detalleReservas:DetalleReserva[]=[];

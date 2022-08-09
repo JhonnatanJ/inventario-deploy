@@ -50,11 +50,17 @@
             <div class="form-floating mb-3">                  
                   <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn" 
                   onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="13">
+                  <div class="alert alert-danger" *ngIf="isbn.invalid && isbn.touched">
+                    ISBN Requerido
+                  </div>
                   <label for="isbn" class="form-label">ISBN</label>
               </div>   
 
               <div class="form-floating mb-3">                      
                   <input  type="text" class="form-control"  id="titulo" formControlName="titulo" >
+                  <div class="alert alert-danger" *ngIf="titulo.invalid && titulo.touched">
+                    Titulo Requerido
+                  </div>
                   <label for="titulo" class="form-label">TÍTULO</label>
               </div>  
             </div>
@@ -62,11 +68,17 @@
             <div class="seccion2">
               <div class="form-floating mb-3 " disabled style="min-width: 50px;max-width: 50%;">
                 <input min="0" type="number" class="form-control"  id="stock" formControlName="stock"  >
+                <div class="alert alert-danger" *ngIf="stock.invalid && stock.touched">
+                  Stock Requerido
+                </div>
                 <label for="stock" class="form-label">STOCK ACTUAL</label>
               </div> 
 
               <div class="form-floating mb-3">              
                 <input min="1" type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
+                <div class="alert alert-danger" *ngIf="precioUnitario.invalid && precioUnitario.touched">
+                  Precio Unitario Requerido
+                </div>
                 <label for="precioUnitario" class="form-label">PRECIO UNITARIO ($)</label>
               </div>
             </div>
@@ -77,8 +89,11 @@
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro"> <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
-                        </div>
+                        </div>                       
                     </div>
+                    <!-- <div class="alert alert-danger" *ngIf="autor.invalid && autor.touched">
+                      Autor Requerido
+                    </div> -->
                       <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
               </div> 
                   <!--FIN AUTOR-->
@@ -90,7 +105,11 @@
                         <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" ><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
                         </div>
+                       
                       </div>
+                      <!-- <div class="alert alert-danger" *ngIf="genero.invalid && genero.touched">
+                        Genero Requerido
+                       </div> -->
                       <a class=" boton mas btn btn-link" (click)="addGenero()"></a>
                    </div> 
                   <!--FIN GENERO-->
@@ -101,7 +120,11 @@
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
                             <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" ><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
                           </div>
+                          
                         </div>
+                        <!-- <div class="alert alert-danger" *ngIf="editorial.invalid && editorial.touched">
+                          Editorial Requerida
+                        </div> -->
                         <a class=" boton mas btn btn-link" (click)="addEditorial()"></a>
                      </div> 
                     <!--FIN EDITORIAL-->
@@ -112,7 +135,8 @@
                   </div> 
                        
             <br>
-            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
+            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock" 
+            [disabled]="!Miformulario.valid" >Guardar</button>
       
             <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>

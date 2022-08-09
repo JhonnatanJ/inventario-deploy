@@ -12,16 +12,20 @@
             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="isbn" name="isbn" />
 
             <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TÍTULOS" aria-label="Search"
-            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="search" name="search" />
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            [(ngModel)]="search" name="search" />
 
             <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
-            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="nombreA" name="nombreA" />
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            [(ngModel)]="nombreA" name="nombreA" />
 
             <input *ngIf="libro.opcion == '4'" type="search" class="form-control" placeholder="GENERO" aria-label="Search"
-            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="genero" name="genero" />
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            [(ngModel)]="genero" name="genero" />
 
             <input *ngIf="libro.opcion == '5'" type="search" class="form-control" placeholder="EDITORIAL" aria-label="Search"
-            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"[(ngModel)]="editorial" name="editorial" />
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            [(ngModel)]="editorial" name="editorial" />
             
 
             <div class="form-floating" style="width: 50%; height: -10%;">

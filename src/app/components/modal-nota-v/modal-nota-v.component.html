@@ -6,7 +6,8 @@
          NUEVA NOTA DE VENTA
     </a>             
 </nav>
-<form class="input-group" style="width: 400px">
+<form #reservasForm="ngForm">
+<form class="input-group" style="width: 400px" >
   <mat-form-field appearance="fill">
     <mat-label>TÍTULO</mat-label>
     <input type="text"
@@ -21,9 +22,12 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <div class="alert alert-danger" *ngIf="myControl.invalid && reservasForm.submitted">
+    La Nota de Venta No puede Estar Vacia!
+  </div>
 </form>
 
-<form >
+
  <div class="alert alert-info my-4" *ngIf="nota.detalles.length == 0">
   No hay Libros Asignados para la Nota De Venta. Debe agregar al menos uno!
  </div>
@@ -65,9 +69,9 @@
    
         </tbody>
     </table>
-    <a id="guardar" class="btn btn-info" type="submit" (click)="create()">
+    <button id="guardar" class="btn btn-info" type="submit" (click)="create(reservasForm)">
       Guardar
-    </a>
+    </button>
   </div>
 </form>
   </div>

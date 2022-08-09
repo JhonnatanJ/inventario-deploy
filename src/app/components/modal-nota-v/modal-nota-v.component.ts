@@ -32,7 +32,7 @@ export class ModalNotaVComponent implements OnInit {
 
   /////UDEMI FORM
   nota:NotaVenta=new NotaVenta();
-  titulo:string='Nueva NotaVenta';
+  titulo:string='NOTA DE VENTA';
   ///autocomplete
   myControl = new FormControl('');
   filteredOptions!: Observable<Libro[]>;
@@ -88,7 +88,7 @@ export class ModalNotaVComponent implements OnInit {
     let libro = event.option.value as Libro;
     console.log(libro);
 
-    if(libro.stock===0){
+    if(libro.stock===0 || libro.stock<0){
       Swal.fire('ERROR',`LIBRO CON STOCK EN CERO`,'warning')
       }
       else{
@@ -117,11 +117,25 @@ export class ModalNotaVComponent implements OnInit {
     }
 
     this.nota.detalles=this.nota.detalles.map((item:Detalle)=>{
-      if(isbn === item.libro.isbn){
-        item.cantidad=cantidad;
+
+      if(item.cantidad >= item.libro.stock ){
+        Swal.fire('ERROR',`LA CANTIDAD EXCEDE EL STOCK DISPONIBLE`,'warning')
+        --item.cantidad;
+      
       }
+      else{
+        if(isbn === item.libro.isbn){
+          item.cantidad=cantidad;
+        }
+      }
+      
       return item;
+
+    
+
     });
+  
+
   }
 
   existeLibro(isbn:string):boolean{
@@ -136,9 +150,17 @@ export class ModalNotaVComponent implements OnInit {
 
   incrementaCantidad(isbn:string):void{
     this.nota.detalles=this.nota.detalles.map((item:Detalle)=>{
+
+      if(item.cantidad>=item.libro.stock ){
+         Swal.fire('ERROR',`LA CANTIDAD EXCEDE EL STOCK DISPONIBLE`,'warning')
+         item.cantidad=item.libro.stock;
+      }
+      else{
       if(isbn === item.libro.isbn){
         ++item.cantidad;
       }
+    }
+
       return item;
     });
   }
@@ -147,8 +169,13 @@ export class ModalNotaVComponent implements OnInit {
     this.nota.detalles = this.nota.detalles.filter((item:Detalle)=> isbn !== item.libro.isbn);
   }
 
-  create():void{
+  create(reservasForm:any):void{
+
+    if(this.nota.detalles.length == 0){
+      this.myControl.setErrors({'invalid':true});
+    }
     
+    if(reservasForm.form.valid && this.nota.detalles.length > 0 ){
    this.nota.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
    console.log(this.nota);
     console.log(this.nota);
@@ -156,6 +183,7 @@ export class ModalNotaVComponent implements OnInit {
       Swal.fire(this.titulo,`CREADA CON EXITO`,'success');
       this.router.navigate(['/notas_de_venta']);
     });
+  }
       
   }
 

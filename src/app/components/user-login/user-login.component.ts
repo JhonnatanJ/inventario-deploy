@@ -30,7 +30,7 @@ export class UserLoginComponent implements OnInit {
     //console.log(JSON.parse(sessionStorage.getItem("token")));
     // if(sessionStorage.getItem("token")!=""){
       if(this.userloginService.isAuthenticated()){
-        Swal.fire({title:'Login',icon:'info',text:`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,timer:1200, showConfirmButton:false});
+        Swal.fire({title:'Inicio de Sesión',icon:'info',text:`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,timer:1200, showConfirmButton:false});
         this.userloginService.iniciar=true;
          this.router.navigate(['/lista']);
       //}
@@ -41,7 +41,7 @@ export class UserLoginComponent implements OnInit {
   login():void{
     console.log(this.cuenta);
     if(this.cuenta.email==null || this.cuenta.contrasena== null){
-      Swal.fire('Error Login','Email o Contraseña Vacias!','error')
+      Swal.fire('Error Inicio de Sesión','Email o Contraseña Vacias!','error')
       return;
     }
 
@@ -57,10 +57,10 @@ export class UserLoginComponent implements OnInit {
 
 
       this.router.navigate(['/lista']);
-      Swal.fire({title:'Login',icon:'success',text:`Bienvenido  ${cuenta.email}, has iniciado sesion con éxito!`, timer: 1500, showConfirmButton:false});
+      Swal.fire({title:'Inicio de Sesión',icon:'success',text:`Bienvenido  ${cuenta.email}, has iniciado sesión con éxito!`, timer: 1500, showConfirmButton:false});
     }, err=>{
      if(err.status ==400 || err.status==401){
-      Swal.fire('Error Login', 'Email o Contraseña Incorrectas!','error');
+      Swal.fire('Error Inicio de Sesión', 'Email o Contraseña Incorrectas!','error');
       this.userloginService.iniciar=false;
      }
       this.userloginService.iniciar=false;

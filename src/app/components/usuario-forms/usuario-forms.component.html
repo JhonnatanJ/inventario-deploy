@@ -1,93 +1,3 @@
-<style>
-  #contenedor {
-    margin-left: 30%;
-    margin-right: 25%;
-    margin-top: 20px;
-
-    border: 2px #194bf0 solid;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
-  .opciones {
-    display: flex;
-    justify-content: space-between;
-
-
-  }
-
-  .roles {
-    margin-top: 2%;
-    margin-left: -3%;
-    width: 230px;
-    margin-right: -5%;
-  }
-
-  .habilitar {
-    width: 230px;
-    margin-top: 2%;
-    margin-left: 7%;
-    margin-right: -8%;
-
-  }
-
-  .content {
-    font-weight: bolder;
-    color: black;
-
-  }
-
-  .content form {
-    margin-left: 15%;
-    margin-right: -5;
-
-  }
-
-  .ingresos {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .ingresos2 {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .ingresos3 {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .navbar.navbar-light {
-    background-color: #2d8fd4;
-
-
-  }
-
-  .navbar.navbar-light .navbar-brand {
-    margin-left: 35%;
-    /*NOTAS DE VENTA*/
-    font-weight: bold;
-  }
-
-  .entradas {
-    width: 75%;
-    margin-top: -5%;
-
-  }
-
-  .columna1 {
-    margin-right: 10%;
-    margin-left: -5%;
-    width: 230px;
-  }
-
-  .columna2 {
-    margin-right: -45%;
-
-    width: 230px;
-  }
-</style>
 
 <body>
   <div id="wrapper" class="toggled">
@@ -104,15 +14,18 @@
           </nav>
 
           <div class="content">
-            <form *ngIf="flag" class="col-8">
+            <form *ngIf="flag" class="col-8" #usuariosForm="ngForm">
               <div class="opciones">
                 <div class="roles">
-                  <div class="form-floating mb-3">
+                  <div class="form-floating mb-3" *ngIf="cuentaServicio.mostrarUs" >
                     <select id="rol" class="form-select" aria-label="Default select example" [(ngModel)]="rolE"
-                      name="rolE">
+                      name="rolE"  #rol="ngModel">
                       <option >ADMINISTRADOR</option>
                       <option >VENDEDOR</option>
                     </select>
+                    <div class="alert alert-danger" *ngIf="rol.invalid && rol.touched || rol.invalid && usuariosForm.submitted">
+                      Opción Requerida
+                    </div>
                     <label for="floatingInput">ROL</label>
                   </div>
                 </div>
@@ -120,11 +33,14 @@
 
                 <div class="habilitar">
                   <!--opcines de habilitar-->
-                  <div class="form-floating mb-3">
-                    <select class="form-select" [(ngModel)]="estado" name="estado">
+                  <div class="form-floating mb-3" *ngIf="cuentaServicio.mostrarUs">
+                    <select class="form-select" [(ngModel)]="estado" name="estado" #habilitar="ngModel">
                       <option selected>Habilitado</option>
                       <option>Deshabilitado</option>
                     </select>
+                    <div class="alert alert-danger" *ngIf="habilitar.invalid && habilitar.touched || habilitar.invalid && usuariosForm.submitted">
+                      Opción Requerida
+                    </div>
                     <label for="floatingInput">ESTADO</label>
                   </div>
                 </div>
@@ -135,14 +51,23 @@
                 <div class="ingresos">
                   <div class="columna1">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci">
+                      <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci" maxlength="10"
+                      onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                      required #cedula="ngModel">
+                      <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && usuariosForm.submitted">
+                        La Cédula Es Requerida
+                      </div>
                       <label for="floatingInput">CÉDULA</label>
                     </div>
                   </div>
                   <div class="columna2">
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="nombre" [(ngModel)]="cuenta.usuario.nombres"
-                        name="nombre">
+                        name="nombre"  onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                        required #nombre="ngModel">
+                        <div class="alert alert-danger" *ngIf="nombre.invalid && nombre.touched || nombre.invalid && usuariosForm.submitted">
+                          El Nombre Es Requerido
+                        </div>
                       <label for="floatingInput">NOMBRE</label>
                     </div>
                   </div>
@@ -151,14 +76,21 @@
                   <div class="columna1">
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="apellidos" [(ngModel)]="cuenta.usuario.apellidos"
-                        name="apellidos">
+                        name="apellidos"  onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                        required #apellido="ngModel">
+                        <div class="alert alert-danger" *ngIf="apellido.invalid && apellido.touched || apellido.invalid && usuariosForm.submitted">
+                          El Apellido Es Requerido
+                        </div>
                       <label for="floatingInput">APELLIDO</label>
                     </div>
                   </div>
                   <div class="columna2">
                     <div class="form-floating mb-3">
                       <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                        [(ngModel)]="cuenta.email" name="email">
+                        [(ngModel)]="cuenta.email" name="email"  required #correo="ngModel">
+                        <div class="alert alert-danger" *ngIf="correo.invalid && correo.touched || correo.invalid && usuariosForm.submitted">
+                          El Correo Es Requerido
+                        </div>
                       <label for="floatingInput">CORREO</label>
                     </div>
                   </div>
@@ -167,14 +99,21 @@
                   <div class="columna1">
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="telefono" [(ngModel)]="cuenta.usuario.telefono"
-                        name="telefono">
+                        name="telefono" maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                        required #telefono="ngModel">
+                        <div class="alert alert-danger" *ngIf="telefono.invalid && telefono.touched || telefono.invalid && usuariosForm.submitted">
+                          El Teléfono Es Requerido
+                        </div>
                       <label for="floatingInput">TELEFONO</label>
                     </div>
                   </div>
                   <div class="columna2">
                     <div class="form-floating mb-3">
                       <input type="password" [disabled]="cuentaServicio.habilitar" class="form-control" id="contrasena"
-                        [(ngModel)]="cuenta.contrasena" name="contrasena" >
+                        [(ngModel)]="cuenta.contrasena" name="contrasena"  required #password="ngModel" >
+                        <div class="alert alert-danger" *ngIf="password.invalid && password.touched || password.invalid && usuariosForm.submitted">
+                          La Contraseña Es Requerida
+                        </div>
                       <label for="floatingInput">CONTRASEÑA</label>
                     </div>
                   </div>
@@ -183,7 +122,7 @@
               <br>
               <button
                 style="background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219); margin-top: 1%; margin-left: 30%;"
-                type="submit" class="btn btn-primary" (click)='create()'
+                type="submit" class="btn btn-primary" (click)='create(usuariosForm)'
                 *ngIf="!cuenta.idCuenta else elseBlock ">Guardar</button>
 
               <button

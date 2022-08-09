@@ -31,7 +31,10 @@ export class UsuarioFormsComponent implements OnInit {
 
   titulo:string='USUARIO';
   Miformulario!:FormGroup;
-  constructor( public cuentaServicio:CuentaService,private router:Router,private activatedRoute:ActivatedRoute, private fb:FormBuilder) { 
+  constructor( public cuentaServicio:CuentaService,
+    private router:Router,
+    private activatedRoute:ActivatedRoute,
+    private fb:FormBuilder) { 
   /* */
   this.flag=true
   }
@@ -46,7 +49,7 @@ export class UsuarioFormsComponent implements OnInit {
 
    
     this.cargar();
-
+   //this.cuentaServicio.mostrarUs=true;
 
     
   }
@@ -76,7 +79,10 @@ export class UsuarioFormsComponent implements OnInit {
   }
 
 
-  create():void{
+  create(notasForm:any):void{
+
+    if(notasForm.form.valid ){
+
     if(this.rolE=='ADMINISTRADOR'){
       this.roles.nombre='ROLE_ADMINISTRADOR'
     }else{
@@ -98,6 +104,9 @@ export class UsuarioFormsComponent implements OnInit {
     (res=> this.router.navigate(['/usuarios']));
     
     console.log(this.cuenta);
+    
+  }
+
   }
   
 

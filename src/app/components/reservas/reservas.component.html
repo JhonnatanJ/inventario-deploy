@@ -1,106 +1,4 @@
-<style>
-#contenedor{
-        margin-left: 25%;
-        margin-right: 4%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-}
 
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-
-.row.g-3{
-    margin: 1%;
-    margin-top: 0%;
-    font-weight: bold;
-}
-.fecha{
-    margin: 1%;
-    font-weight: bold;
-    color: black;
-    margin-right: 5%;
-}
-
-.entrada {
-
-display: flex;
-justify-content: space-evenly;
-margin-top: -4%;
-margin-right: 10%;
-margin-left: 2%;
-
-}
-
-.entrada #fecha{
-display: flex;
-font-weight: bold;
-margin-left: 10%;
-
-}
-
-.entrada #fecha label{
-margin-right: 5%;
-margin-left: -40%;
-}
-
-.entrada #fecha input{
-height: 100%;
-width: 80%;
-}
-
-.table-responsive{
-    margin: 10px;
-} 
-
-a:hover{
-  background-color: rgb(208, 207, 197);
- }
-
- .botones a{
-  margin-left: 70%;
-  margin-top: 1%;
-  color: #1f2a4f;
-  border:#1f2a4f 2px solid;
-  font-weight: bold;
-  max-height: -10%;
-  max-width: 120%;
-  margin-right: 10%;
-
-}
-.botones a:hover{
-  background-color: rgb(134, 183, 222);
-}
-.entrada.botones{
-justify-content: space-evenly;
-}
-.table{
-  text-align: center;
-}
-.text-end{
-  text-align:right ;
-  padding: .5rem 7rem;
-  font-weight: bold;
-}
-.table input{
-  width: 20%;
-  margin-left: 40%;
-  padding-left: 0 ;
-  padding-right: 0;
-}
-
-.table-responsive #guardar{
- margin-left: 90%;
-}
-</style>
 <div id="contenedor">
     <!--CONTENIDO-->
     <nav class="navbar navbar-light ">
@@ -110,35 +8,56 @@ justify-content: space-evenly;
         </a>  
     </nav>
 
-<form action="">
+<form #notasForm="ngForm">
     <form class="row g-3">
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">NOMBRE</label>
-          <input type="text" class="form-control" id="nombre" [(ngModel)]="reserva.usuario.nombres" name="nombres">
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="reserva.usuario.nombres" name="nombres"
+          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          required #nombre="ngModel">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && nombre.touched || nombre.invalid && notasForm.submitted">
+            El Nombre Es Requerido
+          </div>
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">APELLIDO</label>
-          <input type="text" class="form-control" id="apellido" [(ngModel)]="reserva.usuario.apellidos" name="apellidos">
+          <input type="text" class="form-control" id="apellido" [(ngModel)]="reserva.usuario.apellidos" name="apellidos"
+          onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          required #apellido="ngModel">
+          <div class="alert alert-danger" *ngIf="apellido.invalid && apellido.touched || apellido.invalid && notasForm.submitted">
+            El Apellido Es Requerido
+          </div>
         </div>
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">CÉDULA</label>
-            <input type="text" class="form-control" id="cedula" [(ngModel)]="reserva.usuario.ci" name="ci">
+            <input type="text" class="form-control" id="cedula" [(ngModel)]="reserva.usuario.ci" name="ci"  maxlength="10"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            required #cedula="ngModel">
+            <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && notasForm.submitted">
+              La Cédula Es Requerida
+            </div>
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">TELÉFONO</label>
-            <input type="text" class="form-control" id="telefono" [(ngModel)]="reserva.usuario.telefono" name="telefono">
+            <input type="text" class="form-control" id="telefono" [(ngModel)]="reserva.usuario.telefono" name="telefono" maxlength="10"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            required #telefono="ngModel">
+            <div class="alert alert-danger" *ngIf="telefono.invalid && telefono.touched || telefono.invalid && notasForm.submitted">
+              El Teléfono Es Requerido
+            </div>
           </div>
           <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">ABONO</label>
-            <input type="number" class="form-control" id="abono" [(ngModel)]="reserva.abono" name="abono">
+            <label for="inputPassword4" class="form-label">ABONO ($)</label>
+            <input type="number" class="form-control" id="abono" [(ngModel)]="reserva.abono" name="abono"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="0">
           </div>
     </form>
 
-    <form class="input-group" style="width: 400px">
+    <form class="input-group" style="width: 400px;margin-left:20px;">
       <mat-form-field appearance="fill">
-        <mat-label>Libros</mat-label>
+        <mat-label  style="font-weight: bold;">Libros</mat-label>
         <input type="text"
-               placeholder="Pick one"
+               placeholder="Buscar"
                aria-label="Libros"
                matInput
                [formControl]="myControl"
@@ -149,11 +68,17 @@ justify-content: space-evenly;
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <div class="alert alert-danger" *ngIf="myControl.invalid && notasForm.submitted">
+        La Reserva No puede Estar Vacia!
+      </div>
       </form>
 
 
     <div class="table-responsive">
-        <table class="table">
+      <div class="alert alert-info my-4" *ngIf="reserva.detalleReservas.length == 0">
+        No hay Libros Asignados para la reserva. Debe agregar al menos uno!
+       </div>
+        <table class="table" *ngIf="reserva.detalleReservas.length > 0">
           <thead>
             <tr>
               <th scope="col">CODIGO</th>
@@ -175,9 +100,9 @@ justify-content: space-evenly;
               <td  ><input  min="1" type="number" value="{{p.cantidad}}"  class="form-control col-sm-4" (change)="actualizarCantidad(p.libro.isbn,$event)"></td>
             
               <td>{{p.libro.titulo}}</td>
-              <td > {{p.libro.precioUnitario}}</td>
+              <td >${{p.libro.precioUnitario}}</td>
              
-              <td id="subtotal">{{p.calcularTotal().toFixed(2)}}</td>
+              <td id="subtotal">${{p.calcularTotal().toFixed(2)}}</td>
             
               <td>
                 <a class="btn btn-danger" 
@@ -188,19 +113,13 @@ justify-content: space-evenly;
             </tr>      
             <tr>
               <td colspan="5" class="text-end">TOTAL $</td>
-              <td> {{reserva.calcularGranTotal().toFixed(2)}}</td>
+              <td> ${{reserva.calcularGranTotal().toFixed(2)}}</td>
             </tr>
             </tbody>
         </table>
-        <button id="guardar" class="btn btn-info" type="submit" (click)='create()' *ngIf="!reserva.idReserva else elseBlock ">
+        <button id="guardar" class="btn btn-info" type="submit" (click)='create(notasForm)'  style="font-weight: bold;" >
           Reservar
         </button>
-        <ng-template #elseBlock>
-          <button id="actualizar" class="btn btn-success" type="submit" >
-            Actualizar Reserva
-          </button>
-        </ng-template >
-
       </div>
     </form>     
 </div> <!--FIN CONTENIDO-->

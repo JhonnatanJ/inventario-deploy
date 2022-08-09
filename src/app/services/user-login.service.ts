@@ -115,40 +115,4 @@ obtenerDatosToken(accessToken:string):any{
 
   }
 
-
-
-
-/////*
-/*
-autenticar(signInData:DatosLogin):boolean{
-   if(this.checkCredentials(signInData)){
-      this.iniciar=true;//amge
-        this.router.navigate(['/lista']);//amge
-         return true;
-   }//amge}
-     this.iniciar=false;
-       return false;
-        }
-private checkCredentials(signInData:DatosLogin):boolean{
-  return this.checkLogin(signInData.getLogin())&& this.checkPassword(signInData.getPassword());
-}
-
-private checkLogin(login:string):boolean{
-  return login === this.mockUser.getLogin();
-}
-
-private checkPassword(password:string):boolean{
-  return password === this.mockUser.getPassword();
-}
-
-saliendo(){//logout amge
-  this.iniciar=false;
-  this.router.navigate(['/login'])
-}
-
-getIniciar():boolean{
-  return this.iniciar;
-}*/
-
-
 }

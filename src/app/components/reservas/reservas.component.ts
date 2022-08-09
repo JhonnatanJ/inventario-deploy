@@ -70,6 +70,10 @@ export class ReservasComponent implements OnInit {
     let libro = event.option.value as Libro;
     console.log(libro);
 
+    if(libro.stock===0 || libro.stock<0){
+      Swal.fire('ERROR',`LIBRO CON STOCK EN CERO`,'warning')
+      }else{
+
     if(this. existeLibro(libro.isbn)){
       this.incrementaCantidad(libro.isbn);
     }  else{
@@ -78,7 +82,7 @@ export class ReservasComponent implements OnInit {
       this.reserva.detalleReservas.push(nuevoDetalle);
        }
 
-   
+      }
     
     this.myControl.setValue('');
     event.option.focus();
@@ -98,9 +102,17 @@ export class ReservasComponent implements OnInit {
 
   incrementaCantidad(isbn:string):void{
     this.reserva.detalleReservas=this.reserva.detalleReservas.map((item:DetalleReserva)=>{
+
+      if(item.cantidad>=item.libro.stock){
+         Swal.fire('ERROR',`LA CANTIDAD EXCEDE EL STOCK DISPONIBLE`,'warning')
+         item.cantidad=item.libro.stock;
+      }
+      else{
       if(isbn === item.libro.isbn){
         ++item.cantidad;
       }
+    }
+
       return item;
     });
   }
@@ -113,9 +125,17 @@ export class ReservasComponent implements OnInit {
     }
 
     this.reserva.detalleReservas=this.reserva.detalleReservas.map((item:DetalleReserva)=>{
+
+      if(item.cantidad>=item.libro.stock){
+        Swal.fire('ERROR',`LA CANTIDAD EXCEDE EL STOCK DISPONIBLE`,'warning')
+       --item.cantidad
+      }else{
       if(isbn === item.libro.isbn){
         item.cantidad=cantidad;
       }
+
+    }
+
       return item;
     });
   }
@@ -124,7 +144,13 @@ export class ReservasComponent implements OnInit {
     this.reserva.detalleReservas = this.reserva.detalleReservas.filter((item:DetalleReserva)=> isbn !== item.libro.isbn);
   }
 
-  create():void{
+  create(notasForm:any):void{
+
+    if(this.reserva.detalleReservas.length == 0){
+      this.myControl.setErrors({'invalid':true});
+    }
+
+    if(notasForm.form.valid && this.reserva.detalleReservas.length > 0 ){
     this.reserva.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
     console.log(this.reserva);
      this.reservaService.create(this.reserva).subscribe(res=>{ 
@@ -134,7 +160,7 @@ export class ReservasComponent implements OnInit {
        //res=>this.router.navigate(['/notas_de_venta']))
    }
 
-
+  }
   
   
 }

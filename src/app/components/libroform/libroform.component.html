@@ -1,135 +1,4 @@
-<style>
-#contenedor{
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top:-5px ;
-         border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px; 
-    }
 
-  body {
-    overflow-x: hidden;
-  }
-   
-  #wrapper.toggled {
-    padding-left: 250px;
-  }  
-  
-  #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-  }
-  
-  #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-  }
-    
-  @media(min-width:768px) {
-    #wrapper {
-      padding-left: 0;
-    }
-    #wrapper.toggled {
-      padding-left: 250px;
-    }
-    #sidebar-wrapper {
-      width: 0;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-      width: 250px;
-    }
-    #page-content-wrapper {
-      padding: 20px;
-      position: relative;
-    }
-    #wrapper.toggled #page-content-wrapper {
-      position: relative;
-      margin-right: 0;
-    }
-  }
-    .content {
-      margin: 20px auto 32px;
-      padding: 0 10px;
-      max-width: 900px;
-      flex-direction: column;
-      align-items: center;
-      /*border:3px solid rgb(7, 32, 78);
-      border-radius:30px;*/
-    }
-    /*.content button{
-      background-color: red;
-      position:relative;
-      <div class="boton menos"></div>///menos
-    }*/
-    /*botone + -*/
-    .boton {
-  display:inline-block;
-  width:30px;
-  height:30px;
-  border-radius:100%; 
-  position:relative;
-}
-
-.boton.mas::before, .boton.menos::before {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:40%;
-  height:0;
-  border-top:3px solid #0a74bb;/*linea horizontal botones*/
-}
-
-.boton.mas::after {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:0;
-  height:40%;
-  border-left:3px solid #0a74bb;/*linea vertical  boton mas */
-}
-.boton.mas{
-  top: -10px;
-  left: 0%;
-  border:2px solid #6d6d6c;
-  }
-.boton.menos.btn .btn-link{
-  top: -50px;
-  left: 102%;
-  }
-  .boton.menos{
-    left:102%;
-    top: -35px;
-    border:2px solid #6d6d6c;
-    background:#ffffff;/*fondo boton menos*/
-  }
-  .dropdown-menu{
-    padding: 10%;
-    width: 110%;
-  }
-  .navbar.navbar-light{
-    background-color: #2d8fd4;
-   }
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 35%;/*NOTAS DE VENTA*/
-    font-weight: bold;   
-}
-  
-.content form{
-  margin-left: 15%;
-  margin-right:-8;
-}
-.form-floating.mb-3{
-  font-weight: bold;
-}
-  </style>
 <body>
   <div id="wrapper" class="toggled">  
     <div id="page-content-wrapper">
@@ -151,7 +20,7 @@
               color="#fff"
               type="ball-scale-multiple"
             >
-              <p style="font-size: 20px; color: white">Loading Imagen...</p>
+              <p style="font-size: 20px; color: white">Loading Imágen...</p>
             </ngx-spinner>
             <!-- (ngSubmit)="onUpload()" -->
           <form class="col-8"[formGroup]="Miformulario"(ngSubmit)="onSubmit(Miformulario.value)"  novalidate enctype="multipart/form-data"><!-- -->
@@ -161,75 +30,101 @@
               <button  class="btn btn-outline-danger" [disabled]="!imagen" (click)="reset()"><i class="bi bi-arrow-clockwise"></i>Reset</button>
               <!-- <button class="btn btn-outline-secondary" type="button" id="Imagen">Button</button> -->
             </div>
-            <div *ngIf="imagen" class="mt-5">
-              <h5>NUEVA PORTADA:</h5>
+            <div *ngIf="imagen" class="mt-5" style="margin-left: 40%;">
+              <h4  style="font-weight: bold ;">NUEVA PORTADA:</h4>
               <div>
                 <img class="image-thumbnail" style="max-width: 100px;" [src]="imagenMin" >
               </div>
             </div>
 
-            <div *ngIf="this.libro.imagen.id" class="mt-5">
-              <h5>PORTADA ACTUAL:</h5>
+            <div *ngIf="this.libro.imagen.id" class="mt-5" style="margin-left: 40%;">
+              <h4 style="font-weight: bold ;">PORTADA ACTUAL:</h4>
               <div>
                 <img  class="image-thumbnail" style="max-width: 100px;" src="{{this.libro.imagen.imagenUrl}}" >
               </div>
             </div>
-            
-            
+                      
             <br>
+
+            <div class="seccion1">
             <div class="form-floating mb-3">                  
-                  <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn">
+                  <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn" 
+                  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="13">
+                  <div class="alert alert-danger" *ngIf="isbn.invalid && isbn.touched">
+                    ISBN Requerido
+                  </div>
                   <label for="isbn" class="form-label">ISBN</label>
               </div>   
 
               <div class="form-floating mb-3">                      
                   <input  type="text" class="form-control"  id="titulo" formControlName="titulo" >
-                  <label for="titulo" class="form-label">TITULO</label>
+                  <div class="alert alert-danger" *ngIf="titulo.invalid && titulo.touched">
+                    Titulo Requerido
+                  </div>
+                  <label for="titulo" class="form-label">TÍTULO</label>
               </div>  
+            </div>
 
-              <div class="form-floating mb-3 " disabled style=" margin-right:250px">
+            <div class="seccion2">
+              <div class="form-floating mb-3 " disabled style="min-width: 50px;max-width: 50%;">
                 <input min="0" type="number" class="form-control"  id="stock" formControlName="stock"  >
+                <div class="alert alert-danger" *ngIf="stock.invalid && stock.touched">
+                  Stock Requerido
+                </div>
                 <label for="stock" class="form-label">STOCK ACTUAL</label>
               </div> 
 
-
               <div class="form-floating mb-3">              
                 <input min="1" type="number" class="form-control"  id="precioUnitario" formControlName="precioUnitario" >
+                <div class="alert alert-danger" *ngIf="precioUnitario.invalid && precioUnitario.touched">
+                  Precio Unitario Requerido
+                </div>
                 <label for="precioUnitario" class="form-label">PRECIO UNITARIO ($)</label>
               </div>
-              
+            </div>
 
                 <!--AUTOR-->
               <div class="mb-3">
-                      <label for="autor" class="form-label">Autor(es)</label>
+                      <label for="autor" class="form-label">AUTOR(ES)</label>
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro"> <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
-                        </div>
+                        </div>                       
                     </div>
+                    <!-- <div class="alert alert-danger" *ngIf="autor.invalid && autor.touched">
+                      Autor Requerido
+                    </div> -->
                       <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
               </div> 
                   <!--FIN AUTOR-->
 
                   <!--GENERO-->                 
                   <div class="mb-3">
-                    <label for="autor" class="form-label">Genero(s)</label>
+                    <label for="autor" class="form-label">GÉNERO(S)</label>
                     <div formArrayName="generos">
                         <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
                           <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" ><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
                         </div>
+                       
                       </div>
+                      <!-- <div class="alert alert-danger" *ngIf="genero.invalid && genero.touched">
+                        Genero Requerido
+                       </div> -->
                       <a class=" boton mas btn btn-link" (click)="addGenero()"></a>
                    </div> 
                   <!--FIN GENERO-->
                     <!--EDITORIAL-->
                     <div class="mb-3">
-                      <label for="editorial" class="form-label">Editorial(es)</label>
+                      <label for="editorial" class="form-label">EDITORIAL(ES)</label>
                       <div formArrayName="editoriales">
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
                             <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" ><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
                           </div>
+                          
                         </div>
+                        <!-- <div class="alert alert-danger" *ngIf="editorial.invalid && editorial.touched">
+                          Editorial Requerida
+                        </div> -->
                         <a class=" boton mas btn btn-link" (click)="addEditorial()"></a>
                      </div> 
                     <!--FIN EDITORIAL-->
@@ -240,17 +135,18 @@
                   </div> 
                        
             <br>
-            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-top: -5%; margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock">Guardar</button>
+            <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock" 
+            [disabled]="!Miformulario.valid" >Guardar</button>
       
-            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18);margin-top: -5%; margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
+            <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>
 
-            <div class="form-floating mb-3 " style="top: -685px; margin-left:250px">
+            <div class="form-floating mb-3 " style="top: -685px;min-width: 50px;max-width: 50%; margin-left: 300px ;">
               <input min="0" type="number" class="form-control"  id="nuevostock" [(ngModel)]="nuevoS" [ngModelOptions]="{standalone: true}">
               <label for="nuevostock" class="form-label">NUEVO STOCK</label>
             </div> 
 
-            <button style="margin-top: -5%; margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
+            <button style="margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
           </ng-template>
           </form>
         </div> 

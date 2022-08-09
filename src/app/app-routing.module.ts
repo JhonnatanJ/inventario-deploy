@@ -23,7 +23,6 @@ const routes: Routes = [
   {path:'nueva_nota_de_venta',component:ModalNotaVComponent},
   {path:'reservas',component:ListReservaComponent},
   {path:'nueva_reserva',component:ReservasComponent},
-  {path:'reservas/:id',component:ListReservaComponent},
 ];
 
 @NgModule({

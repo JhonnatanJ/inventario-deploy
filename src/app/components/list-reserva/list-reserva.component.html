@@ -1,93 +1,4 @@
 
-<style>
-    #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.input-group{
-    margin: 10px;
-    
-}
-.input-group button{
-    left: 0;
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color:darkblue ;
-    color:white;
-    margin-top: 0;
-    height: 37px;
-}
-.table-responsive{
-    margin: 10px;
-}
-thead tr{
-    background-color: #2d8fd4;
-    border: #194bf0 2px solid;
-}
-table th{
-    text-align: center; /*titulos*/
-}
-table tr{     
-  text-align: center; /*filas*/
-}
-table #botones{
-  text-align: center;
-}
-
-.botonEliminar a{     
-     border: 2px rgb(238, 71, 20) solid;
-     margin-left: 60px;
-     margin-top: -1px;
-           
-   }
-   .botonAumentar a{   
-    /* border: 2px rgb(118, 130, 239) solid; */
-     margin-left: 10px;
-     margin-top: 0px;
-     font-size:x-large;
-}
-a:hover{
-  background-color: rgb(208, 207, 197);
- }
- /***/
- .oscuro .modal-content {
-    background-color: #021f2e;
-    color: white;
-  }
-  .oscuro .close {
-    color: white;
-  }
-
-.azul {
-    background-color: #0fa1eb;
-  }
-  .filtrar{
-    margin: 10px;
-    display: flex;
-    width: 50%;
- 
-}
-</style>
 <app-detalle-reserva *ngIf="reservaSeleccionada" [reserva]="reservaSeleccionada" style="display:block"></app-detalle-reserva>
 <div id="contenedor">
             <!--CONTENIDO-->          
@@ -102,12 +13,14 @@ a:hover{
           <div class="filtrar">
             
             <input *ngIf="opcion == '1'" type="search" class="form-control" placeholder="ID DE RESERVA" aria-label="Search"
-            [(ngModel)]="idR" name="idR" />
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="idR" name="idR" />
 
             <input *ngIf="opcion == '2'" type="search" class="form-control" placeholder="CLIENTE" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="search" name="search" />
 
             <input *ngIf="opcion == '3'" type="search" class="form-control" placeholder="VENDEDOR" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="vendedor" name="vendedor" />
             
             <input *ngIf="opcion == '4'" type="date" id="start"  class="form-control"  [(ngModel)]="fecha" name="fecha"
@@ -140,7 +53,7 @@ a:hover{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr  *ngFor="let r of reservas | paginate: { itemsPerPage: 5, currentPage: page } | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor | bReservaFecha:fecha" >
+                    <tr  *ngFor="let r of reservas | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor | bReservaFecha:fecha | paginate: { itemsPerPage: 5, currentPage: page } " >
                       <th scope="row">{{r.idReserva}}</th>
                       <td>{{r.fechaCreacion}}</td>
                       <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>

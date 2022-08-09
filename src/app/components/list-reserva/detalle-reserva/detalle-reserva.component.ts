@@ -34,9 +34,20 @@ export class DetalleReservaComponent implements OnInit {
   suma(){
 
     this.reservas.abono=this.reservas.abono+this.nuevoA;
+    if(this.nuevoA>this.reserva.saldo){
+      Swal.fire('CUIDADO',`EL ABONO HA EXCEDIDO EL SALDO`,'warning')
+    }else{
+
+    if(this.nuevoA==this.reserva.saldo || this.nuevoA<this.reserva.saldo){
+
+      if(this.nuevoA==this.reserva.saldo){  Swal.fire('FELICIDADES',`EL SALDO HA SIDO COMPLETADO`,'info') }
+    
     console.log(this.reservas)
     this.reservaservice.update(this.reservas.idReserva,this.reservas).subscribe(
       r=>this.router.navigate(['/reservas'])   )
+    }
+
+    }
   }
 
   cerrarModal(){

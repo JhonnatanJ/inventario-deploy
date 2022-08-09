@@ -16,6 +16,7 @@ import { UserLoginService } from './user-login.service';
 export class CuentaService {
  // cuenta!:Cuenta;
  public habilitar:boolean=false;///
+ public mostrarUs:boolean=true;
   private url:string="http://localhost:8088/geolib/cuentas";
   private urlRol:string="http://localhost:8088/geolib/roles";
   

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserLoginService } from 'src/app/services/user-login.service';
-import { FormControl,FormGroup,FormBuilder, FormArray } from '@angular/forms';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import Swal from 'sweetalert2';
+import { CuentaService } from 'src/app/services/cuenta.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  Loginformulario!: FormGroup;
+ 
  bandera=true;
-  constructor(private router:Router,public userloginService:UserLoginService,private fb:FormBuilder) { }
+  constructor(private router:Router,public userloginService:UserLoginService, public cuentaService:CuentaService) { }
 
   logout():void{
     let username=this.userloginService.cuenta.email;
@@ -24,13 +24,7 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
-   
-  }
-  //const autor=new Autor();
-
-  onSubmit(){
-    
-    ////ojo
+    //this.cuentaService.mostrarUs=true;
   }
 
   formulario(){
@@ -44,9 +38,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["login"])
     this.bandera=false;
   }
-  // logout1(){
-  //   this.userloginService.saliendo();//amage y real
-  // }
+ 
   usuarios(){
     this.router.navigate(["usuarios"])
   }

@@ -1,70 +1,4 @@
 
-<style>
-    #contenedor{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-top:20px ;
-        border: 50px;
-        border:2px #194bf0 solid;       
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-.navbar.navbar-light{
-    background-color: #2d8fd4;
-
-}
-
-.navbar.navbar-light .navbar-brand {
-    margin-left: 10px;/*NOTAS DE VENTA*/
-    font-weight: bold;
-}
-.btn.btn-info{
-    margin-right: 10px;/*Boton nuevo*/
-    font-weight: bold;
-    color: black;
-}
-.filtrar{
-    margin: 10px;
-    display: flex;
-    width: 50%;
- 
-}
-
-
-.table-responsive{
-    margin: 10px;
-    
-}
-thead tr{
-    background-color: #2d8fd4;
-    border: #194bf0 2px solid;
-}
-table th{
-    text-align: center; /*titulos*/
-}
-table tr{     
-  text-align: center; /*filas*/
-}
-table #botones{
-  text-align: center;
-}
-
-.botonEditar a{     
-     border: 2px burlywood solid;
-     margin-left: 60px;
-     margin-top: 0px;
-           
-   }
-   .botonEliminar a{   
-     border: 2px red solid;
-     margin-right: 40px;
-      margin-top: -66px;
-}
-a:hover{
-  background-color: rgb(208, 207, 197);
- }
-</style>
   <div id="contenedor">
           <nav class="navbar navbar-light ">
             <a  class="navbar-brand" >
@@ -74,19 +8,23 @@ a:hover{
           
         <div class="filtrar">
             
-            <input *ngIf="libro.opcion == '1'" type="search" class="form-control" placeholder="ISBN" aria-label="Search"
-            [(ngModel)]="isbn" name="isbn" />
+            <input *ngIf="libro.opcion == '1'" type="search" class="form-control" placeholder="ISBN" aria-label="Search" maxlength="13"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" [(ngModel)]="isbn" name="isbn" />
 
-            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TITULOS" aria-label="Search"
+            <input *ngIf="libro.opcion == '2'" type="search" class="form-control" placeholder="TÍTULOS" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="search" name="search" />
 
             <input *ngIf="libro.opcion == '3'" type="search" class="form-control" placeholder="AUTOR" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="nombreA" name="nombreA" />
 
             <input *ngIf="libro.opcion == '4'" type="search" class="form-control" placeholder="GENERO" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="genero" name="genero" />
 
             <input *ngIf="libro.opcion == '5'" type="search" class="form-control" placeholder="EDITORIAL" aria-label="Search"
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || event.charCode == 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             [(ngModel)]="editorial" name="editorial" />
             
 
@@ -94,9 +32,9 @@ a:hover{
             <select class="form-select" aria-label="Default select example" [(ngModel)]="libro.opcion" name="libros" >
        
               <option value="1">ISBN</option>
-              <option value="2">TITULOS</option>
+              <option value="2">TÍTULOS</option>
               <option value="3">AUTOR</option>
-              <option value="4">GENERO</option>
+              <option value="4">GÉNERO</option>
               <option value="5">EDITORIAL</option>
             </select>
             <label for="floatingTextarea">BUSCAR POR:</label>
@@ -111,26 +49,39 @@ a:hover{
                   <!-- <th scope="col">#</th> -->
                   <th scope="col">Imágen</th>
                   <th scope="col">ISBN</th>
-                  <th scope="col">Titulo</th>
+                  <th scope="col">Título</th>
                   <th scope="col">Autor</th>                
                   <th scope="col">Stock</th>
                   <th scope="col">Precio Unitario</th>
-                  <th scope="col">Genero</th>
+                  <th scope="col">Género</th>
                   <th scope="col">Editorial</th>
-                  <th style="text-align: center;" scope="col">Accion</th>
+                  <th style="text-align: center;" scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros | paginate: { itemsPerPage: 5, currentPage: page } | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial;let i=index ">
+                <tr *ngFor="let lib of libros  | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial | paginate: { itemsPerPage: 5, currentPage: page};let i=index ">
                   <!-- <th scope="row">{{i+1}}</th> -->
+                  <!-- | paginate: { itemsPerPage: 5, currentPage: page} -->
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
                   <td>{{lib.isbn}}</td>
                   <td>{{lib.titulo}}</td>
-                  <td *ngFor="let au of lib.autores">{{au.nombre}}</td>                
+                  <td >
+                    <div *ngFor="let au of lib.autores">
+                      {{au.nombre}}
+                    </div>
+                  </td>                
                   <td>{{lib.stock}}</td>
                   <td>${{lib.precioUnitario.toFixed(2)}}</td>
-                  <td *ngFor="let ge of lib.generos">{{ge.nombre}}</td>    
-                  <td *ngFor="let ed of lib.editoriales">{{ed.nombre}}</td>                     
+                  <td>
+                     <div *ngFor="let ge of lib.generos">
+                      {{ge.nombre}}
+                     </div>
+                  </td>    
+                  <td >
+                    <div *ngFor="let ed of lib.editoriales">
+                      {{ed.nombre}}
+                    </div>
+                   </td>                     
                   <td id="botones">
                     <div class="botonEditar">
                     <a (click)="libroService.habilitar=!libroService.habilitar" class="btn btn-default" type="button" [routerLink]="['/formulario',lib.isbn]" >
@@ -144,6 +95,15 @@ a:hover{
                   </div>                
                   </td>
                  </tr>
+                 <!-- <tr>
+                  <td>
+                    <button class="btn btn-default" (click)="prevPage()">  <i class="bi bi-arrow-left-circle-fill"></i> </button>
+                  </td>
+                  <td>
+                  &nbsp;
+                  <button class="btn btn-default" (click)="nextPage()"   > <i class="bi bi-arrow-right-circle-fill"></i> </button>
+                </td>
+                 </tr> -->
               </tbody>              
             </table>
             </div><!--TABLA RESPONSIVE-->
@@ -151,7 +111,7 @@ a:hover{
             <pagination-controls 
             (pageChange)="page = $event"
             previousLabel="Anterior"
-            nextLabel="Siguiente"
+            nextLabel="Siguiente "
             ></pagination-controls>
             <!--FINAL CONTENIDO-->
        

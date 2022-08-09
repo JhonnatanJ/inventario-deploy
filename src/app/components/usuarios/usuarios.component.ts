@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
     c =>{this.cuentas=c; console.log(this.cuentas)}
    );
 
-   this.cuentaService.habilitar=false;
+  //  this.cuentaService.habilitar=false;
   }
   delete(cuenta:Cuenta):void{
 

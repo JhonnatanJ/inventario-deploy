@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class LibroComponent implements OnInit {
   public page!:number;
+  
   autor!:Autor[];
    libros:Libro[]=[];
   libro:Libro=new Libro()
@@ -34,9 +35,7 @@ export class LibroComponent implements OnInit {
  
   }
 
-  
-
-  
+ 
   delete(libro:Libro):void{
 
     Swal.fire({

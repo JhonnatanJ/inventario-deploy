@@ -58,6 +58,7 @@ h1 {
   </div>
 	<form class="custom-form mt-5" method="post"  > <!--(ngSubmit)="onSubmit(signInform)" #signInform="ngForm" -->
 	  <h1>Iniciar Sesión</h1>
+
 	  <input [(ngModel)]="cuenta.email"
 		type="email"placeholder="Email" id="inputLogin" class="form-control" name="login" ngModel required autofocus/>
 	  <input [(ngModel)]="cuenta.contrasena"

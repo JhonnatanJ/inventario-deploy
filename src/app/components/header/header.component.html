@@ -2,20 +2,23 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">GEOMUNDO</a>
+    <a href="">
+      <img src="../assets/icon_Logo_dark.png" alt="logo libreria" width="40%">
+    </a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
         <li class="nav-item dropdown">
           <a  class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{userloginService.cuenta.email}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a (click)="cuentaService.habilitar=true" (click)="cuentaService.mostrarUs=false" class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
-            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
+            <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
             </ul>
         </li>
       </ul>
@@ -36,13 +39,22 @@
         Inicio</li></a>
       <a [routerLink]="['/notas_de_venta']"><li>
         <i class="bi bi-receipt"></i>
-        Ventas</li></a>
+        Ventas</li>
+      </a>
       <a [routerLink]="['/reservas']"><li>
         <i class="bi bi-journal-bookmark"></i>
-        Reservas</li></a>
-      <a *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')" href="#"><li>
-        <i class="bi bi-graph-up-arrow"></i>
-        Reportes</li></a>
+        Reservas</li>
+      </a>
+      <li *ngIf="userloginService.hasRole('ROLE_ADMINISTRADOR')"  class="nav-item dropdown" id="submenu">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-graph-up-arrow"></i>
+          Reportes
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" [routerLink]="['/reporte_diario']">Reporte Diario</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/reporte']">Reportes Personalizados</a></li>
+         </ul>
+      </li>
       <li class="nav-item dropdown" id="submenu">
         <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-book"></i>

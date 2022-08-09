@@ -24,7 +24,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(){
     
       if(this.userloginService.isAuthenticated()){
-        Swal.fire('Login',`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,'info' );
+        Swal.fire({title:'Inicio de Sesión',icon:'info',text:`Bienvenido ${this.userloginService.cuenta.email} ya estas autenticado!`,timer:1200, showConfirmButton:false});
         this.userloginService.iniciar=true;
          this.router.navigate(['/lista']);
       //}
@@ -35,7 +35,7 @@ export class UserLoginComponent implements OnInit {
   login():void{
     
     if(this.cuenta.email==null || this.cuenta.contrasena== null){
-      Swal.fire('Error Login','Email o Contraseña Vacias!','error')
+      Swal.fire('Error Inicio de Sesión','Email o Contraseña Vacias!','error')
       return;
     }
 
@@ -51,10 +51,10 @@ export class UserLoginComponent implements OnInit {
 
 
       this.router.navigate(['/lista']);
-      Swal.fire('Login',`Bienvenido  ${cuenta.email}, has iniciado sesion con éxito!`, 'success' );
+      Swal.fire({title:'Inicio de Sesión',icon:'success',text:`Bienvenido  ${cuenta.email}, has iniciado sesión con éxito!`, timer: 1500, showConfirmButton:false});
     }, err=>{
      if(err.status ==400 || err.status==401){
-      Swal.fire('Error Login', 'Email o Contraseña Incorrectas!','error');
+      Swal.fire('Error Inicio de Sesión', 'Email o Contraseña Incorrectas!','error');
       this.userloginService.iniciar=false;
      }
       this.userloginService.iniciar=false;

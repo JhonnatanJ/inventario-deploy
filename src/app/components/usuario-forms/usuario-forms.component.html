@@ -53,10 +53,16 @@
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="ci" [(ngModel)]="cuenta.usuario.ci" name="ci" maxlength="10"
                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-                      required #cedula="ngModel">
-                      <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && usuariosForm.submitted">
+                      required #cedula="ngModel" (change)="validadorCedula(cuenta.usuario.ci)" >
+                      <!-- (change)="validadorCedula(cuenta.usuario.ci)" -->
+                      <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && usuariosForm.submitted ">
                         La Cédula Es Requerida
                       </div>
+                      <div class="alert alert-danger" *ngIf="!validador&& cedula.touched" >
+                        Cédula Invalida
+                      </div>
+
+
                       <label for="floatingInput">CÉDULA</label>
                     </div>
                   </div>

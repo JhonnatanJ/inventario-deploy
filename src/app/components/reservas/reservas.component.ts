@@ -154,7 +154,7 @@ export class ReservasComponent implements OnInit {
     this.reserva.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
     console.log(this.reserva);
      this.reservaService.create(this.reserva).subscribe(res=>{ 
-       Swal.fire(this.titulo,`creada con extito`,'success');
+       Swal.fire(this.titulo,`CREADO CON ÉXITO`,'success');
        this.router.navigate(['/reservas']);
      });
        //res=>this.router.navigate(['/notas_de_venta']))

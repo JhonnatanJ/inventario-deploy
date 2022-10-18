@@ -1,4 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
+import { ElementSchemaRegistry, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -139,8 +139,37 @@ export class UsuarioFormsComponent implements OnInit {
       u=>this.router.navigate(['/usuarios']));
       Swal.fire(this.titulo,`EDITADO CON EXITO`,'success');
   }
+public validador;
+validadorCedula(cedula:string){
+let cedulaCorrecta=false;
+if(cedula.length==10){
+  let tercerDig =parseInt(cedula.substring(2,3));
+  if(tercerDig<6){
+     let coefValCedula =[2, 1, 2, 1, 2, 1, 2, 1, 2];
+     let verificador=  parseInt(cedula.substring(9, 10));
+     let suma:number=0;
+     let digito:number=0;
+     for(let i=0;i<(cedula.length-1);i++){
+      digito=parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+      suma+=((parseInt((digito % 10)+'') + (parseInt((digito / 10)+''))));
+     }
+     suma= Math.round(suma);
+     if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10)== verificador)) {
+      cedulaCorrecta = true;
+     } else if ((10 - (Math.round(suma % 10))) == verificador) {
+      cedulaCorrecta = true;
+  } else{
+    cedulaCorrecta=false;
+  }
+  }else{
+    cedulaCorrecta = false;
+   }
+} else {
+  cedulaCorrecta = false;
+}
+this.validador= cedulaCorrecta;
 
-  
+}  
  
 
 }

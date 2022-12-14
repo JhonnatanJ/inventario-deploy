@@ -88,13 +88,14 @@
                       <label for="autor" class="form-label">AUTOR(ES)</label>
                     <div formArrayName="autores">
                         <div *ngFor="let item of getnombreautor.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                          <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro"> <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a>
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre" [value]=" this.autorLibro">
+                          <!-- <a class=" boton menos btn btn-link" (click)="removeAutor(pointIndex)"></a> -->
                         </div>                       
                     </div>
                     <!-- <div class="alert alert-danger" *ngIf="autor.invalid && autor.touched">
                       Autor Requerido
                     </div> -->
-                      <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a>
+                      <!-- <a class=" boton mas btn btn-link" (click)="addnombreAutor()"></a> -->
               </div> 
                   <!--FIN AUTOR-->
 
@@ -103,14 +104,15 @@
                     <label for="autor" class="form-label">GÉNERO(S)</label>
                     <div formArrayName="generos">
                         <div *ngFor="let item of getGeneros.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                          <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" ><a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a>
+                          <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.generoLibro" >
+                          <!-- <a class=" boton menos btn btn-link" (click)="removeGenero(pointIndex)"></a> -->
                         </div>
                        
                       </div>
                       <!-- <div class="alert alert-danger" *ngIf="genero.invalid && genero.touched">
                         Genero Requerido
                        </div> -->
-                      <a class=" boton mas btn btn-link" (click)="addGenero()"></a>
+                      <!-- <a class=" boton mas btn btn-link" (click)="addGenero()"></a> -->
                    </div> 
                   <!--FIN GENERO-->
                     <!--EDITORIAL-->
@@ -118,14 +120,15 @@
                       <label for="editorial" class="form-label">EDITORIAL(ES)</label>
                       <div formArrayName="editoriales">
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                            <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" ><a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a>
+                            <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" >
+                            <!-- <a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a> -->
                           </div>
                           
                         </div>
                         <!-- <div class="alert alert-danger" *ngIf="editorial.invalid && editorial.touched">
                           Editorial Requerida
                         </div> -->
-                        <a class=" boton mas btn btn-link" (click)="addEditorial()"></a>
+                        <!-- <a class=" boton mas btn btn-link" (click)="addEditorial()"></a> -->
                      </div> 
                     <!--FIN EDITORIAL-->
                 <!-- Message input -->

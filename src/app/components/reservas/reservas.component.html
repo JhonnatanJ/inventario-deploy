@@ -32,10 +32,14 @@
             <label for="inputEmail4" class="form-label">CÉDULA</label>
             <input type="text" class="form-control" id="cedula" [(ngModel)]="reserva.usuario.ci" name="ci"  maxlength="10"
             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-            required #cedula="ngModel">
+            required #cedula="ngModel" (change)="validadorCedula(reserva.usuario.ci)">
             <div class="alert alert-danger" *ngIf="cedula.invalid && cedula.touched || cedula.invalid && notasForm.submitted">
               La Cédula Es Requerida
             </div>
+            <div class="alert alert-danger" *ngIf="!validador&& cedula.touched" >
+              Cédula Invalida
+            </div>
+
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">TELÉFONO</label>
@@ -49,7 +53,8 @@
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">ABONO ($)</label>
             <input type="number" class="form-control" id="abono" [(ngModel)]="reserva.abono" name="abono"
-            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="0">
+            onkeypress="return event.charCode != 45 && event.charCode != 43" min="0" max="99999"
+            onKeyDown="if(this.value.length==5 && event.keyCode!=8) return false;">
           </div>
     </form>
 

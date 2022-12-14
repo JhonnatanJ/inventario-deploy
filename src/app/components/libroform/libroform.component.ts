@@ -159,7 +159,7 @@ export class LibroformComponent implements OnInit {
           u=>this.router.navigate(['/lista']));
       }
 
- //AUTOR
+ //AUTOR///BORRAR
   get getnombreautor(){
     return this.Miformulario.get('autores') as FormArray;
   }
@@ -200,7 +200,7 @@ export class LibroformComponent implements OnInit {
     const control=<FormArray>this.Miformulario.controls['editoriales'];
     control.removeAt(index);
   }
-  //FIN EDITORIAL
+  //FIN EDITORIAL////BORRAR
 
   ////IMAGEN
   onFileChange(event:any){//ojo any

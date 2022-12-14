@@ -30,6 +30,10 @@ export class ListReservaComponent implements OnInit {
     this.reservaService.getAll().subscribe((r=>{this.reservas=r}));
   }
 
+  cargarDatos():void{
+    this.reservaService.getAll().subscribe((r=>{this.reservas=r}));
+  }
+
   openSM(reserva:Reserva)
   {
     this.reservaSeleccionada=reserva;

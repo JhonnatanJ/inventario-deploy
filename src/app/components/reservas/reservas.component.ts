@@ -20,7 +20,8 @@ import { ModalReservaService } from '../list-reserva/detalle-reserva/modal-reser
 })
 export class ReservasComponent implements OnInit { 
   libros!:Libro[];
-  libro:Libro=new Libro();
+  
+  
   total!:number;
   reservas!:Reserva[];
   reserva= new Reserva();
@@ -150,6 +151,16 @@ export class ReservasComponent implements OnInit {
       this.myControl.setErrors({'invalid':true});
     }
 
+    if(this.reserva.abono==this.reserva.calcularGranTotal()){
+      Swal.fire('ERROR',`EL ABONO ES IGUAL AL TOTAL, PORFAVOR CREE UNA NOTA DE VENTA`,'warning');
+    }else{
+    
+
+    if(this.reserva.abono>this.reserva.calcularGranTotal()){
+      Swal.fire('ERROR',`El ABONO NO PUEDE EXCEDER EL TOTAL`,'warning');
+    }
+    else{
+///CREAR RESERVA CON EXITO////
     if(notasForm.form.valid && this.reserva.detalleReservas.length > 0 ){
     this.reserva.cuenta.idCuenta= JSON.parse(sessionStorage.getItem("cuenta")).idCuenta;
     console.log(this.reserva);
@@ -158,9 +169,44 @@ export class ReservasComponent implements OnInit {
        this.router.navigate(['/reservas']);
      });
        //res=>this.router.navigate(['/notas_de_venta']))
-   }
+   }}
+//////
+  }
 
   }
+/////control cedula
+public validador;
+validadorCedula(cedula:string){
+let cedulaCorrecta=false;
+if(cedula.length==10){
+  let tercerDig =parseInt(cedula.substring(2,3));
+  if(tercerDig<6){
+     let coefValCedula =[2, 1, 2, 1, 2, 1, 2, 1, 2];
+     let verificador=  parseInt(cedula.substring(9, 10));
+     let suma:number=0;
+     let digito:number=0;
+     for(let i=0;i<(cedula.length-1);i++){
+      digito=parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+      suma+=((parseInt((digito % 10)+'') + (parseInt((digito / 10)+''))));
+     }
+     suma= Math.round(suma);
+     if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10)== verificador)) {
+      cedulaCorrecta = true;
+     } else if ((10 - (Math.round(suma % 10))) == verificador) {
+      cedulaCorrecta = true;
+  } else{
+    cedulaCorrecta=false;
+  }
+  }else{
+    cedulaCorrecta = false;
+   }
+} else {
+  cedulaCorrecta = false;
+}
+this.validador= cedulaCorrecta;
+
+}  
+
   
   
 }

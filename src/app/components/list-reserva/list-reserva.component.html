@@ -58,8 +58,8 @@
                       <td>{{r.fechaCreacion}}</td>
                       <td>{{r.cuenta.usuario.nombres}} {{r.cuenta.usuario.apellidos}}</td>
                       <td>{{r.usuario.nombres}} {{r.usuario.apellidos}}</td>
-                      <td>${{r.abono}}</td>
-                      <td>${{r.saldo}}</td>
+                      <td>${{r.abono.toFixed(2)}}</td>
+                      <td>${{r.saldo.toFixed(2)}}</td>
                       <td id="botones">
                         <!-- <div class="botonEliminar">
                             <a class="btn btn-default" type="button">

@@ -17,7 +17,7 @@
             {{userloginService.cuenta.email}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a (click)="cuentaService.mostrarUs=false" class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
+            <li><a (click)="cuentaService.mostrarUs=false" (click)="cuentaService.habilitar=true" class="dropdown-item" [routerLink]="['/registroUsuarios',userloginService.cuenta.idCuenta]">Mi Perfil</a></li>
             <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
             </ul>
         </li>

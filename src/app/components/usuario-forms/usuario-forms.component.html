@@ -94,11 +94,17 @@
                     <div class="form-floating mb-3">
                       <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                         [(ngModel)]="cuenta.email" name="email"  required #correo="ngModel">
-                        <div class="alert alert-danger" *ngIf="correo.invalid && correo.touched || correo.invalid && usuariosForm.submitted">
+                        <div class="alert alert-danger" *ngIf=" correo.invalid && correo.touched || correo.invalid && usuariosForm.submitted">
                           El Correo Es Requerido
+                        </div>  
+                        <div *ngIf=" correo.touched" >
+                        <div class="alert alert-danger" *ngIf="!esEmailValido(cuenta.email)">
+                          Formato de Correo Incorrecto
                         </div>
+                      </div>   
                       <label for="floatingInput">CORREO</label>
                     </div>
+                    
                   </div>
                 </div>
                 <div class="ingresos3">

@@ -64,23 +64,6 @@ export class LibroComponent implements OnInit {
 
     console.log(libro.isbn)
 
-    
-  //   this.reservaService.getAll().subscribe((
-  //     r=>{this.reservas=r,console.log(r)
-  //                   for(let i=0;i<r.length;i++){
-  //                     for(let j=0;j<r[i].detalleReservas.length;j++){
-  //                       // console.log(r[i].detalleReservas[j].libro.isbn)
-  //                       // console.log(libro.isbn)                      
-  //                       if(libro.isbn==r[i].detalleReservas[j].libro.isbn){
-  //                         // console.log(libro.isbn)
-  //                         Swal.fire('CUIDADO',`NO SE PUEDE ELIMINAR SI ESTA EN RESERVA`,'warning')
-  //                         console.log("NO PASO");
-  //                       }
-  
-  //                     }         
-  //           }      
-  //     }     
-  // ));
 
     Swal.fire({
       title: '¿Estas Seguro?',

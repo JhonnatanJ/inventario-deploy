@@ -18,7 +18,7 @@ export class Libro {
     descripcion!:string;
     stock!:number;
     precioUnitario!:number;
-    fechaRegistro!:Date;
+    fechaStock!:Date;
     imagen!:Imagen;
     autores:Autor[]=[];
     generos:Genero[]=[];

@@ -10,18 +10,33 @@
                 <select name="Opciones" id="opciones" class="form-select" aria-label="Default select example" [(ngModel)] = "opcionReporte">
                     <option value="1">Libros con Stock</option>
                     <option value="2">Libros sin Stock</option>
-                    <option value="3">Libros Registrados Según Fecha</option>
+                    <option value="3">Stock de Libros Según Fecha</option>
                     <option value="4">Ventas Diarias Según Fecha</option>
                 </select>
             </div>
             <div *ngIf="this.opcionReporte == 3 || this.opcionReporte == 4" class="row container-fluid m-2">
-                <div class="d-flex justify-content-center align-items-center">
-                    <label for="fecha" class="inputFecha"><h3 class="m-0">Escoja una fecha: </h3></label>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <label for="fecha" class="inputFecha"><h3 class="m-0">Desde: </h3></label>
                     <input type="date" id="fecha" name="fecha" class="ms-3"
                         value = "{{this.fechaActual}}"
-                        [(ngModel)] = "fechaConsulta"
+                        [(ngModel)] = "fechaConsultaI"
                         min="2020-01-01" max="{{this.fechaActual}}"    
                     >
+                    <label for="fecha" class="inputFecha"><h3 class="m-0 ms-5">Hasta: </h3></label>
+                    <input type="date" id="fecha" name="fecha" class="ms-3"
+                        value = "{{this.fechaActual}}"
+                        [(ngModel)] = "fechaConsultaF"
+                        min="2020-01-01" max="{{this.fechaActual}}"    
+                    >
+                </div>
+            </div>
+            <div *ngIf="this.opcionReporte == 1" class="row container-fluid ms-0 m-2">
+                <div class="d-flex flex-row justify-content-center align-items-center stockBox">
+                    
+                    <label for="stock" class="inputStock"><h3 class="m-2">Stock: </h3></label>
+                        <input type="number" id="stock" name="stock" class="ms-3" > 
+                    
+                    
                 </div>
             </div>
             <div class="row container-fluid">
@@ -207,6 +222,7 @@
                         <th scope="col">Titulo</th>
                         <th scope="col">Autor</th>                        
                         <th scope="col">Editorial</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Precio Unitario</th>
                       </tr>
@@ -226,6 +242,7 @@
                                {{editorial.nombre}}
                             </div>
                         </td>
+                        <td>{{libro.fechaStock}}</td>
                         <td>{{libro.stock}}</td> 
                         <td>${{libro.precioUnitario.toFixed(2)}}</td>  
                       </tr>

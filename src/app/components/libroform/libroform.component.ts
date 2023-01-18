@@ -28,6 +28,9 @@ export class LibroformComponent implements OnInit {
 
   load: boolean;
    nuevoS:number=0;
+
+    //ISBN Validator
+ isbnValue: string = ""
  
 
     @ViewChild('imagenInputFile',{static:false}) imagenFile:ElementRef;
@@ -53,10 +56,16 @@ export class LibroformComponent implements OnInit {
       generos:this.fb.array([this.fb.group({nombre:['']})]),
       editoriales:this.fb.array([this.fb.group({nombre:['']})]),
       cuenta:aux.idCuenta, 
-    });
-    console.log(aux);    
+    },
+    { validator: this.isbnValidate}
+////
+    );
+    
+    
+
    this.cargar();    
-  }
+  }//ngOnInit
+ 
 
   createL():void{
     console.log(this.libro);
@@ -78,24 +87,47 @@ export class LibroformComponent implements OnInit {
     this.libro.precioUnitario=formValue.precioUnitario;
     libro.descripcion=formValue.descripcion;   
     this.libro.descripcion=formValue.descripcion;
-    libro.autores=formValue.autores;
-    libro.generos=formValue.generos;
-    libro.editoriales=formValue.editoriales;
-    libro.cuenta.idCuenta=formValue.cuenta;
 
-      console.log(libro);
+    libro.autores=formValue.autores;
+         
+    libro.generos=formValue.generos;
+    
+    libro.editoriales=formValue.editoriales;
+
+    libro.cuenta.idCuenta=formValue.cuenta;
 
 
     if(this.imagen && this.libro.imagen.id){
       this.libroservice.updateImg(this.imagen,this.libro.isbn).subscribe(
         data=>{
           this.spinner.hide();
+          console.log(libro);
           this.libroservice.update(this.libro).subscribe
             (resp=>this.router.navigate(['/lista']));
         }
       );
     }else{
       if(this.libro.imagen.id){
+
+        formValue.autores.forEach(z=>{
+          if(z.nombre!=''||z.nombre!=""){
+            this.libro.autores=formValue.autores
+          }
+        })
+
+        formValue.generos.forEach(g => {
+          if(g.nombre!=''||g.nombre!=""){
+            this.libro.generos=formValue.generos
+          }
+        });
+
+        formValue.editoriales.forEach(e => {
+          if(e.nombre!=''||e.nombre!=""){
+            this.libro.editoriales=formValue.editoriales
+          }
+        });
+       
+        console.log(this.libro)
         this.libroservice.update(this.libro).subscribe
             (resp=>this.router.navigate(['/lista']));
       }else{
@@ -132,19 +164,25 @@ export class LibroformComponent implements OnInit {
         let id = b['id'];
         if(id){
           this.libroservice.get(id).subscribe(
-            (ac=>{
+            (
+              ac=>{
               this.libro = ac;
               this.autorLibro=ac.autores[0].nombre;
               this.generoLibro=ac.generos[0].nombre;
               this.editorialLibro=ac.editoriales[0].nombre;             
               console.log(ac);
+
+              
+
               this.Miformulario.patchValue({
                   isbn:(ac.isbn),
                   titulo:(ac.titulo),
                   stock:(ac.stock),
                   precioUnitario:(ac.precioUnitario.toFixed(2)),
-                  descripcion:(ac.descripcion)
-                });
+                  descripcion:(ac.descripcion),         
+
+              });
+           
                 this.Miformulario.controls['stock'].disable();
                 this.Miformulario.controls['isbn'].disable();
                 
@@ -152,55 +190,39 @@ export class LibroformComponent implements OnInit {
    
    )); 
         }})
-      }
+      }///CARGAR
+
+creado():void{
+  Swal.fire('LIBRO',`CREADO CON EXITO`,'success');
+}
+
       ///edit
       update():void{
         this.libroservice.update(this.libro).subscribe(
           u=>this.router.navigate(['/lista']));
+          Swal.fire('LIBRO',`EDITADO CON EXITO`,'success');
       }
 
  //AUTOR///BORRAR
   get getnombreautor(){
-    return this.Miformulario.get('autores') as FormArray;
+    return (this.Miformulario.get('autores') as FormArray);
   }
-  addnombreAutor(){
-    const control=<FormArray>this.Miformulario.controls['autores'];
-    control.push(this.fb.group({nombre:[]}));
-  }
-  removeAutor(index:number){
-    const control=<FormArray>this.Miformulario.controls['autores'];
-    control.removeAt(index);
-  }
+
   //FIN AUTOR
 
   //GENERO
   get getGeneros(){
     return this.Miformulario.get('generos') as FormArray;
   }
-  addGenero(){
-    const control=<FormArray>this.Miformulario.controls['generos'];
-    control.push(this.fb.group({nombre:[]}));
-  }
 
-  removeGenero(index:number){
-    const control=<FormArray>this.Miformulario.controls['generos'];
-    control.removeAt(index);
-  }
   //FIN GENERO
   
   //EDITORIAL
   get getEditorial(){
     return this.Miformulario.get('editoriales') as FormArray;
   }
-  addEditorial(){
-    const control=<FormArray>this.Miformulario.controls['editoriales'];
-    control.push(this.fb.group({nombre:[]}));
-  }
-  removeEditorial(index:number){
-    const control=<FormArray>this.Miformulario.controls['editoriales'];
-    control.removeAt(index);
-  }
-  //FIN EDITORIAL////BORRAR
+
+  //FIN EDITORIAL
 
   ////IMAGEN
   onFileChange(event:any){//ojo any
@@ -213,13 +235,68 @@ export class LibroformComponent implements OnInit {
     console.log('onfile')
   }
 
-  onUpload(isbn:string,img:File):void{
-    
-  }
+ 
   reset():void{
     this.imagen=null;
     this.imagenMin=null;
     this.imagenFile.nativeElement.value='';
+  }
+
+  ///validar ISBN
+  public isbnValidate(g:FormGroup){
+    var isbnValue= g.get('isbn').value
+    var subject = isbnValue;
+  
+       // Checks for ISBN-10 or ISBN-13 format
+     var regex = /^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$/;
+  
+     if (regex.test(subject)) {
+      // Remove non ISBN digits, then split into an array
+      var chars = subject.replace(/[- ]|^ISBN(?:-1[03])?:?/g, "").split("");
+      // Remove the final ISBN digit from `chars`, and assign it to `last`
+      var last = chars.pop();
+      var sum = 0;
+      var check, i;
+  
+      if (chars.length == 9) {
+          // Compute the ISBN-10 check digit
+          chars.reverse();
+          for (i = 0; i < chars.length; i++) {
+              sum += (i + 2) * parseInt(chars[i], 10);   
+              console.log("ojo")          
+          }
+          check = 11 - (sum % 11);
+          if (check == 10) {
+              check = "X";
+          } else if (check == 11) {
+              check = "0";
+          }
+      } else {
+        if(chars.length==13){
+          // Compute the ISBN-13 check digit         
+          for (i = 0; i < chars.length; i++) {
+              sum += (i % 2 * 2 + 1) * parseInt(chars[i], 10);
+          }
+          check = 10 - (sum % 10);
+          if (check == 10) {
+              check = "0";
+          }
+        }
+      }
+  
+      if (check != last) {
+        return null;
+          
+      } 
+      else {
+        return  g.get('isbn').setErrors( {CheckDigit: true} )
+          
+      }
+    } 
+    else {
+      return g.get('isbn').setErrors( {Invalid: true} );
+  }
+  
   }
 
 }

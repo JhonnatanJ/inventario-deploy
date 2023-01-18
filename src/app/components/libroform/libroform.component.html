@@ -50,9 +50,19 @@
             <div class="form-floating mb-3">                  
                   <input type="text" for="floatingInput" class="form-control" id="isbn" formControlName="isbn" 
                   onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="13">
-                  <div class="alert alert-danger" *ngIf="isbn.invalid && isbn.touched">
+                  <div class="alert alert-danger" *ngIf="isbn.invalid && isbn.touched ">
                     ISBN Requerido
                   </div>
+                  <div  *ngIf="isbn.touched">
+                  <div class="alert alert-danger" *ngIf="Miformulario.controls['isbn'].pristine || Miformulario.controls['isbn'].hasError('CheckDigit') || Miformulario.controls['isbn'].hasError('Invalid')" >
+                    ISBN No Valido
+                  </div>
+                </div>
+                  <!-- <div  *ngIf="isbn.touched">
+                  <div class="alert alert-danger" *ngIf=" Miformulario.controls['isbn'].pristine || Miformulario.controls['isbn'].hasError('Invalid')  " >
+                    ISBN Invalido
+                  </div>
+                </div> -->
                   <label for="isbn" class="form-label">ISBN</label>
               </div>   
 
@@ -116,12 +126,13 @@
                    </div> 
                   <!--FIN GENERO-->
                     <!--EDITORIAL-->
-                    <div class="mb-3">
+                    <div class="mb-3" >                   
                       <label for="editorial" class="form-label">EDITORIAL(ES)</label>
-                      <div formArrayName="editoriales">
+                      <div formArrayName="editoriales" >
                           <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
                             <input formControlName="nombre" type="text" class="form-control" id="nombre"  [value]=" this.editorialLibro" >
                             <!-- <a class=" boton menos btn btn-link" (click)="removeEditorial(pointIndex)"></a> -->
+                            
                           </div>
                           
                         </div>
@@ -132,24 +143,27 @@
                      </div> 
                     <!--FIN EDITORIAL-->
                 <!-- Message input -->
-                <div class="form-floating mb-3">                   
-                  <textarea class="form-control"  id="descripcion" rows="4" formControlName="descripcion"></textarea>
-                  <label class="form-label" for="descripcion">DESCRIPCIÓN</label>
+                <div >                
+                  <label class="form-label" for="descripcion">DESCRIPCIÓN</label>   
+                  <textarea style="height: 200px; width: 100%; resize: none;"
+                  class="form-control"  id="descripcion"  formControlName="descripcion"></textarea>
+                  
                   </div> 
                        
             <br>
             <button style="margin:10px ; background-color: rgb(20, 146, 219); border-color:rgb(20, 146, 219);  margin-left: 30%; " type="submit" class="btn btn-primary" *ngIf="!libro.isbn else elseBlock" 
-            [disabled]="!Miformulario.valid" >Guardar</button>
+            [disabled]="!Miformulario.valid" (click)='creado()' >Guardar</button>
       
             <button style="margin:10px ; background-color: rgb(186, 18, 18); border-color:rgb(186, 18, 18); margin-left: 3%;" type="reset" class="btn btn-primary" [routerLink]="['/lista']" >Cancelar</button>
            <ng-template  #elseBlock>
 
-            <div class="form-floating mb-3 " style="top: -504px;min-width: 50px;max-width: 50%; margin-left: 300px ;">
+            <div class="form-floating mb-3 " style="top: -661px;min-width: 50px;max-width: 50%; margin-left: 300px ;">
+
               <input min="0" type="number" class="form-control"  id="nuevostock" [(ngModel)]="nuevoS" [ngModelOptions]="{standalone: true}">
-              <label for="nuevostock" class="form-label">NUEVO STOCK</label>
+              <label for="nuevostock" class="form-label">STOCK A AGREGAR</label>
             </div> 
 
-            <button style="margin-left: 30%;" type="submit" class="btn btn-success" >Actualizar</button>
+            <button style="margin-left: 30%;" type="submit" class="btn btn-success" (click)='update()' >Actualizar</button>
           </ng-template>
           </form>
         </div> 

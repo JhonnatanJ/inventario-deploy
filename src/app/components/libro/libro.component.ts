@@ -10,6 +10,7 @@ import { Reserva } from 'src/app/models/reserva';
 import { ActivatedRoute } from '@angular/router';
 import { DetalleReserva } from 'src/app/models/detalle-reserva';
 import { ReservasService } from 'src/app/services/reservas.service';
+import { ListReservaComponent } from '../list-reserva/list-reserva.component';
 
 @Component({
   selector: 'app-libro',
@@ -35,6 +36,8 @@ export class LibroComponent implements OnInit {
    nombreA:string="";//autor
    genero:string="";//genero
    editorial:string="";//editorial
+
+
  
   constructor(public libroService:LibroService,
     private activatedRoute:ActivatedRoute,
@@ -48,69 +51,18 @@ export class LibroComponent implements OnInit {
   }
 
   
- 
+ verificarReserva():void{
+
+
+
+ }
+
+
   delete(libro:Libro):void{
 
-    console.log(this.reserva)
 
 
-    // this.activatedRoute.params.subscribe(
-    //   r=>{
-    //   let id =r['id'];
-      
-    //   if(id){
-    //     this.reservaService.get(id).subscribe(
-    //       re=>{this.reserva=re;console.log(re)});
-    //   }
-    
-    // })
-
-  //   console.log(libro.isbn)
-    this.reservaService.getAll().subscribe((
-
-      r=>{this.reservas=r}  
-     
- ));
-
-// this.reserva.detalleReservas.forEach(detalleReserva=>
-//   {
-//     if(detalleReserva.libro.isbn=libro.isbn){
-//       console.log(detalleReserva.libro.isbn)
-//     console.log("probandooooo")
-//     }
-    
-//   })
-
-
-
-    // if(this.detalles.libro.titulo=libro.isbn){
-    //         console.log("PROBANDO RESRVA ELIMINAR");
-    //         console.log(this.detalles.libro);
-    //         console.log(libro.isbn);
-    //       }
-
-   
-    // for(let a of this.reservas){
-      
-    //     for(let au of a.detalleReservas){
-    //       if(libro.isbn=au.libro.isbn){
-    //         console.log("PROBANDO RESRVA ELIMINAR");
-    //         console.log(libro.isbn)
-    //       }
-    //     }
-      
-    // }
-
-    // Object.values(this.reservas || {})
-
-    // this.activatedRoute.params.subscribe(
-    //   r=>{
-    //     let id=r['id'];
-    //     if(id){
-    //       this.reservaService.getAll().subscribe(
-    //         re=>{console.log("re")});
-    //     }})
-   
+    console.log(libro.isbn)
 
 
     Swal.fire({
@@ -126,16 +78,14 @@ export class LibroComponent implements OnInit {
         console.log("hola from delete");
     this.libroService.delete(libro.isbn).subscribe(
       del=>this.libroService.getAllL().subscribe(
-        response=>this.libros=response));
-
-        Swal.fire(
-          'Eliminado!',
-          'Has Eliminado un Libro.',
-          'success'
-        )
-      }
-    })
-    
+        response=>this.libros=response),
+      error=>Swal.fire('LO SENTIMOS',`NO SE PUEDE ELIMINAR UN LIBRO RESERVADO`,'warning'),
+      ()=>  Swal.fire(
+        'Eliminado!',
+        'Has Eliminado un Libro.',
+        'success'
+      ))}
+    })    
   }
   
 

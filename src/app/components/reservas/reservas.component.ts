@@ -203,6 +203,10 @@ if(cedula.length==10){
 } else {
   cedulaCorrecta = false;
 }
+//
+if (cedula=="0000000000"  || cedula=="2222222222" ||  cedula=="4444444444" ||cedula=="5555555555" ||cedula=="1010101010"||cedula=="2020202020"||cedula=="3030303030"||cedula=="4040404040"){
+  cedulaCorrecta = false;
+ }
 this.validador= cedulaCorrecta;
 
 }  

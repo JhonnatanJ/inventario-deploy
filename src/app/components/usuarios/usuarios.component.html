@@ -80,6 +80,10 @@
                  </tr> 
               </tbody>             
             </table>
+            <ng-container  *ngIf="( cuentas  | busquedaUsurio:search | bUsuarioCed:ced | bUsuarioEmail:correo  ) as result">
+              <div style="text-align: center;" class="alert alert-danger" *ngIf="result.length === 0">
+                NO SE ENCONTRARON RESULTADOS</div>
+             </ng-container> 
           </div><!--TABLA RESPONSIVE-->
           <!--FIN TABLA-->
             <pagination-controls 

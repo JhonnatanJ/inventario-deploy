@@ -75,6 +75,10 @@
                     </tr>
                   </tbody>
             </table>
+            <ng-container  *ngIf="( reservas | bReservaNombre:search | bReservaID:idR | bReservaVendedor:vendedor | bReservaFecha:fecha ) as result">
+              <div style="text-align: center;" class="alert alert-danger" *ngIf="result.length === 0">
+                NO SE ENCONTRARON RESULTADOS</div>
+             </ng-container>  
           </div>
           <pagination-controls 
           (pageChange)="page = $event"

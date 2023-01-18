@@ -59,7 +59,7 @@
                 </tr>
               </thead>
               <tbody>               
-                <tr *ngFor="let lib of libros  | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial | paginate: { itemsPerPage: 5, currentPage: page};let i=index ">
+                <tr *ngFor="let lib of libros | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial | paginate: { itemsPerPage: 5, currentPage: page};let i=index ">
                   <!-- <th scope="row">{{i+1}}</th> -->
                   <!-- | paginate: { itemsPerPage: 5, currentPage: page} -->
                   <td style="width: 64px;"><img  src="{{lib.imagen.imagenUrl}}"  class="img-thumbnail rounded"></td>
@@ -104,8 +104,18 @@
                   <button class="btn btn-default" (click)="nextPage()"   > <i class="bi bi-arrow-right-circle-fill"></i> </button>
                 </td>
                  </tr> -->
-              </tbody>              
+                 
+                    
+                 <!-- <div class="alert alert-danger" *ngIf="libros.length==0">
+                    holii
+                 </div> -->
+              </tbody>    
+                    
             </table>
+            <ng-container  *ngIf="( libros | libroISBN:isbn | busqueda:search | bLibroAutor:nombreA | bLibroGenero:genero | bLibroEditorial:editorial) as result">
+              <div style="text-align: center;" class="alert alert-danger" *ngIf="result.length === 0">
+                NO SE ENCONTRARON RESULTADOS</div>
+             </ng-container>    
             </div><!--TABLA RESPONSIVE-->
             <!--FIN TABLA-->
             <pagination-controls 

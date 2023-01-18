@@ -101,7 +101,9 @@ export class UsuarioFormsComponent implements OnInit {
       this.cuenta.enabled=false;
     }
     this.cuentaServicio.create(this.cuenta).subscribe
-    (res=> this.router.navigate(['/usuarios']));
+    (res=> this.router.navigate(['/usuarios']),
+    error=>Swal.fire('LO SENTIMOS',`NO SE PUEDE CREAR UN USUARIO EXISTENTE`,'warning'),
+    ()=>Swal.fire('USUARIO',`CREADO CON EXITO`,'success'))
     
     console.log(this.cuenta);
     

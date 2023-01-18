@@ -18,9 +18,13 @@ export class ReportePersonalizadoComponent implements OnInit {
 //----------VARIABLES PARA FECHAS
   date:number = Date.now();
   fechaActual:string = this.formatDate(new Date(this.date));
+  fechaInicio:string = this.formatDate(new Date(this.date));
+  fechaFin:string = this.formatDate(new Date(this.date));
   horaActual:string = new Date(this.date).toTimeString();
 
   fechaConsulta:string = this.fechaActual;
+  fechaConsultaI:string = this.fechaInicio;
+  fechaConsultaF:string = this.fechaFin;
 
 //-----------VARIABLES PARA ENTIDADES
   cuenta:Cuenta = new Cuenta;
@@ -35,6 +39,8 @@ export class ReportePersonalizadoComponent implements OnInit {
   totalVentasDiario:number = 0;
   totalAbonosDiario:number = 0;
   totalDiario:number = 0;
+
+  stock:number = 0;
 
 //VARIABLES PARA OPCIONES DE REPORTE
   generarReporte:boolean = false;
@@ -72,14 +78,13 @@ export class ReportePersonalizadoComponent implements OnInit {
       this.cargarLibrosStockVacio();
     }
 
-    if(this.opcionReporte == 3){
-      console.log(this.fechaConsulta);      
+    if(this.opcionReporte == 3){    
       this.generarReporte = true;
       this.opcion1 = false;
       this.opcion2 = false;
       this.opcion3 = true;
       this.opcion4 = false; 
-      this.cargarLibrosFechaRegistro(this.fechaConsulta);
+      this.cargarLibrosFechaRegistro(this.fechaConsultaI, this.fechaConsultaF);
     }
 
     if(this.opcionReporte == 4){
@@ -91,8 +96,8 @@ export class ReportePersonalizadoComponent implements OnInit {
       this.opcion2 = false;
       this.opcion3 = false;
       this.opcion4 = true;
-      this.cargarReservas(this.fechaConsulta);
-      this.cargarNotasVenta(this.fechaConsulta);
+      this.cargarReservas(this.fechaConsultaI, this.fechaConsultaF);
+      this.cargarNotasVenta(this.fechaConsultaI, this.fechaConsultaF);
     }
     
   }
@@ -107,8 +112,8 @@ export class ReportePersonalizadoComponent implements OnInit {
     )
   }
 
-  cargarNotasVenta(fecha:string){
-    this.reporteService.getNotaVenta(fecha).subscribe(
+  cargarNotasVenta(fechaI:string, fechaF:string){
+    this.reporteService.getNotaVenta2(fechaI, fechaF).subscribe(
       notaVenta => {
         this.notasventa = notaVenta;
         this.calcularTotalDiarioVentas();
@@ -116,8 +121,8 @@ export class ReportePersonalizadoComponent implements OnInit {
     )
   }
 
-  cargarReservas(fecha:string){
-    this.reporteService.getReserva(fecha).subscribe(
+  cargarReservas(fechaI:string, fechaF:string){
+    this.reporteService.getReserva2(fechaI,fechaF).subscribe(
       reserva => {
         this.reservas = reserva;
         this.calcularTotalDiarioAbonos();
@@ -141,8 +146,8 @@ export class ReportePersonalizadoComponent implements OnInit {
     )
   }
 
-  cargarLibrosFechaRegistro(fecha:string){
-    this.reporteService.getLibroFechaRegistro(fecha).subscribe(
+  cargarLibrosFechaRegistro(fechaI:string, fechaF:string){
+    this.reporteService.getLibroFechaRegistro(fechaI, fechaF).subscribe(
       libro => {
         this.librosFecha = libro;        
       }

@@ -14,7 +14,7 @@ export const environment = {
   //REPORTE SERVICE
   urlReserva: url + "/geolib/reservas",
   //LOGIN SERVICE
-  urlToken: "/oauth/token",
+  urlToken: url + "/oauth/token",
   //USUARIO SERVICE
-  urlAutores: "geolib/autores",
+  urlAutores: url + "geolib/autores",
 };

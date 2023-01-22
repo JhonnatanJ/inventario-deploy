@@ -1,9 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { env } from 'process';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-import { Autor } from '../models/autor';
 import { Imagen } from '../models/imagen';
 import { Libro } from '../models/libro';
 import { UserLoginService } from './user-login.service';

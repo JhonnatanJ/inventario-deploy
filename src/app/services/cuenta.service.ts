@@ -19,7 +19,7 @@ export class CuentaService {
  public habilitar:boolean=false;///
  public mostrarUs:boolean=true;
 
-  //private url:string="http://localhost:8088/geolib/cuentas";
+  //private url:string= "http://localhost:8088/geolib/cuentas";
   //private urlRol:string="http://localhost:8088/geolib/roles";
   
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});

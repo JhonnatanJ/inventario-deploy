@@ -7,6 +7,7 @@ import { DatosLogin } from '../models/datos-login';
 import { CuentaService } from './cuenta.service';
 import { Observable } from 'rxjs';
 import { Rol } from '../models/rol';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class UserLoginService {
 ////UDEMI
 login(cuenta:Cuenta):Observable<any>{
   this.iniciar=true;
-  const urlEndpoint='http://localhost:8088/oauth/token';
+  const urlEndpoint= environment.urlToken;
 
   const credenciales= btoa('clienteLibreria'+':'+'12345');
 

@@ -6,6 +6,7 @@ import { Cuenta } from '../models/cuenta';
 import { NotaVenta } from '../models/nota-venta';
 import { Reserva } from '../models/reserva';
 import { Libro } from '../models/libro';
+import { environment } from '../../environments/environment.prod';
 
 
 @Injectable({
@@ -13,10 +14,10 @@ import { Libro } from '../models/libro';
 })
 export class ReporteService {
 
-  private urlCuenta: string = "http://localhost:8088/geolib/cuentas";
-  private urlNotaVenta: string = "http://localhost:8088/geolib/notasventas";
-  private urlReserva: string = "http://localhost:8088/geolib/reservas";
-  private urlLibro:string="http://localhost:8088/geolib/libros";
+  //private urlCuenta: string = "http://localhost:8088/geolib/cuentas";
+  //private urlNotaVenta: string = "http://localhost:8088/geolib/notasventas";
+  //private urlReserva: string = "http://localhost:8088/geolib/reservas";
+  //private urlLibro:string="http://localhost:8088/geolib/libros";
 
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
 
@@ -31,34 +32,34 @@ export class ReporteService {
   }
 
   getCuenta(idCuenta:number):Observable<Cuenta>{
-    return this.http.get<Cuenta>(this.urlCuenta+`/id/${idCuenta}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Cuenta>(environment.urlCuenta+`/id/${idCuenta}`,{headers:this.agregarAuthorizationHeader()});
   }
 /////////////////////////
   getNotaVenta2(fechaI:string, fechaF:string):Observable<NotaVenta[]>{
-    return this.http.get<NotaVenta[]>(this.urlNotaVenta+`/fecha/${fechaI}/${fechaF}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<NotaVenta[]>(environment.urlNotaVenta+`/fecha/${fechaI}/${fechaF}`,{headers:this.agregarAuthorizationHeader()});
   }
 ///////////
   getReserva2(fechaI:string, fechaF:string):Observable<Reserva[]>{
-    return this.http.get<Reserva[]>(this.urlReserva+`/abonos/${fechaI}/${fechaF}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Reserva[]>(environment.urlReserva+`/abonos/${fechaI}/${fechaF}`,{headers:this.agregarAuthorizationHeader()});
   }
 
   getNotaVenta(fechaI:string):Observable<NotaVenta[]>{
-    return this.http.get<NotaVenta[]>(this.urlNotaVenta+`/fecha/${fechaI}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<NotaVenta[]>(environment.urlNotaVenta+`/fecha/${fechaI}`,{headers:this.agregarAuthorizationHeader()});
   }
 
   getReserva(fechaI:string):Observable<Reserva[]>{
-    return this.http.get<Reserva[]>(this.urlReserva+`/abonos/${fechaI}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Reserva[]>(environment.urlReserva+`/abonos/${fechaI}`,{headers:this.agregarAuthorizationHeader()});
   }
 
   getLibroStock():Observable<Libro[]>{
-    return this.http.get<Libro[]>(this.urlLibro+'/stock',{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Libro[]>(environment.urlLibros+'/stock',{headers:this.agregarAuthorizationHeader()});
   }
 
   getLibroStockVacio():Observable<Libro[]>{
-      return this.http.get<Libro[]>(this.urlLibro+'/stockempty',{headers:this.agregarAuthorizationHeader()});
+      return this.http.get<Libro[]>(environment.urlLibros+'/stockempty',{headers:this.agregarAuthorizationHeader()});
   }
 
   getLibroFechaRegistro(fechaI:string, fechaF:string):Observable<Libro[]>{
-    return this.http.get<Libro[]>(this.urlLibro+'/fecha/'+fechaI+'/'+fechaF,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Libro[]>(environment.urlLibros+'/fecha/'+fechaI+'/'+fechaF,{headers:this.agregarAuthorizationHeader()});
   }
 }

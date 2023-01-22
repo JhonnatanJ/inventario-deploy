@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { env } from 'process';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { Autor } from '../models/autor';
 import { Imagen } from '../models/imagen';
 import { Libro } from '../models/libro';
@@ -14,9 +16,9 @@ export class LibroService {
   public habilitar:boolean=false;///
 
   libro!:Libro;
-  private url:string="http://localhost:8088/geolib/libros";
-  private urlLib:string="http://localhost:8088/geolib/libros/nombre";
-  private ImgUrl:string="http://localhost:8088/geolib/imagenes"
+  //private url:string="http://localhost:8088/geolib/libros";
+  //private urlLib:string="http://localhost:8088/geolib/libros/nombre";
+  //private ImgUrl:string="http://localhost:8088/geolib/imagenes"
   
   
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
@@ -32,7 +34,7 @@ export class LibroService {
   }
 //IMAGEN
    list():Observable<Imagen[]>{
-    return this.http.get<Imagen[]>(this.ImgUrl)
+    return this.http.get<Imagen[]>(environment.urlImagen)
   }
 
   
@@ -41,43 +43,43 @@ export class LibroService {
     formData.append('multipartFile',imagen);
     console.log(formData);
     console.log(imagen);
-    return this.http.post<any>(this.ImgUrl+`/${isbn}`,formData);
+    return this.http.post<any>(environment.urlImagen+`/${isbn}`,formData);
   }
 
   updateImg(imagen:File,isbn:string):Observable<any>{
      const formData=new FormData();
      formData.append('multipartFile',imagen);
-    return this.http.put<any>(this.ImgUrl+`/${isbn}`,formData);
+    return this.http.put<any>(environment.urlImagen+`/${isbn}`,formData);
   }
 
   deleteImg(isbn:string):Observable<any>{
-    return this.http.delete<any>(this.ImgUrl+`/${isbn}`,{headers:this.agregarAuthorizationHeader()});
+    return this.http.delete<any>(environment.urlImagen+`/${isbn}`,{headers:this.agregarAuthorizationHeader()});
   }
 ////LIBRO
   getAllL():Observable<Libro[]>{
-    return this.http.get<Libro[]>(this.url,{headers:this.agregarAuthorizationHeader()})};
+    return this.http.get<Libro[]>(environment.urlLibros,{headers:this.agregarAuthorizationHeader()})};
 /////crear libro
   createLi(libros:Libro):Observable<Libro>{
-    return this.http.post<Libro>(this.url,libros,{headers:this.agregarAuthorizationHeader()})
+    return this.http.post<Libro>(environment.urlLibros,libros,{headers:this.agregarAuthorizationHeader()})
   }
   ///obtener 1 libro
   get(isbn:string):Observable<Libro>{
-    return this.http.get<Libro>(this.url+'/id/'+isbn,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Libro>(environment.urlLibros+'/id/'+isbn,{headers:this.agregarAuthorizationHeader()});
   }
   ///actualizar
   update(libros:Libro):Observable<Libro>{
-    return this.http.put<Libro>(this.url+'/'+libros.isbn,libros,{headers:this.agregarAuthorizationHeader()});
+    return this.http.put<Libro>(environment.urlLibros+'/'+libros.isbn,libros,{headers:this.agregarAuthorizationHeader()});
   }
   ///eliminar
   delete(isbn:string):Observable<Libro>{
-    return this.http.delete<Libro>(this.url+'/'+isbn,{headers:this.agregarAuthorizationHeader()});
+    return this.http.delete<Libro>(environment.urlLibros+'/'+isbn,{headers:this.agregarAuthorizationHeader()});
   }
   ///get autor
   getA():Observable<Libro[]>{
-    return this.http.get<Libro[]>('http://localhost:8088/geolib/autores')};
+    return this.http.get<Libro[]>('https://api-geomundo.herokuapp.com/geolib/autores')};
    
     filtrarProductos(term:string):Observable<Libro[]>{
-      return this.http.get<Libro[]>(this.urlLib+'/'+term,{headers:this.agregarAuthorizationHeader()})
+      return this.http.get<Libro[]>(environment.urlLibrosNombre+'/'+term,{headers:this.agregarAuthorizationHeader()})
     }
 
  /* getlibrotitulo(){

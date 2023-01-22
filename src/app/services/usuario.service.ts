@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Autor } from '../models/autor';
 import { Usuario } from '../models/usuario';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private url:string="http://localhost:8088/geolib/autores";
+  //private url:string="http://localhost:8088/geolib/autores";
   constructor(private http:HttpClient) { }
 //obtener todos los USERS
 getAllau():Observable<Autor[]>{
-    return this.http.get<Autor[]>(this.url)};
+    return this.http.get<Autor[]>(environment.urlAutores)};
     //USER POR ID
  /* getidUs(id:number):Observable<Usuario>{
       return this.http.get<Usuario>(this.url+'/'+id)};

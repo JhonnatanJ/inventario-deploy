@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Libro } from '../models/libro';
 import { Reserva } from '../models/reserva';
 import { UserLoginService } from './user-login.service';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
-  private url:string="http://localhost:8088/geolib/reservas";
-  private urlLib:string="http://localhost:8088/geolib/libros/nombre";
+  //private url:string="http://localhost:8088/geolib/reservas";
+  //private urlLib:string="http://localhost:8088/geolib/libros/nombre";
 
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
 
@@ -25,27 +26,27 @@ export class ReservasService {
   }
 
  getAll():Observable<Reserva[]>{
-  return this.http.get<Reserva[]>(this.url,{headers:this.agregarAuthorizationHeader()});
+  return this.http.get<Reserva[]>(environment.urlReserva,{headers:this.agregarAuthorizationHeader()});
  }
 
  create(reserv:Reserva):Observable<Reserva>{
-  return this.http.post<Reserva>(this.url,reserv,{headers:this.agregarAuthorizationHeader()});
+  return this.http.post<Reserva>(environment.urlReserva,reserv,{headers:this.agregarAuthorizationHeader()});
  }
 
  delete(idReserva:number):Observable<Reserva>{
-  return this.http.delete<Reserva>(this.url+'/'+idReserva,{headers:this.agregarAuthorizationHeader()})};
+  return this.http.delete<Reserva>(environment.urlReserva+'/'+idReserva,{headers:this.agregarAuthorizationHeader()})};
 
   get(idReserva:number):Observable<Reserva>{
-    return this.http.get<Reserva>(this.url+'/id/'+idReserva,{headers:this.agregarAuthorizationHeader()});
+    return this.http.get<Reserva>(environment.urlReserva+'/id/'+idReserva,{headers:this.agregarAuthorizationHeader()});
   }
 
   filtrarProductos(term:string):Observable<Libro[]>{
-    return this.http.get<Libro[]>(this.urlLib+'/'+term,{headers:this.agregarAuthorizationHeader()})
+    return this.http.get<Libro[]>(environment.urlLibrosNombre+'/'+term,{headers:this.agregarAuthorizationHeader()})
   }
   ///reserva update abono
   update(idReserva:number,reserv:Reserva):Observable<Reserva>{
     console.log(reserv);
-    return this.http.put<Reserva>(this.url+'/'+idReserva,reserv,{headers:this.agregarAuthorizationHeader()});
+    return this.http.put<Reserva>(environment.urlReserva+'/'+idReserva,reserv,{headers:this.agregarAuthorizationHeader()});
    }
 
 

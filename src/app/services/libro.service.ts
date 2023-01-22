@@ -14,7 +14,7 @@ export class LibroService {
   public habilitar:boolean=false;///
 
   libro!:Libro;
-  //private url:string="http://localhost:8088/geolib/libros";
+  //private :string="http://localhost:8088/geolib/libros";
   //private urlLib:string="http://localhost:8088/geolib/libros/nombre";
   //private ImgUrl:string="http://localhost:8088/geolib/imagenes"
   

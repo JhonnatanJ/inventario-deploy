@@ -1,8 +1,12 @@
 //Install express server
 const express = require('express');
+import sslRedirect from 'heroku-ssl-redirect';
 const path = require('path');
 
 const app = express();
+
+// enable ssl redirect
+app.use(sslRedirect());
 
 //Serve only the static files form the dist directory
 app.use(express.static('./dist/inv_geomundo'));
